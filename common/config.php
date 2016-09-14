@@ -18,7 +18,8 @@
  * file that was distributed with this source code.
  */
 
-define('VERSION', '3.1');
+define('VERSION', '3.2');
+define('VERSION_NAME', 'Janis');
 define('COMMON',  ROOT.'common/');
 define('LANG', COMMON.'lang/');
 define('DATA', ROOT.'data/');

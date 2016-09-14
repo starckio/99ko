@@ -3,6 +3,7 @@
 <?php if($mode == 'list'){ ?>
 <p>
   <a class="button" href="index.php?p=page&amp;action=edit"><?php echo $core->lang("Add a page"); ?></a>
+  <a class="button" href="index.php?p=page&amp;action=edit&parent=1"><?php echo $core->lang("Add a parent item"); ?></a>
   <a class="button" href="index.php?p=page&amp;action=edit&link=1"><?php echo $core->lang("Add an external link"); ?></a>
 </p>
 <table>
@@ -22,6 +23,7 @@
 		    <?php if($pageItem->getIsHidden()){ ?><img title="<?php echo $core->lang("Does not appear in the menu"); ?>" src="<?php echo PLUGINS; ?>/page/other/ghost.png" alt="icon" /><?php } ?>
 			<?php if($pageItem->targetIs() == 'url'){ ?><img title="<?php echo $core->lang("Target : URL"); ?>" src="<?php echo PLUGINS; ?>/page/other/link.png" alt="icon" /><?php } ?>
 			<?php if($pageItem->targetIs() == 'plugin'){ ?><img title="<?php echo $core->lang("Target : plugin"); ?>" src="<?php echo PLUGINS; ?>/page/other/plugin.png" alt="icon" /><?php } ?>
+			<?php if($pageItem->targetIs() == 'parent'){ ?><img title="<?php echo $core->lang("Parent item"); ?>" src="<?php echo PLUGINS; ?>/page/other/star.png" alt="icon" /><?php } ?>
 		</td>
 		<td><?php echo $pageItem->getName(); ?></td>
 		<td><input readonly="readonly" type="text" value="<?php echo $page->makeUrl($pageItem); ?>" /></td>
@@ -39,12 +41,16 @@
 </table>
 <?php } ?>
 
-<?php if($mode == 'edit' && !$isLink){ ?>
+<?php if($mode == 'edit' && !$isLink && !$isParent){ ?>
 <form method="post" action="index.php?p=page&amp;action=save">
   <?php show::adminTokenField(); ?>
   <input type="hidden" name="id" value="<?php echo $pageItem->getId(); ?>" />
   <input type="hidden" name="position" value="<?php echo $pageItem->getPosition(); ?>" />
   
+  <p>
+      <label><?php echo $core->lang("Parent item"); ?></label><br>
+      <input type="text" name="parent" value="<?php echo $pageItem->getParent(); ?>" required="required" />
+  </p>
   <p>
       <label><?php echo $core->lang("Name"); ?></label><br>
       <input type="text" name="name" value="<?php echo $pageItem->getName(); ?>" required="required" />
@@ -94,6 +100,10 @@
   <input type="hidden" name="position" value="<?php echo $pageItem->getPosition(); ?>" />
   
   <p>
+      <label><?php echo $core->lang("Parent item"); ?></label><br>
+      <input type="text" name="parent" value="<?php echo $pageItem->getParent(); ?>" required="required" />
+  </p>
+  <p>
       <label><?php echo $core->lang("Name"); ?></label><br>
       <input type="text" name="name" value="<?php echo $pageItem->getName(); ?>" required="required" />
   </p>
@@ -114,6 +124,26 @@
 		<option value="_self" <?php if($pageItem->getTargetAttr() == '_self'){ ?>selected<?php } ?>><?php echo $core->lang("Same window"); ?></option>
 		<option value="_blank" <?php if($pageItem->getTargetAttr() == '_blank'){ ?>selected<?php } ?>><?php echo $core->lang("New window"); ?></option>
 	  </select>
+  </p>
+  <p>
+      <input <?php if($pageItem->getIsHidden()){ ?>checked<?php } ?> type="checkbox" name="isHidden" /> <label for="isHidden"><?php echo $core->lang("Don't display in the menu"); ?></label>
+  </p>
+  <p>
+	<button type="submit" class="button success radius"><?php echo $core->lang("Save"); ?></button>
+  </p>
+</form>
+<?php } ?>
+
+<?php if($mode == 'edit' && $isParent){ ?>
+<form method="post" action="index.php?p=page&amp;action=save">
+  <?php show::adminTokenField(); ?>
+  <input type="hidden" name="id" value="<?php echo $pageItem->getId(); ?>" />
+  <input type="hidden" name="position" value="<?php echo $pageItem->getPosition(); ?>" />
+  <input type="hidden" name="target" value="javascript:" />
+  
+  <p>
+      <label><?php echo $core->lang("Name"); ?></label><br>
+      <input type="text" name="name" value="<?php echo $pageItem->getName(); ?>" required="required" />
   </p>
   <p>
       <input <?php if($pageItem->getIsHidden()){ ?>checked<?php } ?> type="checkbox" name="isHidden" /> <label for="isHidden"><?php echo $core->lang("Don't display in the menu"); ?></label>

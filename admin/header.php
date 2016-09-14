@@ -40,7 +40,7 @@
 			  <?php eval($core->callHook('adminNotifications')); ?>
 			</div>
 			<p class="just_using">
-			  <a title="<?php echo $core->lang("NoDB CMS"); ?>" target="_blank" href="http://99ko.org"><?php echo $core->lang("Just using 99ko"); ?> <?php echo VERSION; ?></a>
+			  <a title="<?php echo $core->lang("NoDB CMS"); ?>" target="_blank" href="http://99ko.org"><?php echo $core->lang("Just using 99ko"); ?><br><?php echo VERSION; ?> « <i><?php echo VERSION_NAME; ?></i> »</a>
 			</p>
 		  </div>
 		  <div id="content_mask">

@@ -181,18 +181,35 @@ class show{
      }
 
      // affiche la navigation principale (theme)
-     public static function mainNavigation($format = '<li><a href="[target]" target="[targetAttribut]">[label]</a></li>') {
+     public static function mainNavigation($format = '<li><a href="[target]" target="[targetAttribut]">[label]</a>[childrens]</li>') {
      	$pluginsManager = pluginsManager::getInstance();
 	$core = core::getInstance();
      	$data = '';
      	eval($core->callHook('startShowMainNavigation'));
      	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
+			//print_r($plugin->getNavigation());
      		foreach($plugin->getNavigation() as $k2=>$item) if($item['label'] != ''){
-     			$temp = $format;
-     			$temp = str_replace('[target]', $item['target'], $temp);
-     			$temp = str_replace('[label]', $item['label'], $temp);
-     			$temp = str_replace('[targetAttribut]', $item['targetAttribut'], $temp);
-     			$data.= $temp;
+				if($item['parent'] < 1){
+				 $temp = $format;
+				 $temp = str_replace('[target]', $item['target'], $temp);
+				 $temp = str_replace('[label]', $item['label'], $temp);
+				 $temp = str_replace('[targetAttribut]', $item['targetAttribut'], $temp);
+				 $data2 = '<ul>';
+				 $i = 0;
+				 foreach($plugin->getNavigation() as $k3=>$item2) if($item2['label'] != '' && $item2['parent'] == $item['id']){
+				  $temp2 = $format;
+				  $temp2 = str_replace('[target]', $item2['target'], $temp2);
+				  $temp2 = str_replace('[label]', $item2['label'], $temp2);
+				  $temp2 = str_replace('[targetAttribut]', $item2['targetAttribut'], $temp2);
+				  $temp2 = str_replace('[childrens]', '', $temp2);
+				  $data2.= $temp2;
+				  $i++;
+				 }
+				 $data2.= '</ul>';
+				 if($i == 0) $data2 = '';
+				 $temp = str_replace('[childrens]', $data2, $temp);
+				 $data.= $temp;
+				}
      		}
      	}
      	eval($core->callHook('endShowMainNavigation'));

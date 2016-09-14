@@ -26,6 +26,7 @@ switch($action){
 			$pageItem->setTarget($_POST['target']);
 			$pageItem->setTargetAttr($_POST['targetAttr']);
 			$pageItem->setNoIndex((isset($_POST['noIndex'])) ? 1 : 0);
+			$pageItem->setParent($_POST['parent']);
 			if($page->save($pageItem)){
 				$msg = $core->lang("The changes have been saved.");
 				$msgType = 'success';
@@ -41,7 +42,8 @@ switch($action){
 	case 'edit':
 		if(isset($_GET['id'])) $pageItem = $page->create($_GET['id']);
 		else $pageItem = new pageItem();
-		$isLink = (isset($_GET['link']) || $pageItem->getTarget() != '') ? true : false;
+		$isLink = (isset($_GET['link']) || $pageItem->targetIs() == 'url') ? true : false;
+		$isParent = (isset($_GET['parent']) || $pageItem->targetIs() == 'parent') ? true : false;
 		$mode = 'edit';
 		break;
 	case 'del':

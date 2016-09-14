@@ -111,7 +111,7 @@ class page{
 				// no item !
 			}
 			else{
-				$pluginsManager->getPlugin('page')->addToNavigation($pageItem->getName(), $page->makeUrl($pageItem), $pageItem->getTargetAttr());
+				$pluginsManager->getPlugin('page')->addToNavigation($pageItem->getName(), $page->makeUrl($pageItem), $pageItem->getTargetAttr(), $pageItem->getId(), $pageItem->getParent());
 			}
 		}
 	}
@@ -161,6 +161,7 @@ class page{
 			'targetAttr' => $obj->getTargetAttr(),
 			'target' => $obj->getTarget(),
 			'noIndex' => $obj->getNoIndex(),
+			'parent' => $obj->getParent(),
 		);
 		$update = false;
 		foreach($this->items as $k=>$v){
@@ -308,6 +309,7 @@ class pageItem{
 	private $target;
 	private $targetAttr;
 	private $noIndex;
+	private $parent;
 	
 	public function __construct($val = array()){
 		if(count($val) > 0){
@@ -324,6 +326,7 @@ class pageItem{
 			$this->target = (isset($val['target']) ? $val['target'] : '');
 			$this->targetAttr = (isset($val['targetAttr']) ? $val['targetAttr'] : '_self');
 			$this->noIndex = (isset($val['noIndex']) ? $val['noIndex'] : 0);
+			$this->parent = (isset($val['parent']) ? $val['parent'] : 0);
 		}
 	}
 
@@ -379,6 +382,10 @@ class pageItem{
 	public function setNoIndex($val){
 		$this->noIndex = trim($val);
 	}
+	
+	public function setParent($val){
+		$this->parent = trim($val);
+	}
 
 	public function getId(){
 		return $this->id;
@@ -432,8 +439,13 @@ class pageItem{
 		return $this->noIndex;
 	}
 	
+	public function getParent(){
+		return $this->parent;
+	}
+	
 	public function targetIs(){
 		if($this->getTarget() == '') return 'page';
+		elseif($this->getTarget() == 'javascript:') return 'parent';
 		elseif(filter_var($this->getTarget(), FILTER_VALIDATE_URL)) return 'url';
 		else return 'plugin';
 	}

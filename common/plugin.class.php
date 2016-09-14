@@ -236,8 +236,8 @@ class plugin{
 	}
 	
 	## Ajoute un item dans la navigation
-	function addToNavigation($label, $target, $targetAttribut = '_self'){
-		$this->navigation[] = array('label' => $label, 'target' => $target, 'targetAttribut' => $targetAttribut);
+	function addToNavigation($label, $target, $targetAttribut = '_self', $id = 0, $parent = 0){
+		$this->navigation[] = array('label' => $label, 'target' => $target, 'targetAttribut' => $targetAttribut, 'id' => $id, 'parent' => $parent);
 	}
 	
 	## Supprime un item de la navigation
