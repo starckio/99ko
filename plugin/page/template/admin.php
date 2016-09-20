@@ -49,7 +49,12 @@
   
   <p>
       <label><?php echo $core->lang("Parent item"); ?></label><br>
-      <input type="text" name="parent" value="<?php echo $pageItem->getParent(); ?>" required="required" />
+	  <select name="parent">
+	  <option value=""><?php echo $core->lang("None"); ?></option>
+	  <?php foreach($page->getItems() as $k=>$v) if($v->targetIs() == 'parent'){ ?>
+	  <option <?php if($v->getId() == $pageItem->getParent()){ ?>selected<?php } ?> value="<?php echo $v->getId(); ?>"><?php echo $v->getName(); ?></option>
+	  <?php } ?>
+	  </select>
   </p>
   <p>
       <label><?php echo $core->lang("Name"); ?></label><br>
@@ -101,7 +106,12 @@
   
   <p>
       <label><?php echo $core->lang("Parent item"); ?></label><br>
-      <input type="text" name="parent" value="<?php echo $pageItem->getParent(); ?>" required="required" />
+	  <select name="parent">
+	  <option value=""><?php echo $core->lang("None"); ?></option>
+	  <?php foreach($page->getItems() as $k=>$v) if($v->targetIs() == 'parent'){ ?>
+	  <option <?php if($v->getId() == $pageItem->getParent()){ ?>selected<?php } ?> value="<?php echo $v->getId(); ?>"><?php echo $v->getName(); ?></option>
+	  <?php } ?>
+	  </select>
   </p>
   <p>
       <label><?php echo $core->lang("Name"); ?></label><br>
