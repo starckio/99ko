@@ -17,7 +17,7 @@
 	</tr>
   </thead>
   <tbody>
-	<?php foreach($page->getItems() as $k=>$pageItem) if($pageItem->targetIs() != 'plugin' || ($pageItem->targetIs() == 'plugin' && $pluginsManager->isActivePlugin($pageItem->getTarget()))){ ?>
+	<?php foreach($page->getItems() as $k=>$pageItem) if($pageItem->getParent() == 0 && ($pageItem->targetIs() != 'plugin' || ($pageItem->targetIs() == 'plugin' && $pluginsManager->isActivePlugin($pageItem->getTarget())))){ ?>
 	<tr>
 		<td><?php if($pageItem->getIsHomepage()){ ?><img title="<?php echo $core->lang("Homepage"); ?>" src="<?php echo PLUGINS; ?>page/other/house.png" alt="icon" /><?php } ?> 
 		    <?php if($pageItem->getIsHidden()){ ?><img title="<?php echo $core->lang("Does not appear in the menu"); ?>" src="<?php echo PLUGINS; ?>/page/other/ghost.png" alt="icon" /><?php } ?>
@@ -35,8 +35,27 @@
 		  <a class="button" href="index.php?p=page&amp;action=edit&amp;id=<?php echo $pageItem->getId(); ?>"><?php echo $core->lang("Edit"); ?></a> 
           <?php if(!$pageItem->getIsHomepage() && $pageItem->targetIs() != 'plugin'){ ?><a class="button alert" href="index.php?p=page&amp;action=del&amp;id=<?php echo $pageItem->getId(). '&amp;token=' .administrator::getToken(); ?>" onclick = "if(!confirm('<?php echo $core->lang("Delete this page ?"); ?>')) return false;"><?php echo $core->lang("Delete"); ?></a><?php } ?>	
 		</td>
-	</tr>	
-	<?php } ?>
+	</tr>
+	<?php foreach($page->getItems() as $k=>$pageItemChild) if($pageItemChild->getParent() == $pageItem->getId() && ($pageItemChild->targetIs() != 'plugin' || ($pageItemChild->targetIs() == 'plugin' && $pluginsManager->isActivePlugin($pageItemChild->getTarget())))){ ?>
+	<tr>
+		<td><?php if($pageItemChild->getIsHomepage()){ ?><img title="<?php echo $core->lang("Homepage"); ?>" src="<?php echo PLUGINS; ?>page/other/house.png" alt="icon" /><?php } ?> 
+			<?php if($pageItemChild->getIsHidden()){ ?><img title="<?php echo $core->lang("Does not appear in the menu"); ?>" src="<?php echo PLUGINS; ?>/page/other/ghost.png" alt="icon" /><?php } ?>
+			<?php if($pageItemChild->targetIs() == 'url'){ ?><img title="<?php echo $core->lang("Target : URL"); ?>" src="<?php echo PLUGINS; ?>/page/other/link.png" alt="icon" /><?php } ?>
+			<?php if($pageItemChild->targetIs() == 'plugin'){ ?><img title="<?php echo $core->lang("Target : plugin"); ?>" src="<?php echo PLUGINS; ?>/page/other/plugin.png" alt="icon" /><?php } ?>
+			<?php if($pageItemChild->targetIs() == 'parent'){ ?><img title="<?php echo $core->lang("Parent item"); ?>" src="<?php echo PLUGINS; ?>/page/other/star.png" alt="icon" /><?php } ?>
+		</td>
+		<td>▸ <?php echo $pageItemChild->getName(); ?></td>
+		<td><input readonly="readonly" type="text" value="<?php echo $page->makeUrl($pageItemChild); ?>" /></td>
+		<td>
+		  <a class="up" href="index.php?p=page&action=up&id=<?php echo $pageItemChild->getId(); ?>&token=<?php echo administrator::getToken(); ?>"><img src="<?php echo PLUGINS; ?>page/other/up.png" alt="icon" /></a>&nbsp;&nbsp;
+		  <a class="down" href="index.php?p=page&action=down&id=<?php echo $pageItemChild->getId(); ?>&token=<?php echo administrator::getToken(); ?>"><img src="<?php echo PLUGINS; ?>page/other/down.png" alt="icon" /></a>
+		</td>
+		<td>
+		  <a class="button" href="index.php?p=page&amp;action=edit&amp;id=<?php echo $pageItemChild->getId(); ?>"><?php echo $core->lang("Edit"); ?></a> 
+		  <?php if(!$pageItemChild->getIsHomepage() && $pageItemChild->targetIs() != 'plugin'){ ?><a class="button alert" href="index.php?p=page&amp;action=del&amp;id=<?php echo $pageItemChild->getId(). '&amp;token=' .administrator::getToken(); ?>" onclick = "if(!confirm('<?php echo $core->lang("Delete this page ?"); ?>')) return false;"><?php echo $core->lang("Delete"); ?></a><?php } ?>	
+		</td>
+	</tr>
+	<?php } } ?>
   </tbody>
 </table>
 <?php } ?>
