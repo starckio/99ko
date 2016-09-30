@@ -60,7 +60,7 @@
 </table>
 <?php } ?>
 
-<?php if($mode == 'edit' && !$isLink && !$isParent){ ?>
+<?php if($mode == 'edit' && !$isLink && !$isParent && $pageItem->targetIs() != 'plugin'){ ?>
 <form method="post" action="index.php?p=page&amp;action=save">
   <?php show::adminTokenField(); ?>
   <input type="hidden" name="id" value="<?php echo $pageItem->getId(); ?>" />
@@ -117,7 +117,7 @@
 </form>
 <?php } ?>
 
-<?php if($mode == 'edit' && $isLink){ ?>
+<?php if($mode == 'edit' && ($isLink || $pageItem->targetIs() == 'plugin')){ ?>
 <form method="post" action="index.php?p=page&amp;action=save">
   <?php show::adminTokenField(); ?>
   <input type="hidden" name="id" value="<?php echo $pageItem->getId(); ?>" />
