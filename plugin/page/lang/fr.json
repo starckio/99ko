@@ -39,6 +39,7 @@
 	"Same window" : "Même fenêtre",
 	"New window" : "Nouvelle fenêtre",
 	"Prevent indexing by search engines" : "Empêcher l'indexation par les moteurs de recherche",
-	"Add parent item" : "Ajouter un item parent",
-	"Parent item" : "Item parent"
+	"Add a parent item" : "Ajouter un item parent",
+	"Parent item" : "Item parent",
+	"None" : "Aucun"
 }
