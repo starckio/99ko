@@ -111,7 +111,8 @@ class page{
 				// no item !
 			}
 			else{
-				$pluginsManager->getPlugin('page')->addToNavigation($pageItem->getName(), $page->makeUrl($pageItem), $pageItem->getTargetAttr(), $pageItem->getId(), $pageItem->getParent());
+				$url = ($pageItem->targetIs() == 'parent')  ? $pageItem->getTarget() : $page->makeUrl($pageItem);
+				$pluginsManager->getPlugin('page')->addToNavigation($pageItem->getName(), $url, $pageItem->getTargetAttr(), $pageItem->getId(), $pageItem->getParent());
 			}
 		}
 	}
