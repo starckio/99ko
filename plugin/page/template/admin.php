@@ -26,7 +26,7 @@
 			<?php if($pageItem->targetIs() == 'parent'){ ?><img title="<?php echo $core->lang("Parent item"); ?>" src="<?php echo PLUGINS; ?>/page/other/star.png" alt="icon" /><?php } ?>
 		</td>
 		<td><?php echo $pageItem->getName(); ?></td>
-		<td><input readonly="readonly" type="text" value="<?php echo $page->makeUrl($pageItem); ?>" /></td>
+		<td><?php if($pageItem->targetIs() != 'parent'){ ?><input readonly="readonly" type="text" value="<?php echo $page->makeUrl($pageItem); ?>" /><?php } ?></td>
 		<td>
 		  <a class="up" href="index.php?p=page&action=up&id=<?php echo $pageItem->getId(); ?>&token=<?php echo administrator::getToken(); ?>"><img src="<?php echo PLUGINS; ?>page/other/up.png" alt="icon" /></a>&nbsp;&nbsp;
 		  <a class="down" href="index.php?p=page&action=down&id=<?php echo $pageItem->getId(); ?>&token=<?php echo administrator::getToken(); ?>"><img src="<?php echo PLUGINS; ?>page/other/down.png" alt="icon" /></a>

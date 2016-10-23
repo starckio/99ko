@@ -1,3 +1,5 @@
-# 3.2
-    - Plugin Page : ajout de la possibilité de gérer un menu à deux niveaux
-    - Thème public : correction de bugs et mise à jour de compatibilité
+# 3.2.1
+    - Plugins manager : cheking version désactivable
+    - Plugins page : correction d'un bug
+    - Thème par défaut : correction d'un bug / mise à jour
+    - Divers : correction de bugs / mises à jour

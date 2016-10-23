@@ -232,7 +232,7 @@ code{
     display: block;
     list-style: none;
     margin: 0;
-    width: 60%;
+    width: 65%;
     font-size: 14px;
     text-transform: uppercase;
     overflow: hidden;
@@ -274,7 +274,7 @@ code{
 #siteName{
     display: block;
     margin: 0;
-    width: 30%;
+    width: 25%;
     float: left;
     padding: 15px 0;
     text-transform: uppercase;

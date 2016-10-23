@@ -62,7 +62,7 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
 		'siteLang' => $lang,
 		'hideTitles' => '0',
 		'defaultPlugin' => 'page',
-		'checkUrl' => base64_decode('aHR0cDovLzk5a28ub3JnL3ZlcnNpb24='),
+		'checkUrl' => CHECK_URL,
 		'debug' => '0',
 		'defaultAdminPlugin' => 'page',
 		'urlSeparator' => ',',

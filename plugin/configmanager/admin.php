@@ -27,6 +27,7 @@ switch($action){
 				'debug' => (isset($_POST['debug'])) ? '1' : '0',
 				'defaultAdminPlugin' => $_POST['defaultAdminPlugin'],
 				'urlSeparator' => $_POST['urlSeparator'],
+				'checkUrl' => (isset($_POST['checkUrl'])) ? CHECK_URL : '',
 			);
 			if(trim($_POST['_adminPwd']) != ''){
 				if(trim($_POST['_adminPwd']) == trim($_POST['_adminPwd2'])) {

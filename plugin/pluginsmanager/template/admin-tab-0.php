@@ -15,9 +15,9 @@
 		<?php foreach($pluginsManager->getPlugins() as $plugin){ ?>
 		<tr>
 			<td>
-				<a href="<?php echo $plugin->getInfoVal('authorWebsite'); ?>" target="_blank"><?php echo $core->lang($plugin->getInfoVal('name')); ?></a>
+				<a href="<?php echo $plugin->getInfoVal('authorWebsite'); ?>" target="_blank"><?php echo $core->lang($plugin->getInfoVal('name')); ?>&nbsp;&nbsp;&nbsp;(<?php echo $plugin->getInfoVal('version'); ?>)</a>
 				<div class="description">
-					<?php echo $core->lang($plugin->getInfoVal('description')); ?> - <?php echo $core->lang("Version"); ?> : <?php echo $plugin->getInfoVal('version'); ?>
+					<?php echo $core->lang($plugin->getInfoVal('description')); ?>
 				</div>
 			</td>
 			<td><?php echo util::htmlSelect($priority, $plugin->getconfigVal('priority'), 'name="priority['.$plugin->getName().']" onchange="document.getElementById(\'pluginsmanagerForm\').submit();"'); ?></td>
