@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>99ko - <?php echo $core->lang('Login'); ?></title>	
-	<link rel="icon" href="favicon.gif">
 	<?php show::linkTags(); ?>
 	<link rel="stylesheet" href="styles.css" media="all">
 	<?php show::scriptTags(); ?>

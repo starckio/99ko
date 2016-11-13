@@ -7,7 +7,7 @@
 	"Configuration management of 99ko" : "Gestion de la configuration de 99ko",
 	"The password is different from his confirmation." : "Le mot de passe est différent de sa confirmation.",
 	"An error occurred while saving the changes" : "Une erreur est survenue lors de l'enregistrement des modifications",
-	"Do not change advanced settings if you're not on what you're doing." : "Ne modifiez pas les paramètres avancés si vous n'êtes pas sur de ce que vous faites.",
+	"Do not change advanced settings if you're not on what you're doing" : "Ne modifiez pas les paramètres avancés si vous n'êtes pas sur de ce que vous faites",
 	"URL of the site (no trailing slash)" : "URL du site (sans slash final)",
 	"URL rewriting" : "Réécriture d'URL",
 	"Debug Mod" : "Mode débogage",
@@ -28,5 +28,7 @@
 	"URL separator" : "Séparateur d'URL",
 	"Dot" : "point",
 	"Comma" : "Virgule",
-	"Slash" : "Slash"
+	"Slash" : "Slash",
+	"Disable checking for new versions can solve a problem of slow access to administration" : "Désactiver la vérification de nouvelles versions peut résoudre un problème de lenteur d'accès à l'administration",
+	"Check for updates" : "Vérifier l'existence de mises à jour"
 }

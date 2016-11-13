@@ -1,3 +1,0 @@
-# 3.2
-    - Plugin Page : ajout de la possibilité de gérer un menu à deux niveaux
-    - Thème public : correction de bugs et mise à jour de compatibilité

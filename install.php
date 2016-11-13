@@ -62,7 +62,7 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
 		'siteLang' => $lang,
 		'hideTitles' => '0',
 		'defaultPlugin' => 'page',
-		'checkUrl' => base64_decode('aHR0cDovLzk5a28ub3JnL3ZlcnNpb24='),
+		'checkUrl' => CHECK_URL,
 		'debug' => '0',
 		'defaultAdminPlugin' => 'page',
 		'urlSeparator' => ',',
@@ -85,7 +85,6 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>99ko - <?php echo $core->lang('Installation'); ?></title>	
-	<link rel="icon" href="admin/favicon.gif">
 	<link rel="stylesheet" href="admin/styles.css" media="all">
   </head>
   

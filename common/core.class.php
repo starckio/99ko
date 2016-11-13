@@ -38,11 +38,6 @@ class core{
         util::setMagicQuotesOff();
         // Configuration
         $this->config = util::readJsonFile(DATA.'config.json', true);
-        // Fix Bug update 2.2 => 2.3
-        if($this->config['checkUrl'] == 'http://99ko.hellojo.fr/version'){
-            $this->config['checkUrl'] = 'http://99ko.org/version';
-            $this->saveConfig($this->config);
-        }
         // Error reporting
         if($this->config['debug']) error_reporting(E_ALL);
         else error_reporting(E_ERROR | E_PARSE);
@@ -111,13 +106,6 @@ class core{
     ## Retourne une valeur de configuration
     public function getConfigVal($k){
         if(isset($this->config[$k])) return $this->config[$k];
-        elseif(!isset($this->config[$k])){
-            // Auto update config : 2.0 => 2.1
-            if($k == 'urlSeparator'){
-                $this->saveConfig($this->config, array('urlSeparator' => ','));
-                return ',';
-            }
-        }
         else return false;
     }
     
@@ -206,6 +194,7 @@ class core{
     
     ## Détecte s'il existe une nouvelle version de 99ko
     public function detectNewVersion(){
+        if($this->getConfigVal('checkUrl') == '') return false;
         if($last = trim(@file_get_contents($this->getConfigVal('checkUrl')))) if($last != VERSION) return $last;
         return false;
     }

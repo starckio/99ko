@@ -17,16 +17,16 @@ switch($action){
 			$pageItem->setName($_POST['name']);
 			$pageItem->setPosition($_POST['position']);
 			$pageItem->setIsHomepage((isset($_POST['isHomepage'])) ? 1 : 0);
-			$pageItem->setContent($_POST['content']);
-			$pageItem->setFile($_POST['file']);
+			$pageItem->setContent((isset($_POST['content'])) ? $_POST['content'] : '');
+			$pageItem->setFile((isset($_POST['file'])) ? $_POST['file'] : '');
 			$pageItem->setIsHidden((isset($_POST['isHidden'])) ? 1 : 0);
-			$pageItem->setMainTitle($_POST['mainTitle']);
-			$pageItem->setMetaDescriptionTag($_POST['metaDescriptionTag']);
-			$pageItem->setMetaTitleTag($_POST['metaTitleTag']);
-			$pageItem->setTarget($_POST['target']);
-			$pageItem->setTargetAttr($_POST['targetAttr']);
+			$pageItem->setMainTitle((isset($_POST['mainTitle'])) ? $_POST['mainTitle'] : '');
+			$pageItem->setMetaDescriptionTag((isset($_POST['metaDescriptionTag'])) ? $_POST['metaDescriptionTag'] : '');
+			$pageItem->setMetaTitleTag((isset($_POST['metaTitleTag'])) ? $_POST['metaTitleTag'] : '');
+			$pageItem->setTarget((isset($_POST['target'])) ? $_POST['target'] : '');
+			$pageItem->setTargetAttr((isset($_POST['targetAttr'])) ? $_POST['targetAttr'] : '');
 			$pageItem->setNoIndex((isset($_POST['noIndex'])) ? 1 : 0);
-			$pageItem->setParent($_POST['parent']);
+			$pageItem->setParent((isset($_POST['parent'])) ? $_POST['parent'] : '');
 			if($page->save($pageItem)){
 				$msg = $core->lang("The changes have been saved.");
 				$msgType = 'success';
