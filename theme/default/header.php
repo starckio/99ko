@@ -1,4 +1,7 @@
-<?php defined('ROOT') OR exit('No direct script access allowed'); ?>
+<?php
+defined('ROOT') OR exit('No direct script access allowed');
+include_once(THEMES.$core->getConfigVal('theme').'/functions.php');
+?>
 <!DOCTYPE html>
 <html lang="<?php show::siteLang(); ?>">
 <head>

@@ -58,6 +58,7 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
 		'adminEmail' => $_POST['adminEmail'],
 		'siteUrl' => $core->makeSiteUrl(),      
 		'urlRewriting' => '0',
+		'htaccessOptimization' => '0',
 		'theme' => 'default',
 		'siteLang' => $lang,
 		'hideTitles' => '0',
