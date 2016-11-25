@@ -30,7 +30,7 @@
 		  <div id="sidebar">
 			<ul id="navigation">
 			  <?php foreach($pluginsManager->getPlugins() as $k=>$v) if($v->getConfigVal('activate') && $v->getAdminFile()){ ?>
-			  <li><a class="" href="index.php?p=<?php echo $v->getName(); ?>"><?php echo $core->lang($v->getInfoVal('name')); ?></a></li>
+			  <li class="<?php if($v->isRequired()){ ?>last<?php } ?>"><a href="index.php?p=<?php echo $v->getName(); ?>"><?php echo $core->lang($v->getInfoVal('name')); ?></a></li>
 			  <?php } ?>
 			</ul>
 			<div id="notifs">

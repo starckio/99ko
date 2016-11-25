@@ -19,4 +19,10 @@ $(document).ready(function () {
 		});
 	});
 	$("#alert .alert-box").delay(5000).fadeOut('slow');
+	// tri menu
+	var elem = $('#navigation').find('li').sort(sortMe);
+	function sortMe(a, b){
+			return a.className > b.className;
+	}
+	$('#navigation').append(elem);
 });

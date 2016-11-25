@@ -308,16 +308,8 @@ code{
 
 @media only screen and (max-width: 768px){
     
-    #navigation{
-        display: none;
-    }
-    
-    .slicknav_menu{
-        display: block;
-    }
-    
     #siteName{
-        display: none;
+        width: 100%;
     }
 
 }
