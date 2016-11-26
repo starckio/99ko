@@ -22,7 +22,7 @@ function pluginsmanagerAdminNotifications(){
     foreach($pluginsManager->getPlugins() as $plugin){
         if(!$pluginsManager->isActivePlugin($plugin->getName())) $list.= $plugin->getInfoVal('name').', ';
     }
-    if($list != '') show::msg($core->lang("Plugins are inactive").' ('.trim($list, ', ').')', "info");
+    if($list != '') show::msg($core->lang("Plugins are inactive or require maintenance").' ('.trim($list, ', ').')', "info");
 }
 
 ?>
