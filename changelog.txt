@@ -1,5 +1,0 @@
-# 3.2.1
-    - Plugins manager : cheking version désactivable
-    - Plugins page : correction d'un bug
-    - Thème par défaut : correction d'un bug / mise à jour
-    - Divers : correction de bugs / mises à jour

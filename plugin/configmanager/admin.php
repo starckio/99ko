@@ -21,6 +21,7 @@ switch($action){
 				'theme' => $_POST['theme'],
 				'defaultPlugin' => $_POST['defaultPlugin'],
 				'urlRewriting' => (isset($_POST['urlRewriting'])) ? '1' : '0',
+				'htaccessOptimization' => (isset($_POST['htaccessOptimization'])) ? '1' : '0',
 				'siteLang' => $_POST['lang'],
 				'hideTitles' => (isset($_POST['hideTitles'])) ? '1' : '0',
 				'gzip' => (isset($_POST['gzip'])) ? '1' : '0',

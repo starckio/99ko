@@ -16,6 +16,7 @@
 		<tr>
 			<td>
 				<a href="<?php echo $plugin->getInfoVal('authorWebsite'); ?>" target="_blank"><?php echo $core->lang($plugin->getInfoVal('name')); ?>&nbsp;&nbsp;&nbsp;(<?php echo $plugin->getInfoVal('version'); ?>)</a>
+				<?php if($plugin->getConfigVal('activate') && !$plugin->isInstalled()){ ?>&nbsp;&nbsp;<a class="button" href="index.php?p=pluginsmanager&action=maintenance&plugin=<?php echo $plugin->getName(); ?>&token=<?php echo administrator::getToken(); ?>"><?php echo $core->lang("Maintenance required"); ?></a><?php } ?>
 				<div class="description">
 					<?php echo $core->lang($plugin->getInfoVal('description')); ?>
 				</div>

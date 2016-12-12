@@ -30,5 +30,6 @@
 	"Comma" : "Virgule",
 	"Slash" : "Slash",
 	"Disable checking for new versions can solve a problem of slow access to administration" : "Désactiver la vérification de nouvelles versions peut résoudre un problème de lenteur d'accès à l'administration",
-	"Check for updates" : "Vérifier l'existence de mises à jour"
+	"Check for updates" : "Vérifier l'existence de mises à jour",
+	"Optimize loading time" : "Optimiser le temps de chargement"
 }

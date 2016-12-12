@@ -58,6 +58,7 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
 		'adminEmail' => $_POST['adminEmail'],
 		'siteUrl' => $core->makeSiteUrl(),      
 		'urlRewriting' => '0',
+		'htaccessOptimization' => '0',
 		'theme' => 'default',
 		'siteLang' => $lang,
 		'hideTitles' => '0',
@@ -85,7 +86,6 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>99ko - <?php echo $core->lang('Installation'); ?></title>	
-	<link rel="icon" href="admin/favicon.gif">
 	<link rel="stylesheet" href="admin/styles.css" media="all">
   </head>
   

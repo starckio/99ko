@@ -13,6 +13,9 @@
       <input id="urlRewriting" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($core->getConfigVal('urlRewriting')){ ?>checked<?php } ?> name="urlRewriting" /> <label for="urlRewriting"><?php echo $core->lang("URL rewriting"); ?></label>
 </p>
   <p>
+      <input id="htaccessOptimization" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($core->getConfigVal('htaccessOptimization')){ ?>checked<?php } ?> name="htaccessOptimization" /> <label for="htaccessOptimization"><?php echo $core->lang("Optimize loading time"); ?></label>
+</p>
+  <p>
       <label><?php echo $core->lang("URL of the site (no trailing slash)"); ?></label><br>
       <input type="text" name="siteUrl" value="<?php echo $core->getConfigVal('siteUrl'); ?>" />
 </p>

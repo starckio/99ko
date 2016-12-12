@@ -242,6 +242,7 @@ class core{
     public function saveConfig($val, $append = array()){
         $config = util::readJsonFile(DATA.'config.json', true);
         $config = array_merge($config, $append);
+        if(!isset($config['htaccessOptimization'])) $config['htaccessOptimization'] = 0; // 3.3
         foreach($config as $k=>$v) if(isset($val[$k])){
             $config[$k] = $val[$k];
         }

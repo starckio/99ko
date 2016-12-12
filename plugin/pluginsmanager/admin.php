@@ -26,7 +26,8 @@ switch($action){
 				if(isset($_POST['activate'][$v->getName()])){
 					if(!$v->isInstalled()) $pluginsManager->installPlugin($v->getName(), true);
 					else $v->setConfigVal('activate', 1);
-				}else $v->setConfigVal('activate', 0);
+				}
+				else $v->setConfigVal('activate', 0);
 				if($v->isInstalled()){
 					$v->setConfigVal('priority', intval($_POST['priority'][$v->getName()]));
 					if(!$pluginsManager->savePluginConfig($v)){
@@ -41,6 +42,13 @@ switch($action){
 			}
 		}
 		header('location:index.php?p=pluginsmanager&msg='.urlencode($msg).'&msgType='.$msgType);
+		die();
+		break;
+	case 'maintenance':
+		if($administrator->isAuthorized()){
+			$pluginsManager->installPlugin($_GET['plugin'], true);
+		}
+		header('location:index.php?p=pluginsmanager');
 		die();
 		break;
 	case 'cache':

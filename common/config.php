@@ -18,8 +18,8 @@
  * file that was distributed with this source code.
  */
 
-define('VERSION', '3.2.1');
-define('VERSION_NAME', 'Janis');
+define('VERSION', '3.3');
+define('VERSION_NAME', 'Layne');
 define('CHECK_URL', 'http://99ko.org/version');
 define('COMMON',  ROOT.'common/');
 define('LANG', COMMON.'lang/');
