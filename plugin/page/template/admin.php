@@ -1,11 +1,11 @@
 <?php include_once(ROOT.'admin/header.php'); ?>
 
 <?php if($mode == 'list'){ ?>
-<p>
-  <a class="button" href="index.php?p=page&amp;action=edit"><?php echo $core->lang("Add a page"); ?></a>
-  <a class="button" href="index.php?p=page&amp;action=edit&parent=1"><?php echo $core->lang("Add a parent item"); ?></a>
-  <a class="button" href="index.php?p=page&amp;action=edit&link=1"><?php echo $core->lang("Add an external link"); ?></a>
-</p>
+<ul class="tabs_style">
+  <li><a class="button" href="index.php?p=page&amp;action=edit"><?php echo $core->lang("Add a page"); ?></a></li>
+  <li><a class="button" href="index.php?p=page&amp;action=edit&parent=1"><?php echo $core->lang("Add a parent item"); ?></a></li>
+  <li><a class="button" href="index.php?p=page&amp;action=edit&link=1"><?php echo $core->lang("Add an external link"); ?></a></li>
+</ul>
 <table>
   <thead>
 	<tr>
@@ -20,10 +20,10 @@
 	<?php foreach($page->getItems() as $k=>$pageItem) if($pageItem->getParent() == 0 && ($pageItem->targetIs() != 'plugin' || ($pageItem->targetIs() == 'plugin' && $pluginsManager->isActivePlugin($pageItem->getTarget())))){ ?>
 	<tr>
 		<td><?php if($pageItem->getIsHomepage()){ ?><img title="<?php echo $core->lang("Homepage"); ?>" src="<?php echo PLUGINS; ?>page/other/house.png" alt="icon" /><?php } ?> 
-		    <?php if($pageItem->getIsHidden()){ ?><img title="<?php echo $core->lang("Does not appear in the menu"); ?>" src="<?php echo PLUGINS; ?>/page/other/ghost.png" alt="icon" /><?php } ?>
-			<?php if($pageItem->targetIs() == 'url'){ ?><img title="<?php echo $core->lang("Target : URL"); ?>" src="<?php echo PLUGINS; ?>/page/other/link.png" alt="icon" /><?php } ?>
-			<?php if($pageItem->targetIs() == 'plugin'){ ?><img title="<?php echo $core->lang("Target : plugin"); ?>" src="<?php echo PLUGINS; ?>/page/other/plugin.png" alt="icon" /><?php } ?>
-			<?php if($pageItem->targetIs() == 'parent'){ ?><img title="<?php echo $core->lang("Parent item"); ?>" src="<?php echo PLUGINS; ?>/page/other/star.png" alt="icon" /><?php } ?>
+		    <?php if($pageItem->getIsHidden()){ ?><img title="<?php echo $core->lang("Does not appear in the menu"); ?>" src="<?php echo PLUGINS; ?>page/other/ghost.png" alt="icon" /><?php } ?>
+			<?php if($pageItem->targetIs() == 'url'){ ?><img title="<?php echo $core->lang("Target : URL"); ?>" src="<?php echo PLUGINS; ?>page/other/link.png" alt="icon" /><?php } ?>
+			<?php if($pageItem->targetIs() == 'plugin'){ ?><img title="<?php echo $core->lang("Target : plugin"); ?>" src="<?php echo PLUGINS; ?>page/other/plugin.png" alt="icon" /><?php } ?>
+			<?php if($pageItem->targetIs() == 'parent'){ ?><img title="<?php echo $core->lang("Parent item"); ?>" src="<?php echo PLUGINS; ?>page/other/star.png" alt="icon" /><?php } ?>
 		</td>
 		<td><?php echo $pageItem->getName(); ?></td>
 		<td><?php if($pageItem->targetIs() != 'parent'){ ?><input readonly="readonly" type="text" value="<?php echo $page->makeUrl($pageItem); ?>" /><?php } ?></td>
@@ -39,10 +39,10 @@
 	<?php foreach($page->getItems() as $k=>$pageItemChild) if($pageItemChild->getParent() == $pageItem->getId() && ($pageItemChild->targetIs() != 'plugin' || ($pageItemChild->targetIs() == 'plugin' && $pluginsManager->isActivePlugin($pageItemChild->getTarget())))){ ?>
 	<tr>
 		<td><?php if($pageItemChild->getIsHomepage()){ ?><img title="<?php echo $core->lang("Homepage"); ?>" src="<?php echo PLUGINS; ?>page/other/house.png" alt="icon" /><?php } ?> 
-			<?php if($pageItemChild->getIsHidden()){ ?><img title="<?php echo $core->lang("Does not appear in the menu"); ?>" src="<?php echo PLUGINS; ?>/page/other/ghost.png" alt="icon" /><?php } ?>
-			<?php if($pageItemChild->targetIs() == 'url'){ ?><img title="<?php echo $core->lang("Target : URL"); ?>" src="<?php echo PLUGINS; ?>/page/other/link.png" alt="icon" /><?php } ?>
-			<?php if($pageItemChild->targetIs() == 'plugin'){ ?><img title="<?php echo $core->lang("Target : plugin"); ?>" src="<?php echo PLUGINS; ?>/page/other/plugin.png" alt="icon" /><?php } ?>
-			<?php if($pageItemChild->targetIs() == 'parent'){ ?><img title="<?php echo $core->lang("Parent item"); ?>" src="<?php echo PLUGINS; ?>/page/other/star.png" alt="icon" /><?php } ?>
+			<?php if($pageItemChild->getIsHidden()){ ?><img title="<?php echo $core->lang("Does not appear in the menu"); ?>" src="<?php echo PLUGINS; ?>page/other/ghost.png" alt="icon" /><?php } ?>
+			<?php if($pageItemChild->targetIs() == 'url'){ ?><img title="<?php echo $core->lang("Target : URL"); ?>" src="<?php echo PLUGINS; ?>page/other/link.png" alt="icon" /><?php } ?>
+			<?php if($pageItemChild->targetIs() == 'plugin'){ ?><img title="<?php echo $core->lang("Target : plugin"); ?>" src="<?php echo PLUGINS; ?>page/other/plugin.png" alt="icon" /><?php } ?>
+			<?php if($pageItemChild->targetIs() == 'parent'){ ?><img title="<?php echo $core->lang("Parent item"); ?>" src="<?php echo PLUGINS; ?>page/other/star.png" alt="icon" /><?php } ?>
 		</td>
 		<td>▸ <?php echo $pageItemChild->getName(); ?></td>
 		<td><input readonly="readonly" type="text" value="<?php echo $page->makeUrl($pageItemChild); ?>" /></td>

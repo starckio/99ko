@@ -233,7 +233,7 @@ class page{
 	public function listTemplates(){
 		$core = core::getInstance();
 		$data = array();
-		$items = util::scanDir(THEMES .$core->getConfigVal('theme').'/', array('header.php', 'footer.php', 'style.css', '404.php'));
+		$items = util::scanDir(THEMES .$core->getConfigVal('theme').'/', array('header.php', 'footer.php', 'style.css', '404.php', 'functions.php'));
 		foreach($items['file'] as $file){
 			if(in_array(util::getFileExtension($file), array('htm', 'html', 'txt', 'php'))) $data[] = $file;
 		}

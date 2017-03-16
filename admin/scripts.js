@@ -25,4 +25,8 @@ $(document).ready(function () {
 			return a.className > b.className;
 	}
 	$('#navigation').append(elem);
+	// login
+	$('#login input.alert').click(function(){
+		document.location.href= $(this).attr('rel');
+	});
 });

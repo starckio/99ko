@@ -22,8 +22,10 @@
 	  <input type="email" id="adminEmail" name="adminEmail" placeholder="your@mail.com" required></p>
 	  <p><label for="adminPwd"><?php echo $core->lang('Password'); ?></label>
 	  <input type="password" id="adminPwd" name="adminPwd" placeholder="*******" required></p>
-	  <p><a href="../" class="button alert"><?php echo $core->lang('Quit'); ?></a> 
-	  <button type="submit" class="button success"><?php echo $core->lang('Validate'); ?></button></p>
+	  <p>
+		<input type="button" class="button alert" value="<?php echo $core->lang('Quit'); ?>" rel="<?php echo $core->getConfigVal('siteUrl'); ?>" />
+		<input type="submit" class="button" value="<?php echo $core->lang('Validate'); ?>" />
+		</p>
 	  <p class="just_using"><a title="<?php echo $core->lang("NoDB CMS"); ?>" target="_blank" href="http://99ko.org"><?php echo $core->lang("Just using 99ko"); ?></a>
 	  </p>
 	</form>

@@ -1,24 +1,18 @@
 <?php
-/**
- * 99ko cms
+/*
+ * 99ko CMS (since 2010)
+ * http://99ko.org
  *
- * This source file is part of the 99ko cms. More information,
- * documentation and support can be found at http://99ko.org
+ * Creator / Developper :
+ * helloJo (contact@99ko.org / j.coulet@gmail.com)
+ * 
+ * Contributors :
+ * Frédéric Kaplon (frederic.kaplon@me.com)
+ * Florent Fortat (florent.fortat@maxgun.fr)
  *
- * @package     99ko
- *
- * @author      Jonathan Coulet (contact@99ko.org)
- * @copyright   2016 Jonathan Coulet (contact@99ko.org)
- * @copyright   2015 Jonathan Coulet (contact@99ko.org) / Frédéric Kaplon (frederic.kaplon@me.com)
- * @copyright   2013-2014 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (contact@99ko.org) / Frédéric Kaplon (frederic.kaplon@me.com)
- * @copyright   2010-2012 Florent Fortat (florent.fortat@maxgun.fr) / Jonathan Coulet (contact@99ko.org)
- * @copyright   2010 Jonathan Coulet (contact@99ko.org)  
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
  */
 
-define('VERSION', '3.3');
+define('VERSION', '3.3.1');
 define('VERSION_NAME', 'Layne');
 define('CHECK_URL', 'http://99ko.org/version');
 define('COMMON',  ROOT.'common/');

@@ -157,17 +157,17 @@ ul.no_bullet{
 
 /* TABS */
 
-ul.tabs{
+ul.tabs, ul.tabs_style{
     list-style: none inside;
     overflow: hidden;
 }
 
-ul.tabs li{
+ul.tabs li, ul.tabs_style li{
     float: left;
     margin-right: 5px;
 }
 
-ul.tabs a{
+ul.tabs a, ul.tabs_style a{
     display: block;
     margin-bottom: 15px;
 }
@@ -231,7 +231,11 @@ ul.tabs a{
 }
 
 .just_using a{
-    color: #E5E5E5;
+    color: #ccc;
+}
+
+#login .just_using a{
+    color: #14161a;
 }
 
 #container{
@@ -288,6 +292,11 @@ ul.tabs a{
     float: left;
 }
 
+#header li.facebook{
+    padding: 10px;
+    float: right;
+}
+
 #header a{
     color: #2c313b;
     padding: 15px;
@@ -297,7 +306,7 @@ ul.tabs a{
 }
 
 #header a:hover, #header a.active{
-    color: #E5E5E5;
+    color: #fff;
     background: #2c313b;
 }
 
@@ -306,7 +315,7 @@ ul.tabs a{
 }
 
 #sidebar h2{
-    color: #E5E5E5;
+    color: #ccc;
 }
 
 #navigation{
@@ -321,11 +330,12 @@ ul.tabs a{
     border-bottom: 1px solid #14161a;
     transition: background 0.5s ease;
     display: block;
-    color: #E5E5E5;
+    color: #ccc;
 }
 
 #navigation a:hover{
     background: #14161a;
+    color: #fff;
 }
 
 #navigation li:last-child a{
