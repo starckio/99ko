@@ -1,0 +1,6 @@
+{
+    "adminNotifications" : "pageAdminNotifications",
+    "startCreatePlugin" : "pageStartCreatePlugin",
+    "endFrontHead" : "pageEndFrontHead",
+    "endAdminHead" : "pageEndAdminHead"
+}

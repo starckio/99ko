@@ -1,0 +1,19 @@
+{
+	"Configuration" : "Configuration",
+	"Informations" : "Informations",
+	"Label (meta title and page title)" : "Libélé (meta title et titre de page)",
+	"The address for receiving emails is " : "L'adresse de réception des emails est ",	
+	"Insert contents before the form" : "Insérer du contenu avant le formulaire",
+	"Insert contents after the form" : "Insérer du contenu après le formulaire",
+	"Name" : "Nom",
+	"First name" : "Prénom",
+	"E-mail" : "Email",
+	"Message" : "Message",
+	"Send" : "Envoyer",
+	"The captcha you entered is incorrect" : "Le captcha saisi est erroné",
+	"Your message has been sent" : "Votre message a bien été envoyé",
+	"Fields are not filled or the email address is invalid" : "Des champs ne sont pas remplis ou l'adresse email est invalide",
+
+	"The changes have been saved." : "Les modifications ont été enregistrées.",
+	"Copy recipient" : "Destinataire en copie"
+}

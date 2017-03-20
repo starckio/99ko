@@ -1,0 +1,8 @@
+{
+    "name" : "Plugins manager",
+    "description" : "Plugins management of 99ko",
+    "author" : "helloJo",
+    "authorEmail" : "contact@99ko.org",
+    "authorWebsite" : "http://99ko.org",
+    "version" : "6.0"
+}

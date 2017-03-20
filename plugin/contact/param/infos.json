@@ -1,0 +1,8 @@
+{
+    "name" : "Contact",
+    "description" : "Formulaire de contact (nécessite le plugin Page)",
+    "author" : "helloJo",
+    "authorEmail" : "contact@99ko.org",
+    "authorWebsite" : "http://www.99ko.org",
+    "version" : "5.0"
+}
