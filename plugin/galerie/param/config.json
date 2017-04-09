@@ -1,9 +1,0 @@
-{
-    "priority" : "2",
-    "adminTabs" : "Pictures,Configuration",
-    "label" : "Portfolio",
-    "order" : "byDate",
-    "onlyImg" : "0",
-    "introduction" : "",
-    "showTitles" : "1"
-}
