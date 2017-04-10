@@ -11,28 +11,8 @@ function pageInstall(){
 		$pageItem->setIsHomepage(1);
 		$pageItem->setContent('<p>L\'installation s\'est déroulée avec succès !<br>Rendez-vous sur le site officiel de 99ko pour télécharger des plugins et des thèmes.</p>');
 		$pageItem->setIsHidden(0);
-		$pageItem->setFile('home.php');
 		$page->save($pageItem);
 		$page = new page();
-		$pageItem = new pageItem();
-		$pageItem->setName('Page 2');
-		$pageItem->setPosition(2);
-		$pageItem->setIsHomepage(0);
-		$pageItem->setContent("<p>Iamque lituis cladium concrepantibus internarum non celate ut antea turbidum saeviebat ingenium a veri consideratione detortum et nullo inpositorum vel conpositorum fidem sollemniter inquirente nec discernente a societate noxiorum insontes velut exturbatum e iudiciis fas omne discessit, et causarum legitima silente defensione carnifex rapinarum sequester et obductio capitum et bonorum ubique multatio versabatur per orientales provincias, quas recensere puto nunc oportunum absque Mesopotamia digesta, cum bella Parthica dicerentur, et Aegypto, quam necessario aliud reieci ad tempus.</p><p>Haec igitur lex in amicitia sanciatur, ut neque rogemus res turpes nec faciamus rogati. Turpis enim excusatio est et minime accipienda cum in ceteris peccatis, tum si quis contra rem publicam se amici causa fecisse fateatur. Etenim eo loco, Fanni et Scaevola, locati sumus ut nos longe prospicere oporteat futuros casus rei publicae. Deflexit iam aliquantum de spatio curriculoque consuetudo maiorum.</p>");
-		$pageItem->setIsHidden(0);
-		$pageItem->setFile('');
-		$page->save($pageItem);
-		$page = new page();
-		$pageItem = new pageItem();
-		$pageItem->setName('Texte support');
-		$pageItem->setPosition(3);
-		$pageItem->setIsHomepage(0);
-		$pageItem->setContent('<p style="padding:15px;background:#f7f7f7;">Site officiel : <a href="http://99ko.org">http://99ko.org</a><br>
-Forum : <a href="http://99ko.org/support/">http://99ko.org/support/</a><br>
-Page Facebook : <a href="https://www.facebook.com/99kocms">https://www.facebook.com/99kocms</a></p>');
-		$pageItem->setIsHidden(1);
-		$pageItem->setFile('');
-		$page->save($pageItem);
 		$page = new page();
 		$pageItem = new pageItem();
 		$pageItem->setName('99ko');
@@ -44,15 +24,6 @@ Page Facebook : <a href="https://www.facebook.com/99kocms">https://www.facebook.
 		$pageItem->setTarget('http://99ko.org');
 		$pageItem->setTargetAttr('_blank');
 		$page->save($pageItem);
-	}
-}
-
-## Hook (notifications admin)
-function pageAdminNotifications(){
-	$page = new page();
-	$core = core::getInstance();
-	if(!$page->createHomepage()){
-		show::msg($core->lang("No homepage defined"), "error");
 	}
 }
 

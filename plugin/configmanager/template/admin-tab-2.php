@@ -1,13 +1,9 @@
    <?php defined('ROOT') OR exit('No direct script access allowed'); ?>
 
    <?php show::msg($core->lang("Do not change advanced settings if you're not on what you're doing"), "info"); ?>
-   <?php show::msg($core->lang("Disable checking for new versions can solve a problem of slow access to administration"), "info"); ?>
    
 <p>
       <input <?php if($core->getConfigVal('debug')){ ?>checked<?php } ?> type="checkbox" name="debug" /> <label for="debug"><?php echo $core->lang("Debug Mod"); ?></label> 
-</p>
-<p>
-      <input <?php if($core->getConfigVal('checkUrl') != ''){ ?>checked<?php } ?> type="checkbox" name="checkUrl" /> <label for="debug"><?php echo $core->lang("Check for updates"); ?></label> 
 </p>
   <p>
       <input id="urlRewriting" type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($core->getConfigVal('urlRewriting')){ ?>checked<?php } ?> name="urlRewriting" /> <label for="urlRewriting"><?php echo $core->lang("URL rewriting"); ?></label>
@@ -29,7 +25,7 @@
 </p>
   <p>
       <label><?php echo $core->lang(".htaccess"); ?></label><br>
-      <textarea id="htaccess" name="htaccess"><?php echo $htaccess; ?></textarea>
+      <textarea id="htaccess" name="htaccess"><?php echo $core->getHtaccess(); ?></textarea>
 </p>
   <p>
             

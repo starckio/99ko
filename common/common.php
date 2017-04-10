@@ -23,10 +23,6 @@ include_once(COMMON.'plugin.class.php');
 include_once(COMMON.'show.class.php');
 ## Création de l'instance core
 $core = core::getInstance();
-## Plugin par défaut du mode public
-define('DEFAULT_PLUGIN', $core->getConfigVal('defaultPlugin'));
-## Plugin par défaut du mode admin
-define('DEFAULT_ADMIN_PLUGIN', $core->getConfigVal('defaultAdminPlugin'));
 ## Si le core n'est pas installé on redirige vers le script d'installation
 if(!$core->isInstalled()){
 	header('location:' .ROOT. 'install.php');

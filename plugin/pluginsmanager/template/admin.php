@@ -1,6 +1,5 @@
-<?php defined('ROOT') OR exit('No direct script access allowed'); ?>
+<?php include_once(ROOT.'admin/header.php'); ?>
 
-<br />
 <form method="post" action="index.php?p=pluginsmanager&action=save" id="pluginsmanagerForm">
 	<?php show::adminTokenField(); ?>
 	<table>
@@ -33,3 +32,6 @@
 		<?php } ?>
 	  </tbody>					
 	</table>
+</form>
+
+<?php include_once(ROOT.'admin/footer.php'); ?>

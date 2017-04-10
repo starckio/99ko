@@ -22,7 +22,7 @@
       <label><?php echo $core->lang("Default plugin"); ?> (admin)</label><br>
       <select name="defaultAdminPlugin">
 	    <?php foreach($pluginsManager->getPlugins() as $k=>$v) if($v->getConfigVal('activate') && $v->getAdminFile()){ ?>
-	    <option <?php if($v->getName() == DEFAULT_ADMIN_PLUGIN){ ?>selected<?php } ?> value="<?php echo $v->getName(); ?>"><?php echo $v->getInfoVal('name'); ?></option>
+	    <option <?php if($v->getName() == $v->getIsDefaultAdminPlugin()){ ?>selected<?php } ?> value="<?php echo $v->getName(); ?>"><?php echo $v->getInfoVal('name'); ?></option>
 	    <?php } ?>
       </select>
   </p>

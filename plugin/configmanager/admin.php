@@ -1,12 +1,10 @@
 <?php
 defined('ROOT') OR exit('No direct script access allowed');
 
-$action = (isset($_GET['action'])) ? urldecode($_GET['action']) : '';
+$action = (isset($_GET['action'])) ? $_GET['action'] : '';
 $msg = (isset($_GET['msg'])) ? urldecode($_GET['msg']) : '';
 $msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
 $error = false;
-$htaccess = @file_get_contents(ROOT.'.htaccess');
-$htaccess = htmlspecialchars($htaccess, ENT_QUOTES, 'UTF-8');
 $rewriteBase = str_replace(array('index.php', 'install.php', 'admin/'), '', $_SERVER['PHP_SELF']);
 $passwordError = false;
 
@@ -24,16 +22,13 @@ switch($action){
 				'htaccessOptimization' => (isset($_POST['htaccessOptimization'])) ? '1' : '0',
 				'siteLang' => $_POST['lang'],
 				'hideTitles' => (isset($_POST['hideTitles'])) ? '1' : '0',
-				'gzip' => (isset($_POST['gzip'])) ? '1' : '0',
 				'debug' => (isset($_POST['debug'])) ? '1' : '0',
 				'defaultAdminPlugin' => $_POST['defaultAdminPlugin'],
 				'urlSeparator' => $_POST['urlSeparator'],
-				'checkUrl' => (isset($_POST['checkUrl'])) ? CHECK_URL : '',
 			);
 			if(trim($_POST['_adminPwd']) != ''){
 				if(trim($_POST['_adminPwd']) == trim($_POST['_adminPwd2'])) {
 					$config['adminPwd'] = $administrator->encrypt(trim($_POST['_adminPwd']));
-					$_SESSION['admin'] = $config['adminPwd'];
 				}
 				else $passwordError = true;
 			}
@@ -53,8 +48,7 @@ switch($action){
 				$msg = $core->lang("The changes have been saved.");
 				$msgType = 'success';
 			}
-			@file_put_contents(ROOT.'.htaccess', str_replace('¶m', '&param', $_POST['htaccess']));
-			$pluginsManager->intiPluginsCache(array(), true);
+			$core->saveHtaccess($_POST['htaccess']);
 			header('location:index.php?p=configmanager&msg='.urlencode($msg).'&msgType='.$msgType);
 			die();
 		}

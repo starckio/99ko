@@ -44,14 +44,8 @@
 			  <li class="<?php if($v->isRequired()){ ?>last<?php } ?>"><a href="index.php?p=<?php echo $v->getName(); ?>"><?php echo $core->lang($v->getInfoVal('name')); ?></a></li>
 			  <?php } ?>
 			</ul>
-			<div id="notifs">
-			  <?php foreach($core->check() as $k=>$v){ ?>
-			  <?php echo show::msg($v['msg'], $v['type']); ?>
-			  <?php } ?>
-			  <?php eval($core->callHook('adminNotifications')); ?>
-			</div>
 			<p class="just_using">
-			  <a title="<?php echo $core->lang("NoDB CMS"); ?>" target="_blank" href="http://99ko.org"><?php echo $core->lang("Just using 99ko"); ?><br><?php echo VERSION; ?> « <i><?php echo VERSION_NAME; ?></i> »</a>
+			  <a title="<?php echo $core->lang("NoDB CMS"); ?>" target="_blank" href="http://99ko.org"><?php echo $core->lang("Just using 99ko"); ?><br><?php echo VERSION; ?></a>
 			</p>
 		  </div>
 		  <div id="content_mask">

@@ -54,9 +54,9 @@ class plugin{
 		// Validité du plugin (si false l'etat ou la configuration du plugin ne sera pas sauvegardé)
 		$this->isValid = true;
 		// Détermine si il s'agit du plugin par défaut en mode public
-		$this->isDefaultPlugin = ($name == DEFAULT_PLUGIN) ? true : false;
+		$this->isDefaultPlugin = ($name == $core->getConfigVal('defaultPlugin')) ? true : false;
 		// Détermine si il s'agit du plugin par défaut en mode admin
-		$this->isDefaultAdminPlugin = ($name == DEFAULT_ADMIN_PLUGIN) ? true : false;
+		$this->isDefaultAdminPlugin = ($name == $core->getConfigVal('defaultAdminPlugin')) ? true : false;
 		// Meta title
 		$this->setTitleTag($infos['name']);
 		// Titre de page
@@ -213,10 +213,7 @@ class plugin{
 	
 	## Permet de définir la meta title
 	public function setTitleTag($val){
-		$core = core::getInstance();
-		/*if($this->isDefaultPlugin) $val = $core->getConfigVal('siteName').' | '.trim($val);
-		else */$val = $val.' | '.$core->getConfigVal('siteName');
-		$this->titleTag = $val;
+		$this->titleTag = trim($val);
 	}
 	
 	## Permet de définir la meta description

@@ -16,7 +16,7 @@
 define('ROOT', '../');
 include_once(ROOT.'common/common.php');
 include_once(COMMON.'administrator.class.php');
-$administrator = $core->createAdministrator();
+$administrator = new administrator($core->getConfigVal('adminEmail'), $core->getConfigVal('adminPwd'));
 ## Variables
 $msg = (isset($_GET['msg'])) ? $_GET['msg'] : '';
 $msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
@@ -26,13 +26,13 @@ if($administrator->isAuthorized() && $core->detectAdminMode() == 'login'){
 	// hook
 	eval($core->callHook('startAdminLogin'));
 	// on bloque l'authentification si le fichier install est présent
-	$temp = $core->check();
+	/*$temp = $core->check();
 	if($core->getConfigVal('debug') == 0 && isset($temp[2])){
 		$msg = $core->lang('Please delete the install.php file before logging');
 		include_once('login.php');
-	}
+	}*/
 	// authentification
-	elseif($administrator->login($_POST['adminEmail'], $_POST['adminPwd'])){
+	/*else*/if($administrator->login($_POST['adminEmail'], $_POST['adminPwd'])){
 		header('location:index.php');
 		die();
 	}

@@ -63,7 +63,8 @@ class core{
         }
         if(!is_array($this->lang)) $this->lang = array();
         // Quel est le plugin solicité ?
-        $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultPlugin');
+        if(ROOT == './') $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultPlugin');
+        else $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultAdminPlugin');
     }
     
     ## Retourne l'instance core
@@ -152,47 +153,6 @@ class core{
         return $url;
     }
     
-    ## Lance un check et retourne les alertes
-    public function check(){
-        $data = array();
-        if(isset($_SESSION['installOk'])){
-            $data[0]['msg'] = $this->lang("99ko is installed");
-            $data[0]['type'] = 'success';
-        }
-        if(!file_exists(ROOT.'.htaccess')){
-            $data[1]['msg'] = $this->lang('The .htaccess file is missing');
-            $data[1]['type'] = 'warning';
-        }
-        if(file_exists(ROOT.'install.php')){
-            $data[2]['msg'] = $this->lang('The install.php file must be deleted');
-            $data[2]['type'] = 'warning';
-        }
-        if(!ini_get('allow_url_fopen')){
-            $data[3]['msg'] = $this->lang("Unable to check for updates as 'allow_url_fopen' is disabled on this system.");
-            $data[3]['type'] = 'error';
-        }
-        if($this->detectNewVersion()){
-            $data[4]['msg'] = $this->lang("A new version of 99ko is available"). ' : '.$this->detectNewVersion();
-            $data[4]['type'] = 'success';
-        }
-        if($this->getConfigVal('debug')){
-            $data[5]['msg'] = $this->lang("The debug mode is activated");
-            $data[5]['type'] = 'warning';
-        }
-        if(!file_exists(ROOT.'data/.htaccess') || file_get_contents(ROOT.'data/.htaccess') != 'deny from all'){
-            $data[6]['msg'] = $this->lang('The data/.htaccess file is missing or does not contain : deny from all');
-            $data[6]['type'] = 'warning';
-        }
-        return $data;
-    }
-    
-    ## Détecte s'il existe une nouvelle version de 99ko
-    public function detectNewVersion(){
-        if($this->getConfigVal('checkUrl') == '') return false;
-        if($last = trim(@file_get_contents($this->getConfigVal('checkUrl')))) if($last != VERSION) return $last;
-        return false;
-    }
-    
     ## Ajoute un hook à executter
     public function addHook($name, $function){
         $this->hooks[$name][] = $function;
@@ -236,7 +196,6 @@ class core{
     public function saveConfig($val, $append = array()){
         $config = util::readJsonFile(DATA.'config.json', true);
         $config = array_merge($config, $append);
-        if(!isset($config['htaccessOptimization'])) $config['htaccessOptimization'] = 0; // 3.3
         foreach($config as $k=>$v) if(isset($val[$k])){
             $config[$k] = $val[$k];
         }
@@ -245,11 +204,6 @@ class core{
             return true;
         }
         else return false;
-    }
-    
-    ## Retourne l'objet administrator
-    public function createAdministrator(){
-        return new administrator($this->getConfigVal('adminEmail'), $this->getConfigVal('adminPwd'));
     }
     
     ## Installation de 99ko
@@ -274,6 +228,14 @@ class core{
             if(!file_exists(DATA. 'key.php') && !@file_put_contents(DATA. 'key.php', "<?php define('KEY', '$key'); ?>", 0666)) $install = false;
         }
         return $install;
+    }
+    
+    public function getHtaccess(){
+        return htmlspecialchars(@file_get_contents(ROOT.'.htaccess'), ENT_QUOTES, 'UTF-8');
+    }
+    
+    public function saveHtaccess($content){
+        @file_put_contents(ROOT.'.htaccess', str_replace('¶m', '&param', $content));
     }
 }
 ?>
