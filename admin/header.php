@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="fr">
   <head>
-	<?php eval($core->callHook('adminHead')); ?>
+	<?php $core->callHook('adminHead'); ?>
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>99ko - Administration</title>	
@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="styles.css" media="all">
 	<?php show::scriptTags(); ?>
 	<script type="text/javascript" src="scripts.js"></script>
-	<?php eval($core->callHook('endAdminHead')); ?>	
+	<?php $core->callHook('endAdminHead'); ?>	
   </head>
   <body>
 	<div id="alert"><?php show::msg($msg, $msgType); ?></div>

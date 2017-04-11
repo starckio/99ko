@@ -21,6 +21,8 @@ class core{
     private $urlParams;
     private $themes;
     private $pluginToCall;
+    private $js;
+    private $css;
     
     ## Constructeur
     public function __construct(){
@@ -50,6 +52,9 @@ class core{
         // Quel est le plugin solicité ?
         if(ROOT == './') $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultPlugin');
         else $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultAdminPlugin');
+        // Ressources
+        $this->css = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css';
+        $this->js = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js';
     }
     
     ## Retourne l'instance core
@@ -86,6 +91,14 @@ class core{
     ## Retourne l'identifiant du plugin solicité
     public function getPluginToCall(){
         return $this->pluginToCall;
+    }
+    
+    public function getJs(){
+        return $this->js;
+    }
+    
+    public function getCss(){
+        return $this->css;
     }
     
         ## Détermine si 99ko est installé

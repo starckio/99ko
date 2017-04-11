@@ -3,8 +3,8 @@
 	</div>
 	<div id="sidebar">
 		<div id="sidebar_content">
-			<?php eval($core->callHook('sidebar')); ?>
-			<?php eval($core->callHook('endSidebar')); ?>
+			<?php $core->callHook('sidebar'); ?>
+			<?php $core->callHook('endSidebar'); ?>
 		</div>
 	</div>
 	<div id="footer">
@@ -15,6 +15,6 @@
 		</div>
 	</div>
 </div>
-<?php eval($core->callHook('endFrontBody')); ?>
+<?php $core->callHook('endFrontBody'); ?>
 </body>
 </html>

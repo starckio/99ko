@@ -57,7 +57,7 @@ class show{
      public static function linkTags($format = '<link href="[file]" rel="stylesheet" type="text/css" />'){
       $core = core::getInstance();
      	$pluginsManager = pluginsManager::getInstance();
-     	$data = '';
+     	$data = str_replace('[file]', $core->getCss(), $format);
      	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
      		if(ROOT == './' && $plugin->getConfigVal('activate') && $plugin->getPublicCssFile()) $data.= str_replace('[file]', $plugin->getPublicCssFile(), $format);
      		elseif(ROOT == '../' && $plugin->getConfigVal('activate') && $plugin->getAdminCssFile()) $data.= str_replace('[file]', $plugin->getAdminCssFile(), $format);
@@ -70,7 +70,7 @@ class show{
      public static function scriptTags($format = '<script type="text/javascript" src="[file]"></script>') {
       $core = core::getInstance();
      	$pluginsManager = pluginsManager::getInstance();
-     	$data = '';
+     	$data = str_replace('[file]', $core->getJs(), $format);
      	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
      		if(ROOT == './' && $plugin->getConfigVal('activate') && $plugin->getPublicJsFile()) $data.= str_replace('[file]', $plugin->getPublicJsFile(), $format);
      		elseif(ROOT == '../' && $plugin->getConfigVal('activate') && $plugin->getAdminJsFile()) $data.= str_replace('[file]', $plugin->getAdminJsFile(), $format);

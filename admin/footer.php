@@ -5,6 +5,6 @@
 	   </div>
 
 
-	   <?php eval($core->callHook('endAdminBody')); ?>
+	   <?php $core->callHook('endAdminBody'); ?>
 	   </body>
 </html>
