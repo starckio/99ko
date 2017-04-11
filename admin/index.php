@@ -23,8 +23,6 @@ $msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
 $pageTitle = $runPlugin->getInfoVal('name');
 ## Mode login
 if($administrator->isAuthorized() && $core->detectAdminMode() == 'login'){
-	// hook
-	eval($core->callHook('startAdminLogin'));
 	// on bloque l'authentification si le fichier install est présent
 	/*$temp = $core->check();
 	if($core->getConfigVal('debug') == 0 && isset($temp[2])){
@@ -40,8 +38,6 @@ if($administrator->isAuthorized() && $core->detectAdminMode() == 'login'){
 		$msg = $core->lang('Incorrect password');
 		include_once('login.php');
 	}
-	// hook
-	eval($core->callHook('endAdminLogin'));
 }
 ## Mode logout
 elseif($administrator->isAuthorized() && $core->detectAdminMode() == 'logout'){
@@ -55,8 +51,6 @@ if(!$administrator->isLogged()){
 }
 ## Mode plugin
 elseif($core->detectAdminMode() == 'plugin'){
-	// hook
-	eval($core->callHook('startAdminIncludePluginFile'));
 	// On inclut le fichier des traitements admin
 	include($runPlugin->getAdminFile());
 	// Plugin standard (un seul template)
@@ -71,7 +65,5 @@ elseif($core->detectAdminMode() == 'plugin'){
 		}
 		include_once(ROOT.'admin/footer.php');
 	}
-	// hook
-	eval($core->callHook('endAdminIncludePluginFile'));
 }
 ?>

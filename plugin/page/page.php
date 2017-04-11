@@ -27,10 +27,7 @@ function pageInstall(){
 	}
 }
 
-## Hook (ajout des items navigation)
-function pageStartCreatePlugin(){
-	page::addToNavigation();
-}
+page::addToNavigation();
 
 ## Hook (header thème)
 function pageEndFrontHead(){

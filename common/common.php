@@ -43,10 +43,6 @@ foreach($pluginsManager->getPlugins() as $plugin){
 		}
 	}
 }
-## Hook
-eval($core->callHook('startCreatePlugin'));
 ## Création de l'instance runPlugin, objet qui représente le plugin en cours d'execution
 $runPlugin = $pluginsManager->getPlugin($core->getPluginToCall());
-## Hook
-eval($core->callHook('endCreatePlugin'));
 ?>
