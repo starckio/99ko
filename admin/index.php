@@ -35,7 +35,7 @@ if($administrator->isAuthorized() && $core->detectAdminMode() == 'login'){
 		die();
 	}
 	else{
-		$msg = $core->lang('Incorrect password');
+		$msg = "Mot de passe incorrect";
 		include_once('login.php');
 	}
 }
@@ -55,15 +55,5 @@ elseif($core->detectAdminMode() == 'plugin'){
 	include($runPlugin->getAdminFile());
 	// Plugin standard (un seul template)
 	if(!is_array($runPlugin->getAdminTemplate())) include($runPlugin->getAdminTemplate());
-	// Plugin avec onglets
-	if($runPlugin->useAdminTabs()){
-		include_once(ROOT.'admin/header.php');
-		foreach($runPlugin->getAdminTemplate() as $k=>$v){
-			echo '<div class="tab" id="tab-'.$k.'">';
-			include_once($v);
-			echo '</div>';
-		}
-		include_once(ROOT.'admin/footer.php');
-	}
 }
 ?>

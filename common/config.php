@@ -14,7 +14,6 @@
 
 define('VERSION', '3.3.1');
 define('COMMON',  ROOT.'common/');
-define('LANG', COMMON.'lang/');
 define('DATA', ROOT.'data/');
 define('UPLOAD', ROOT.'data/upload/');
 define('DATA_PLUGIN', ROOT.'data/plugin/');

@@ -33,19 +33,19 @@ switch($action){
 				else $passwordError = true;
 			}
 			if($passwordError){
-				$msg = $core->lang("The password is different from his confirmation.");
+				$msg = "Le mot de passe est différent de sa confirmation.";
 				$msgType = 'error';
 			}
 			elseif(!util::isEmail(trim($_POST['adminEmail']))){
-				$msg = $core->lang("Invalid email.");
+				$msg = "Email invalide";
 				$msgType = 'error';
 			}
 			elseif(!$core->saveConfig($config)){
-				$msg = $core->lang("An error occurred while saving the changes");
+				$msg = "Une erreur est survenue";
 				$msgType = 'error';
 			}
 			else{
-				$msg = $core->lang("The changes have been saved.");
+				$msg = "Les modifications ont été enregistrées.";
 				$msgType = 'success';
 			}
 			$core->saveHtaccess($_POST['htaccess']);

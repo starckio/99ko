@@ -31,11 +31,11 @@ switch($action){
 				if($v->isInstalled()){
 					$v->setConfigVal('priority', intval($_POST['priority'][$v->getName()]));
 					if(!$pluginsManager->savePluginConfig($v)){
-						$msg = $core->lang('An error occured while saving your modifications.');
+						$msg = "Une erreur est survenue";
 						$msgType = 'error';
 					}
 					else{
-						$msg = $core->lang("The changes have been saved.");
+						$msg = "Modifications enregistrées";
 						$msgType = 'success';
 					}
 				}

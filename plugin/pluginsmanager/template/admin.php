@@ -5,19 +5,19 @@
 	<table>
 	  <thead>
 		<tr>
-			<th><?php echo $core->lang("Name"); ?></th>
-			<th><?php echo $core->lang("Priority"); ?></th>
-			<th><?php echo $core->lang("Enable"); ?></th>
+			<th>Nom</th>
+			<th>Priorité</th>
+			<th>Activer</th>
 		</tr>
 	  </thead>
 	  <tbody>			  	
 		<?php foreach($pluginsManager->getPlugins() as $plugin){ ?>
 		<tr>
 			<td>
-				<a href="<?php echo $plugin->getInfoVal('authorWebsite'); ?>" target="_blank"><?php echo $core->lang($plugin->getInfoVal('name')); ?>&nbsp;&nbsp;&nbsp;(<?php echo $plugin->getInfoVal('version'); ?>)</a>
-				<?php if($plugin->getConfigVal('activate') && !$plugin->isInstalled()){ ?>&nbsp;&nbsp;<a class="button" href="index.php?p=pluginsmanager&action=maintenance&plugin=<?php echo $plugin->getName(); ?>&token=<?php echo administrator::getToken(); ?>"><?php echo $core->lang("Maintenance required"); ?></a><?php } ?>
+				<a href="<?php echo $plugin->getInfoVal('authorWebsite'); ?>" target="_blank"><?php echo $plugin->getInfoVal('name'); ?>&nbsp;&nbsp;&nbsp;(<?php echo $plugin->getInfoVal('version'); ?>)</a>
+				<?php if($plugin->getConfigVal('activate') && !$plugin->isInstalled()){ ?>&nbsp;&nbsp;<a class="button" href="index.php?p=pluginsmanager&action=maintenance&plugin=<?php echo $plugin->getName(); ?>&token=<?php echo administrator::getToken(); ?>">Maintenance requise</a><?php } ?>
 				<div class="description">
-					<?php echo $core->lang($plugin->getInfoVal('description')); ?>
+					<?php echo $plugin->getInfoVal('description'); ?>
 				</div>
 			</td>
 			<td><?php echo util::htmlSelect($priority, $plugin->getconfigVal('priority'), 'name="priority['.$plugin->getName().']" onchange="document.getElementById(\'pluginsmanagerForm\').submit();"'); ?></td>

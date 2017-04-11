@@ -34,8 +34,6 @@ $pluginsManager = pluginsManager::getInstance();
 foreach($pluginsManager->getPlugins() as $plugin){
 	// On inclut le fichier PHP principal
 	include_once($plugin->getLibFile());
-	// Le core charge le fichier langue du plugin
-	$core->loadPluginLang($plugin->getName());
 	// Le core alimente le tableau des hooks
 	if($plugin->getConfigVal('activate')){
 		foreach($plugin->getHooks() as $name=>$function){

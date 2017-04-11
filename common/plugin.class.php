@@ -32,8 +32,6 @@ class plugin{
 	private $adminTemplate;
 	private $initConfig;
 	private $navigation;
-	private $adminTabs;
-	private $lang;
 	private $publicCssFile;
 	private $publicJsFile;
 	private $adminCssFile;
@@ -41,7 +39,7 @@ class plugin{
 	private $isDefaultAdminPlugin;
 	
 	## Constructeur
-	public function __construct($name, $config = array(), $infos = array(), $hooks = array(), $initConfig = array(), $lang = array()){
+	public function __construct($name, $config = array(), $infos = array(), $hooks = array(), $initConfig = array()){
 		$core = core::getInstance();
 		// Identifiant
 		$this->name = $name;
@@ -63,18 +61,16 @@ class plugin{
 		$this->setMainTitle($infos['name']);
 		// Fichier principal
 		$this->libFile = (file_exists(PLUGINS .$this->name.'/'.$this->name.'.php')) ? PLUGINS .$this->name.'/'.$this->name.'.php' : false;
-		// Tableau lang
-		$this->lang = $lang;
 		// Controlleur public
 		$this->publicFile = (file_exists(PLUGINS .$this->name.'/public.php')) ? PLUGINS .$this->name.'/public.php' : false;
 		// Controlleur admin
 		$this->adminFile = (file_exists(PLUGINS .$this->name.'/admin.php')) ? PLUGINS .$this->name.'/admin.php' : false;
 		// CSS
-		$this->publicCssFile = (file_exists(PLUGINS .$this->name.'/other/public.css')) ? PLUGINS .$this->name.'/other/public.css' : false;
-		$this->adminCssFile = (file_exists(PLUGINS .$this->name.'/other/admin.css')) ? PLUGINS .$this->name.'/other/admin.css' : false;
+		$this->publicCssFile = (file_exists(PLUGINS .$this->name.'/template/public.css')) ? PLUGINS .$this->name.'/template/public.css' : false;
+		$this->adminCssFile = (file_exists(PLUGINS .$this->name.'/template/admin.css')) ? PLUGINS .$this->name.'/template/admin.css' : false;
 		// JS
-		$this->publicJsFile = (file_exists(PLUGINS .$this->name.'/other/public.js')) ? PLUGINS .$this->name.'/other/public.js' : false;
-		$this->adminJsFile = (file_exists(PLUGINS .$this->name.'/other/admin.js')) ? PLUGINS .$this->name.'/other/admin.js' : false;
+		$this->publicJsFile = (file_exists(PLUGINS .$this->name.'/template/public.js')) ? PLUGINS .$this->name.'/template/public.js' : false;
+		$this->adminJsFile = (file_exists(PLUGINS .$this->name.'/template/admin.js')) ? PLUGINS .$this->name.'/template/admin.js' : false;
 		// Data
 		$this->dataPath = (is_dir(DATA_PLUGIN .$this->name)) ? DATA_PLUGIN .$this->name.'/' : false;
 		// Template public (peut etre le template par defaut ou un template présent dans le dossier du theme)
@@ -87,15 +83,6 @@ class plugin{
 		$this->initConfig = $initConfig;
 		// Navigation
 		$this->navigation = array();
-		// Templates admin (mode onglets)
-		$this->adminTabs = array();
-		if(isset($this->config['adminTabs']) && $this->config['adminTabs'] != '') $this->adminTabs = explode(',', $this->config['adminTabs']);
-		foreach($this->adminTabs as $k=>$v){
-			if(file_exists(PLUGINS .$this->name.'/template/admin-tab-'.$k.'.php')){
-				if(!is_array($this->adminTemplate)) $this->adminTemplate = array();
-				$this->adminTemplate[] = PLUGINS .$this->name.'/template/admin-tab-'.$k.'.php';
-			}
-		}
 	}
 	
 	## Getters
@@ -187,22 +174,8 @@ class plugin{
 		return $this->navigation;
 	}
 	
-	public function getAdminTabs(){
-		return $this->adminTabs;
-	}
-	
-	public function getLang(){
-		return $this->lang;
-	}
-	
 	public function getIsDefaultAdminPlugin(){
 		return $this->isDefaultAdminPlugin;
-	}
-	
-	## Détermine si le plugin utilise des onglets admin
-	public function useAdminTabs(){
-		if(is_array($this->adminTemplate)) return true;
-		else return false;
 	}
 
 	## Permet de modifier une valeur de configuration
@@ -248,9 +221,6 @@ class plugin{
 		$currentConfig = implode(',', array_keys($temp));
 		$initConfig = @implode(',', array_keys($this->initConfig));
 		if(count($this->config) < 1 || $currentConfig != $initConfig) return false;
-		elseif(isset($currentConfig['adminTabs'])){
-			if($currentConfig['adminTabs'] != $initConfig['adminTabs']) return false;
-		}
 		return true;
 	}
 	

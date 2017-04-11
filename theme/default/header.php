@@ -3,7 +3,7 @@ defined('ROOT') OR exit('No direct script access allowed');
 include_once(THEMES.$core->getConfigVal('theme').'/functions.php');
 ?>
 <!DOCTYPE html>
-<html lang="<?php show::siteLang(); ?>">
+<html lang="fr">
 <head>
 	<?php eval($core->callHook('frontHead')); ?>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

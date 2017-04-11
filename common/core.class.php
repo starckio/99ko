@@ -20,12 +20,10 @@ class core{
     private $hooks;
     private $urlParams;
     private $themes;
-    private $langs;
-    private $lang;
     private $pluginToCall;
     
     ## Constructeur
-    public function __construct($forceLang = ''){
+    public function __construct(){
         // Timezone
         date_default_timezone_set(date_default_timezone_get());
         // Macgic quotes OFF
@@ -49,19 +47,6 @@ class core{
         foreach($temp['dir'] as $k=>$v){
             $this->themes[$v] = util::readJsonFile(THEMES.$v.'/infos.json', true);
         }
-        // Liste des langues
-        $this->langs = array('en');
-        $temp = util::scanDir(LANG);
-        foreach($temp['file'] as $k=>$v){
-            $this->langs[] = substr($v, 0, 2);
-        }
-        // Tableau langue courante
-        if($forceLang == '') $this->lang = util::readJsonFile(LANG.$this->getConfigVal('siteLang').'.json', true);
-        else $this->lang = util::readJsonFile(LANG.$forceLang.'.json', true);
-        if(file_exists(THEMES.$this->getConfigVal('theme').'/lang/'.$this->getConfigVal('siteLang').'.json')){
-            $this->lang = array_merge($this->lang, util::readJsonFile(THEMES.$this->getConfigVal('theme').'/lang/'.$this->getConfigVal('siteLang').'.json', true));
-        }
-        if(!is_array($this->lang)) $this->lang = array();
         // Quel est le plugin solicité ?
         if(ROOT == './') $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultPlugin');
         else $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultAdminPlugin');
@@ -81,21 +66,9 @@ class core{
         else return false;
     }
     
-    ## Retourne la liste des langues
-    public function getLangs(){
-        return $this->langs;
-    }
-    
     ## Retourne la liste des thèmes
     public function getThemes(){
         return $this->themes;
-    }
-    
-    ## Retourne une phrase dans la langue courante
-    public function lang($k){
-        if($this->getConfigVal('siteLang') == 'en') return $k;
-        elseif(is_array($this->lang) && array_key_exists($k, $this->lang)) return $this->lang[$k];
-        else return $k;
     }
     
     ## Retourne une valeur de configuration
@@ -167,12 +140,6 @@ class core{
             }
         }
         return $return;
-    }
-    
-    ## Charge le fichier lang d'un plugin dans le tableau lang
-    public function loadPluginLang($plugin){
-        $pluginsManager = pluginsManager::getInstance();
-        $this->lang = array_merge($this->lang, $pluginsManager->getPlugin($plugin)->getLang());
     }
     
     ## Detecte le mode de l'administration

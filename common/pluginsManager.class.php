@@ -97,13 +97,11 @@ class pluginsManager{
 		$hooks = util::readJsonFile(PLUGINS .$name. '/param/hooks.json');
 		// Config usine
 		$initConfig = util::readJsonFile(PLUGINS .$name. '/param/config.json');
-		// lang
-		$lang = util::readJsonFile(PLUGINS .$name. '/lang/'.$core->getConfigVal('siteLang').'.json');
 		// Derniers checks
 		if(!is_array($config)) $config = array();
 		if(!is_array($hooks)) $hooks = array();
 		// Création de l'objet
-		$plugin = new plugin($name, $config, $infos, $hooks, $initConfig, $lang);
+		$plugin = new plugin($name, $config, $infos, $hooks, $initConfig);
 		return $plugin;
 	}
 	

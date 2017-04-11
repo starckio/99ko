@@ -142,13 +142,6 @@ class show{
      	echo $data;
      }
 
-     // affiche la langue courante (theme)
-     public static function siteLang() {
-      $core = core::getInstance();
-     	$data = $core->getConfigVal('siteLang');
-     	echo $data;
-     }
-
      // affiche la navigation principale (theme)
      public static function mainNavigation($format = '<li><a href="[target]" target="[targetAttribut]">[label]</a>[childrens]</li>') {
      	$pluginsManager = pluginsManager::getInstance();

@@ -28,11 +28,11 @@ switch($action){
 			$pageItem->setNoIndex((isset($_POST['noIndex'])) ? 1 : 0);
 			$pageItem->setParent((isset($_POST['parent'])) ? $_POST['parent'] : '');
 			if($page->save($pageItem)){
-				$msg = $core->lang("The changes have been saved.");
+				$msg = "Les modifications ont été enregistrées.";
 				$msgType = 'success';
 			}
 			else{
-				$msg = $core->lang("An error occurred while saving the changes.");
+				$msg = "Une erreur est survenue.";
 				$msgType = 'error';
 			}
 			header('location:index.php?p=page&msg='.urlencode($msg).'&msgType='.$msgType);
@@ -50,11 +50,11 @@ switch($action){
 		if($administrator->isAuthorized()){
 			$pageItem = $page->create($_GET['id']);
 			if($page->del($pageItem)){
-				$msg = $core->lang("The changes have been saved.");
+				$msg = "Les modifications ont été enregistrées.";
 				$msgType = 'success';
 			}
 			else{
-				$msg = $core->lang("An error occurred while saving the changes.");
+				$msg = "Une erreur est survenue.";
 				$msgType = 'error';
 			}
 			header('location:index.php?p=page&msg='.urlencode($msg).'&msgType='.$msgType);
@@ -82,6 +82,10 @@ switch($action){
 		}
 		break;
 	default:
+		if(!$page->createHomepage()){
+			$msg = "Aucune page d'accueil définie";
+			$msgType = "error";
+		}
 		$mode = 'list';
 }
 ?>
