@@ -1,7 +1,8 @@
 <?php
 defined('ROOT') OR exit('No pagesFileect script access allowed');
 
-## Traitements à effecturer lors de l'installation du plugin
+## Fonction d'installation
+
 function pageInstall(){
 	$page = new page();
 	if(count($page->getItems()) < 1){
@@ -27,9 +28,8 @@ function pageInstall(){
 	}
 }
 
-page::addToNavigation();
+## Hooks
 
-## Hook (header thème)
 function pageEndFrontHead(){
 	global $runPlugin;
 	if($runPlugin->getName() == 'page'){
@@ -41,7 +41,10 @@ function pageEndFrontHead(){
 	}
 }
 
-## Classe page manager
+## Code relatif au plugin
+
+page::addToNavigation();
+
 class page{
 	private $items;
 	private $pagesFile;
@@ -263,7 +266,6 @@ class page{
 	}
 }
 
-## Classe page item
 class pageItem{
 	private $id;
 	private $name;

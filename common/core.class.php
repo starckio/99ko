@@ -28,8 +28,6 @@ class core{
     public function __construct(){
         // Timezone
         date_default_timezone_set(date_default_timezone_get());
-        // Macgic quotes OFF
-        util::setMagicQuotesOff();
         // Configuration
         $this->config = util::readJsonFile(DATA.'config.json', true);
         // Error reporting
@@ -53,8 +51,8 @@ class core{
         if(ROOT == './') $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultPlugin');
         else $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultAdminPlugin');
         // Ressources
-        $this->css = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css';
-        $this->js = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js';
+        $this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css';
+        $this->js[] = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js';
     }
     
     ## Retourne l'instance core

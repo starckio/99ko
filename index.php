@@ -12,12 +12,9 @@
  *
  */
 
-## Préchauffage...
 define('ROOT', './');
 include_once(ROOT.'common/common.php');
-## Gestion des erreurs 404
 if(!$runPlugin || $runPlugin->getConfigVal('activate') < 1) $core->error404();
-## On inclut le fichier public et la template du plugin en cours d'execution
 elseif($runPlugin->getPublicFile()){
 	include($runPlugin->getPublicFile());
 	include($runPlugin->getPublicTemplate());

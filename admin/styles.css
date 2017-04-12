@@ -180,44 +180,20 @@ ul.tabs a, ul.tabs_style a{
 
 /* ALERT */
 
-#msg p{
-    padding: 5px;
-    font-size: 12px;
-}
-
-#msg.success{
-    background: #ccffcc;
-    color: green;
-}
-
-#msg.error{
-    background: #ffcccc;
-    color: #cc3333;
-}
-
-.alert-box{
-    background: #ffff99;
-    padding: 5px;
-    margin-bottom: 5px;
-    text-align: center;
-    border-radius: 5px;
-}
-
 .alert-box p{
     margin: 0;
 }
 
-.alert-box .close{
-    display: none !important;
-}
-
-#alert .alert-box{
+.alert-box{
     margin: 0;
     border-radius: 0;
     position: absolute;
     z-index: 99;
     width: 100%;
     top: 0;
+    background: #ffff99;
+    padding: 5px;
+    text-align: center;
 }
 
 /* STRUCTURE */
@@ -267,20 +243,19 @@ ul.tabs a, ul.tabs_style a{
 }
 
 #sidebar{
-    width: 20%;
-    float: left;
-    padding: 15px;
-    padding-top: 60px;
+    position: fixed;
+    top: 60px;
     background: #2c313b;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    display: none;
 }
 
 #content{
-    width: 70%;
-    float: left;
     background: #fff;
-    height: 100%;
-    padding: 120px 60px;
+    padding: 120px;
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
 /* MENU */
@@ -303,10 +278,9 @@ ul.tabs a, ul.tabs_style a{
 }
 
 #header a{
-    color: #2c313b;
+    color: #ccc;
     padding: 15px;
     display: block;
-    transition: background 0.5s ease;
     height: 60px;
 }
 
@@ -333,7 +307,6 @@ ul.tabs a, ul.tabs_style a{
 #navigation a{
     padding: 5px;
     border-bottom: 1px solid #14161a;
-    transition: background 0.5s ease;
     display: block;
     color: #ccc;
 }
@@ -349,7 +322,7 @@ ul.tabs a, ul.tabs_style a{
 
 /* MOBILE */
 
-@media only screen and (max-width: 1024px){
+@media only screen and (max-width: 960px){
     
     body,
     input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], input[type=date],
@@ -366,35 +339,16 @@ ul.tabs a, ul.tabs_style a{
         text-align: center;
     }
     
-    .just_using{
+    #header li{
         display: none;
     }
     
-    #header{
-        display: none;
-    }
-    
-    #sidebar{
-        width: 100%;
-        height: auto;
-        padding-top: 0;
-        text-align: center;
-    }
-    
-    #navigation{
-        display: none;
-    }
-    
-    .slicknav_menu{
+    #header li:first-child{
         display: block;
     }
     
     #content{
-        width: 100%;
-    }
-    
-    #body{
-        height: auto;
+        padding: 120px 15px;
     }
 
 }

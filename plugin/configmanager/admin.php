@@ -13,7 +13,6 @@ switch($action){
 		if($administrator->isAuthorized()){
 			$config = array(
 				'siteName' => (trim($_POST['siteName']) != '') ? trim($_POST['siteName']) : 'Démo',
-				'siteDescription' => (trim($_POST['siteDescription']) != '') ? trim($_POST['siteDescription']) : 'Un site propulsé par 99Ko',
 				'adminEmail' => trim($_POST['adminEmail']),
 				'siteUrl' => (trim($_POST['siteUrl']) != '') ? trim($_POST['siteUrl']) : $core->getConfigVal('siteUrl'),
 				'theme' => $_POST['theme'],

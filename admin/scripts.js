@@ -10,4 +10,13 @@ $(document).ready(function () {
 	$('#login input.alert').click(function(){
 		document.location.href= $(this).attr('rel');
 	});
+	// nav
+	$('#open_nav').click(function(){
+		if($('#sidebar').css('display') == 'none'){
+			$('#sidebar').fadeIn();
+		}
+		else{
+			$('#sidebar').hide();
+		}
+	});
 });

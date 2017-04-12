@@ -17,101 +17,67 @@ defined('ROOT') OR exit('No direct script access allowed');
 class show{
     
      // affiche un message d'alerte (admin + theme)
-     public static function msg($msg, $type){
-      $core = core::getInstance();
-      if(ROOT == './'){
-     	$class = array(
-     		'error'   => 'error',
-     		'success' => 'success',
-     		'info'    => 'info',
-     		'warning' => 'warning',
-     	);
-
-          if (!isset($class[$type])) {
-               $type = 'info';
-          }
-     	$data = '';
-     	if($msg != '') $data = '<div id="msg" class="'.$class[$type].'"><p>'.nl2br(htmlentities($msg)).'</p></div>';
-      }
-      else{
-	 $class = array(
-     		'error'   => 'alert',
-     		'success' => 'success',
-     		'info'    => 'info',
-     		'warning' => 'warning',
-     	);
-
-          if (!isset($class[$type])) {
-               $type = 'info';
-          }
-
-     	$data = '';
-     	if($msg != '') $data = '<div data-alert class="alert-box '.$class[$type].' radius">
-     	                                <p>'.nl2br(htmlentities($msg)).'</p><a href="#" class="close">&times;</a>
-     	                        </div>';
-      }
-     	echo $data;
+     public static function msg($msg){
+		$core = core::getInstance();
+		if(ROOT == './'){
+			if($msg != '') echo '<div id="msg"><p>'.nl2br(htmlentities($msg)).'</p></div>';
+		}
+		else{
+			if($msg != '') echo '<div class="alert-box"><p>'.nl2br(htmlentities($msg)).'</p></div>';
+		}
      }
 
      // affiche les balises "link" type css (admin + theme)
-     public static function linkTags($format = '<link href="[file]" rel="stylesheet" type="text/css" />'){
-      $core = core::getInstance();
+     public static function linkTags(){
+		$core = core::getInstance();
      	$pluginsManager = pluginsManager::getInstance();
-     	$data = str_replace('[file]', $core->getCss(), $format);
+		foreach($core->getCss() as $k=>$v){
+			echo '<link href="'.$v.'" rel="stylesheet" type="text/css" />';
+		}
      	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
-     		if(ROOT == './' && $plugin->getConfigVal('activate') && $plugin->getPublicCssFile()) $data.= str_replace('[file]', $plugin->getPublicCssFile(), $format);
-     		elseif(ROOT == '../' && $plugin->getConfigVal('activate') && $plugin->getAdminCssFile()) $data.= str_replace('[file]', $plugin->getAdminCssFile(), $format);
+     		if(ROOT == './' && $plugin->getConfigVal('activate') && $plugin->getPublicCssFile()) echo '<link href="'.$plugin->getPublicCssFile().'" rel="stylesheet" type="text/css" />';
+     		elseif(ROOT == '../' && $plugin->getConfigVal('activate') && $plugin->getAdminCssFile()) echo '<link href="'.$plugin->getAdminCssFile().'" rel="stylesheet" type="text/css" />';
      	}
-     	if(ROOT == './') $data.= str_replace('[file]', $core->getConfigVal('siteUrl').'/'.'theme/'.$core->getConfigVal('theme').'/styles.css', $format);
-     	echo $data;
+     	if(ROOT == './') echo '<link href="'.$core->getConfigVal('siteUrl').'/'.'theme/'.$core->getConfigVal('theme').'/styles.css" rel="stylesheet" type="text/css" />';
      }
 
      // affiche les balises "script" type javascript (admin + theme)
-     public static function scriptTags($format = '<script type="text/javascript" src="[file]"></script>') {
-      $core = core::getInstance();
+     public static function scriptTags(){
+		$core = core::getInstance();
      	$pluginsManager = pluginsManager::getInstance();
-     	$data = str_replace('[file]', $core->getJs(), $format);
+		foreach($core->getJs() as $k=>$v){
+			echo '<script type="text/javascript" src="'.$v.'"></script>';
+		}
      	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
-     		if(ROOT == './' && $plugin->getConfigVal('activate') && $plugin->getPublicJsFile()) $data.= str_replace('[file]', $plugin->getPublicJsFile(), $format);
-     		elseif(ROOT == '../' && $plugin->getConfigVal('activate') && $plugin->getAdminJsFile()) $data.= str_replace('[file]', $plugin->getAdminJsFile(), $format);
+     		if(ROOT == './' && $plugin->getConfigVal('activate') && $plugin->getPublicJsFile()) echo '<script type="text/javascript" src="'.$plugin->getPublicJsFile().'"></script>';
+     		elseif(ROOT == '../' && $plugin->getConfigVal('activate') && $plugin->getAdminJsFile()) echo '<script type="text/javascript" src="'.$plugin->getAdminJsFile().'"></script>';
      	}
-     	if(ROOT == './') $data.= str_replace('[file]', $core->getConfigVal('siteUrl').'/'.'theme/'.$core->getConfigVal('theme').'/scripts.js', $format);
-     	echo $data;
-     }
-
-     // affiche une balise textarea (admin)
-     public static function adminEditor($name, $content, $id='editor', $class='editor') {
-      $core = core::getInstance();
-     	$data = '<textarea name="'.$name.'" id="'.$id.'" class="'.$class.'">'.$content.'</textarea>';
-     	echo $data;
+     	if(ROOT == './') echo '<script type="text/javascript" src="'.$core->getConfigVal('siteUrl').'/'.'theme/'.$core->getConfigVal('theme').'/scripts.js'.'"></script>';
      }
 
      // affiche un input hidden contenant le token (admin)
-     public static function adminTokenField() {
-      $core = core::getInstance();
-     	$output = '<input type="hidden" name="token" value="'.administrator::getToken().'" />';
-     	echo $output;
+     public static function adminTokenField(){
+		$core = core::getInstance();
+     	echo '<input type="hidden" name="token" value="'.administrator::getToken().'" />';
      }
    
      // affiche le contenu de la meta title (theme)
-     public static function titleTag() {
-      $core = core::getInstance();
+     public static function titleTag(){
+		$core = core::getInstance();
      	global $runPlugin;
-     	$data = $runPlugin->getTitleTag();
-     	echo $data;
+     	echo $runPlugin->getTitleTag().' - '.$core->getConfigVal('siteName');
      }
 
      // affiche le contenu de la meta description (theme)
-     public static function metaDescriptionTag() {
-      $core = core::getInstance();
+     public static function metaDescriptionTag(){
+		$core = core::getInstance();
      	global $runPlugin;
-     	$data = $runPlugin->getMetaDescriptionTag();
-     	echo $data;
+     	echo $runPlugin->getMetaDescriptionTag();
      }
 
      // affiche le titre de page (theme)
-     public static function mainTitle($format = '<h1>[mainTitle]</h1>') {
-      $core = core::getInstance();
+     public static function mainTitle($format = '<h1>[mainTitle]</h1>'){
+		$core = core::getInstance();
      	global $runPlugin;
      	if($core->getConfigVal('hideTitles') == 0 && $runPlugin->getMainTitle() != ''){
      		$data = $format;
@@ -122,33 +88,29 @@ class show{
      }
 
      // affiche le nom du site (theme)
-     public static function siteName() {
-      $core = core::getInstance();
-     	$data = $core->getConfigVal('siteName');
-     	echo $data;
+     public static function siteName(){
+		$core = core::getInstance();
+     	echo $core->getConfigVal('siteName');
      }
 
      // affiche la escription du site (theme)
-     public static function siteDescription() {
-      $core = core::getInstance();
-     	$data = $core->getConfigVal('siteDescription');
-     	echo $data;
+     public static function siteDescription(){
+		$core = core::getInstance();
+     	echo $core->getConfigVal('siteDescription');
      }
 
      // affiche l'url du site (theme)
-     public static function siteUrl() {
-      $core = core::getInstance();
-     	$data = $core->getConfigVal('siteUrl');
-     	echo $data;
+     public static function siteUrl(){
+		$core = core::getInstance();
+     	echo $core->getConfigVal('siteUrl');
      }
 
      // affiche la navigation principale (theme)
-     public static function mainNavigation($format = '<li><a href="[target]" target="[targetAttribut]">[label]</a>[childrens]</li>') {
+     public static function mainNavigation($format = '<li><a href="[target]" target="[targetAttribut]">[label]</a>[childrens]</li>'){
      	$pluginsManager = pluginsManager::getInstance();
-	$core = core::getInstance();
+		$core = core::getInstance();
      	$data = '';
      	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
-			//print_r($plugin->getNavigation());
      		foreach($plugin->getNavigation() as $k2=>$item) if($item['label'] != ''){
 				if($item['parent'] < 1){
 				 $temp = $format;
@@ -177,29 +139,26 @@ class show{
      }
 
      // affiche le theme courant (theme)
-     public static function theme($format = '<a onclick="window.open(this.href);return false;" href="[authorWebsite]">[name]</a>') {
-     	//global $themes;
-	$core = core::getInstance();
+     public static function theme($format = '<a onclick="window.open(this.href);return false;" href="[authorWebsite]">[name]</a>'){
+		$core = core::getInstance();
      	$data = $format;
      	$data = str_replace('[authorWebsite]', $core->getThemeInfo('authorWebsite'), $data);
      	$data = str_replace('[author]', $core->getThemeInfo('author'), $data);
      	$data = str_replace('[name]', $core->getThemeInfo('name'), $data);
-	$data = str_replace('[id]', $core->getConfigVal('theme'), $data);
+		$data = str_replace('[id]', $core->getConfigVal('theme'), $data);
      	echo $data;
      }
 
      // affiche l'identifiant du plugin courant (theme)
      public static function pluginId(){
-      $core = core::getInstance();
+		$core = core::getInstance();
      	global $runPlugin;
-     	$data = $runPlugin->getName();
-     	echo $data;
+     	echo $runPlugin->getName();
      }
 	 
 	 public static function currentUrl(){
-	  $core = core::getInstance();
-     	$data = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-     	echo $data;
+		$core = core::getInstance();
+     	echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	 }
     
 }

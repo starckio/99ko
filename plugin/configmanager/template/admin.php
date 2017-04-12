@@ -30,10 +30,6 @@ include_once(ROOT.'admin/header.php');
       <input type="text" name="siteName" value="<?php echo $core->getConfigVal('siteName'); ?>" required />
   </p>
   <p>
-      <label>Description du site</label><br>
-      <input type="text" name="siteDescription" value="<?php echo $core->getConfigVal('siteDescription'); ?>" required />
-  </p>
-  <p>
       <label>Thème</label><br>
 			<select name="theme">
       <?php foreach($core->getThemes() as $k=>$v){ ?>

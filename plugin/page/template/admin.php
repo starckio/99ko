@@ -1,4 +1,7 @@
-<?php include_once(ROOT.'admin/header.php'); ?>
+<?php
+defined('ROOT') OR exit('No direct script access allowed');
+include_once(ROOT.'admin/header.php');
+?>
 
 <?php if($mode == 'list'){ ?>
 <ul class="tabs_style">
@@ -110,7 +113,7 @@
   </p>
   <p>
       <label>Contenu</label>
-      <?php show::adminEditor('content', $pageItem->getContent()); ?>
+			<textarea name="content" class="editor"><?php echo $pageItem->getContent(); ?></textarea>
   </p>
   <p>
 	<button type="submit" class="button success radius">Enregistrer</button>

@@ -23,7 +23,6 @@ body{
 a, a:hover, a:active, a:visited{
     color: #999;
     text-decoration: none;
-    transition: color 0.5s ease;
 }
 
 a:hover{
@@ -146,16 +145,8 @@ code{
 #msg p{
     padding: 5px;
     font-size: 12px;
-}
-
-#msg.success{
     background: #ccffcc;
     color: green;
-}
-
-#msg.error{
-    background: #ffcccc;
-    color: #cc3333;
 }
 
 /* STRUCTURE */
@@ -188,18 +179,6 @@ code{
     padding: 15px;
 }
 
-#sidebar{
-    clear: both;
-    background: #f7f7f7;
-}
-
-#sidebar_content{
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 60px 15px;
-    overflow: hidden;
-}
-
 #content{
 }
 
@@ -224,6 +203,17 @@ code{
 
 /* MENU */
 
+#mobile_menu{
+    display: none;
+    width: 32px;
+    height: 32px;
+    background: url(menu.png);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
 #navigation{
     display: block;
     list-style: none;
@@ -242,7 +232,6 @@ code{
     display: block;
     color: #4986b7;
     padding: 15px;
-    transition: all 0.5s ease;
 }
 
 #navigation a:hover{
@@ -306,10 +295,40 @@ code{
 
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 960px){
     
     #siteName{
         width: 100%;
+    }
+    
+    #mobile_menu{
+        display: block;
+    }
+    
+    #navigation{
+        display: none;
+        width: 100%;
+    }
+    
+    #navigation li{
+        clear: both;
+        width: 100%;
+    }
+    
+    #navigation a{
+        padding: 15px 0px;
+    }
+    
+    #navigation a:hover{
+        background: none;
+        color: #4986b7;
+    }
+    
+    #navigation li ul{
+        display: block;
+        position: inherit;
+        box-shadow: inherit;
+        padding-left: 30px;
     }
 
 }

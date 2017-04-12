@@ -12,16 +12,13 @@
  *
  */
 
-## Préchauffage...
 define('ROOT', '../');
 include_once(ROOT.'common/common.php');
 include_once(COMMON.'administrator.class.php');
 $administrator = new administrator($core->getConfigVal('adminEmail'), $core->getConfigVal('adminPwd'));
-## Variables
 $msg = (isset($_GET['msg'])) ? $_GET['msg'] : '';
 $msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
 $pageTitle = $runPlugin->getInfoVal('name');
-## Mode login
 if($administrator->isAuthorized() && $core->detectAdminMode() == 'login'){
 	// on bloque l'authentification si le fichier install est présent
 	/*$temp = $core->check();
@@ -39,21 +36,16 @@ if($administrator->isAuthorized() && $core->detectAdminMode() == 'login'){
 		include_once('login.php');
 	}
 }
-## Mode logout
 elseif($administrator->isAuthorized() && $core->detectAdminMode() == 'logout'){
 	$administrator->logout();
 	header('location:index.php');
 	die();
 }
-## Mode session KO
 if(!$administrator->isLogged()){
 	include_once('login.php');
 }
-## Mode plugin
 elseif($core->detectAdminMode() == 'plugin'){
-	// On inclut le fichier des traitements admin
 	include($runPlugin->getAdminFile());
-	// Plugin standard (un seul template)
 	if(!is_array($runPlugin->getAdminTemplate())) include($runPlugin->getAdminTemplate());
 }
 ?>

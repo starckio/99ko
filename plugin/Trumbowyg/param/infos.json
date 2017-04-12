@@ -1,0 +1,8 @@
+{
+	"name" : "Trumbowyg",
+	"description" : "Editeur WYSIWYG léger",
+    "author" : "Jonathan Coulet",
+    "authorEmail" : "contact@99ko.org",
+    "authorWebsite" : "http://99ko.org",
+	"version" : "2.0"
+}

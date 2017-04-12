@@ -15,20 +15,6 @@
 defined('ROOT') OR exit('No direct script access allowed');
 
 class util{
-	
-    public static function setMagicQuotesOff(){
-		if(phpversion() < 5.4){
-			if(get_magic_quotes_gpc()){
-				function stripslashes_gpc(&$value){
-					$value = stripslashes($value);
-				}
-				array_walk_recursive($_GET, 'stripslashes_gpc');
-				array_walk_recursive($_POST, 'stripslashes_gpc');
-				array_walk_recursive($_COOKIE, 'stripslashes_gpc');
-				array_walk_recursive($_REQUEST, 'stripslashes_gpc');
-			}
-		}
-    }
     
     public static function sort2DimArray($data, $key, $mode){
     	if($mode == 'desc') $mode = SORT_DESC;
@@ -55,19 +41,10 @@ class util{
     	$str = preg_replace(array('`[^a-z0-9]`i','`[-]+`'),'-',$str);
     	return strtolower(trim($str,'-'));
     }
-
-	public static function strCheck($str) {
-		return htmlspecialchars($str, ENT_QUOTES);
-	}
 	
     public static function isEmail($email){
     	if(preg_match("/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4}$/", $email)) return true;
     	return false;
-    }
-    
-    public static function isValidEmail($email){
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) return false;
-        return true;
     }
 
     public static function sendEmail($from, $reply, $to, $subject, $msg){
@@ -78,16 +55,7 @@ class util{
     	$headers.= 'Content-Transfer-Encoding: 8bit';
     	if(@mail($to, $subject, $msg, $headers)) return true;
     	return false;
-    }
-
-    public static function hideEmail($email){               
-    	$length = strlen($email);
-    	$hideEmail = '';                         
-    	for ($i = 0; $i < $length; $i++){                
-    	$hideEmail .= "&#" . ord($email[$i]).";";
-    	}
-    	return $hideEmail;
-    }    
+    } 
 
     public static function getFileExtension($file){
         return substr(strtolower(strrchr(basename($file), ".")), 1);
@@ -103,10 +71,6 @@ class util{
     		}
     	}
     	return $data;
-    }
-
-    public static function phpVersion(){
-    	return substr(phpversion(), 0, 5);
     }
 
     public static function writeJsonFile($file, $data){
@@ -128,29 +92,6 @@ class util{
     		else return 'upload error';
     	}
     	return 'undefined';
-    }
-
-    public static function htmlTable($cols, $vals, $params = ''){
-    	$cols = explode(',', $cols);
-    	$data = '<table '.$params.'><thead><tr>';
-    	foreach($cols as $v) $data.= '<th>'.$v.'</th>';
-    	$data.= '</tr></thead><tbody>';
-    	foreach($vals as $v){
-    		$data.= '<tr>';
-    		foreach($v as $v2) $data.= '<td>'.$v2.'</td>';
-    		$data.= '</tr>';
-    	}
-    	$data.= '</tbody><tfoot><tr>';
-    	foreach($cols as $v) $data.= '<th>'.$v.'</th>';
-    	$data.= '</tr></tfoot></table>';
-    	return $data;
-    }
-
-    public static function htmlSelect($options, $selected = '', $params = ''){
-    	$data = '<select '.$params.'>';
-    	foreach($options as $k=>$v) $data.= '<option value="'.$k.'"'.(($k == $selected) ? ' selected="selected"' : '').'>'.$v.'</option>';
-    	$data.= '</select>';
-    	return $data;
     }
 
     public static function formatDate($date, $langFrom = 'en', $langTo = 'en'){

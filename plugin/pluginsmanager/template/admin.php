@@ -1,4 +1,7 @@
-<?php include_once(ROOT.'admin/header.php'); ?>
+<?php
+defined('ROOT') OR exit('No direct script access allowed');
+include_once(ROOT.'admin/header.php');
+?>
 
 <form method="post" action="index.php?p=pluginsmanager&action=save" id="pluginsmanagerForm">
 	<?php show::adminTokenField(); ?>
@@ -20,7 +23,13 @@
 					<?php echo $plugin->getInfoVal('description'); ?>
 				</div>
 			</td>
-			<td><?php echo util::htmlSelect($priority, $plugin->getconfigVal('priority'), 'name="priority['.$plugin->getName().']" onchange="document.getElementById(\'pluginsmanagerForm\').submit();"'); ?></td>
+			<td>
+				<select name="priority[<?php echo $plugin->getName(); ?>]" onchange="document.getElementById('pluginsmanagerForm').submit();">
+					<?php foreach($priority as $k=>$v){ ?>
+					<option <?php if($plugin->getconfigVal('priority') == $v){ ?>selected<?php } ?> value="<?php echo $v; ?>"><?php echo $v; ?></option>
+					<?php } ?>
+				</select>
+			</td>
 			<td>
 				<?php if(!$plugin->isRequired()){ ?>
 				<input onchange="document.getElementById('pluginsmanagerForm').submit();" id="activate[<?php echo $plugin->getName(); ?>]" type="checkbox" name="activate[<?php echo $plugin->getName(); ?>]" <?php if($plugin->getConfigVal('activate')){ ?>checked<?php } ?> />

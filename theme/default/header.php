@@ -20,6 +20,7 @@ include_once(THEMES.$core->getConfigVal('theme').'/functions.php');
 <div id="container">
 	<div id="header">
 		<div id="header_content">
+			<div id="mobile_menu"></div>
 			<p id="siteName"><a href="<?php show::siteUrl(); ?>"><?php show::siteName(); ?></a></p>
 			<ul id="navigation">
 				<?php show::mainNavigation(); ?>
