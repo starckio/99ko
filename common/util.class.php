@@ -16,6 +16,10 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 class util{
     
+	## Tri un tableau à 2 dimenssions
+	## $data => tableau
+	## $key => index du tableau sur lequel doit se faire le tri
+	## $mode => type de tri ('desc', 'asc', 'num')
     public static function sort2DimArray($data, $key, $mode){
     	if($mode == 'desc') $mode = SORT_DESC;
     	elseif($mode == 'asc') $mode = SORT_ASC;
@@ -28,11 +32,13 @@ class util{
     	return $data;
     }
 	
+	## Découpe une chaîne trop longue
 	public static function cutStr($str, $length, $add = '...'){
 		if(mb_strlen($str) > $length) $str = mb_strcut($str, 0, $length).$add;
 		return $str;
 	}
-
+	
+	## Transforme une chaîne en URL
     public static function strToUrl($str){
     	$str = str_replace('&', 'et', $str);
     	if($str !== mb_convert_encoding(mb_convert_encoding($str,'UTF-32','UTF-8'),'UTF-8','UTF-32')) $str = mb_convert_encoding($str,'UTF-8');
@@ -42,11 +48,13 @@ class util{
     	return strtolower(trim($str,'-'));
     }
 	
+	## Vérifie si la chaîne est un email valide
     public static function isEmail($email){
     	if(preg_match("/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4}$/", $email)) return true;
     	return false;
     }
 
+	## Envoie un email
     public static function sendEmail($from, $reply, $to, $subject, $msg){
     	$headers = "From: ".$from."\r\n";
     	$headers.= "Reply-To: ".$reply."\r\n";
@@ -57,10 +65,12 @@ class util{
     	return false;
     } 
 
+	## Retourne l'extension d'un fichier présent sur le serveur
     public static function getFileExtension($file){
         return substr(strtolower(strrchr(basename($file), ".")), 1);
     }
-
+	
+	## Liste un répertoire et retourne un tableau contenant les fichiers et les dossiers (séparés)
     public static function scanDir($folder, $not = array()){
     	$data['dir'] = array();
     	$data['file'] = array();
@@ -72,16 +82,19 @@ class util{
     	}
     	return $data;
     }
-
+	
+	## Sauvegarde un tableau dans un fichier au format json
     public static function writeJsonFile($file, $data){
         if(@file_put_contents($file, json_encode($data), LOCK_EX)) return true; 
     	return false;
     }
-
+	
+	## Retourne un tableau provenant d'un fichier au format json
     public static function readJsonFile($file, $assoc = true){
     	return json_decode(@file_get_contents($file), $assoc);
     }
-
+	
+	## Upload
     public static function uploadFile($k, $dir, $name, $validations = array()){
     	if(isset($_FILES[$k]) && $_FILES[$k]['name'] != ''){
     		$extension = mb_strtolower(util::getFileExtension($_FILES[$k]['name']));
@@ -93,7 +106,8 @@ class util{
     	}
     	return 'undefined';
     }
-
+	
+	## Formate une date
     public static function formatDate($date, $langFrom = 'en', $langTo = 'en'){
     	$date = substr($date, 0, 10);
     	$temp = preg_split('#[-_;\. \/]#', $date);
@@ -111,6 +125,5 @@ class util{
     	elseif($langTo == 'fr') $data = $day.'/'.$month.'/'.$year;
     	return $data;
     }
-    
 }
 ?>

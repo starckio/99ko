@@ -39,14 +39,14 @@ class pluginsManager{
 		return false;
 	}
 	
-	## Sauvegarde la configuration d'un plugin
+	## Sauvegarde la configuration d'un objet plugin
 	public function savePluginConfig($obj){
 		if($obj->getIsValid() && $path = $obj->getDataPath()){
 		    return util::writeJsonFile($path.'config.json', $obj->getConfig());
 		}
 	}
 
-	## Installe un plugin
+	## Installe un plugin ciblé
 	public function installPlugin($name, $activate = false){
 		// Création du dossier data
 		@mkdir(DATA_PLUGIN .$name.'/', 0777);
@@ -64,6 +64,27 @@ class pluginsManager{
 		// Check du fichier config
 		if(!file_exists(DATA_PLUGIN .$name.'/config.json')) return false;
 		return true;
+	}
+	
+	## Retourne l'instance de l'objet pluginsManager
+	public static function getInstance(){
+		if(is_null(self::$instance)) self::$instance = new pluginsManager();
+		return self::$instance;
+	}
+	
+	## Retourne une valeur de configuration ciblée d'un plugin
+	public static function getPluginConfVal($pluginName, $kConf){
+		$instance = self::getInstance();
+		$plugin = $instance->getPlugin($pluginName);
+		return $plugin->getConfigVal($kConf);
+	}
+	
+	## Détermine si le plugin ciblé existe et s'il est actif
+	public static function isActivePlugin($pluginName){
+		$instance = self::getInstance();
+		$plugin = $instance->getPlugin($pluginName);
+		if($plugin && $plugin->isInstalled() && $plugin->getConfigval('activate')) return true;
+		return false;
 	}
 	
 	## Génère la liste des plugins
@@ -103,27 +124,6 @@ class pluginsManager{
 		// Création de l'objet
 		$plugin = new plugin($name, $config, $infos, $hooks, $initConfig);
 		return $plugin;
-	}
-	
-	## Singleton
-	public static function getInstance(){
-		if(is_null(self::$instance)) self::$instance = new pluginsManager();
-		return self::$instance;
-	}
-	
-	## Retourne une valeur de configuration
-	public static function getPluginConfVal($pluginName, $kConf){
-		$instance = self::getInstance();
-		$plugin = $instance->getPlugin($pluginName);
-		return $plugin->getConfigVal($kConf);
-	}
-	
-	## Détermine si le plugin ciblé existe et s'il est actif
-	public static function isActivePlugin($pluginName){
-		$instance = self::getInstance();
-		$plugin = $instance->getPlugin($pluginName);
-		if($plugin && $plugin->isInstalled() && $plugin->getConfigval('activate')) return true;
-		return false;
 	}
 }
 ?>

@@ -3,7 +3,6 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 $action = (isset($_GET['action'])) ? $_GET['action'] : '';
 $msg = (isset($_GET['msg'])) ? urldecode($_GET['msg']) : '';
-$msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
 $error = false;
 $rewriteBase = str_replace(array('index.php', 'install.php', 'admin/'), '', $_SERVER['PHP_SELF']);
 $passwordError = false;
@@ -48,7 +47,7 @@ switch($action){
 				$msgType = 'success';
 			}
 			$core->saveHtaccess($_POST['htaccess']);
-			header('location:index.php?p=configmanager&msg='.urlencode($msg).'&msgType='.$msgType);
+			header('location:index.php?p=configmanager&msg='.urlencode($msg));
 			die();
 		}
 		break;

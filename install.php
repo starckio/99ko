@@ -25,8 +25,7 @@ if(file_exists(DATA. 'config.json')) die('Un fichier de configuration existe dé
 $core = core::getInstance();
 $administrator = new administrator();
 $pluginsManager = pluginsManager::getInstance();
-$msg = "";
-$msgType = "";
+$msg = "Après l'installation, vous serez redirigé vers la page d'identification afin de paramétrer votre site.";
 if($core->install()){
 	$plugins = $pluginsManager->getPlugins();
 	if($plugins != false){
@@ -59,7 +58,6 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
 	);
 	if(!@file_put_contents(DATA. 'config.json', json_encode($config)) ||	!@chmod(DATA. 'config.json', 0666)){
 		$msg = 'Une erreur est survenue';
-	    $$msgType = "error";
 	}
 	else{
 		$_SESSION['installOk'] = true;
@@ -79,10 +77,9 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
   </head>
   
   <body class="login">
+	<?php show::msg($msg); ?>
 	<div id="login">
-	<?php show::msg($msg, $msgType); ?>
            <h1 class="text-center">Installation</h1>
-		   <p class="alert-box">Après l'installation, vous serez redirigé vers la page d'identification afin de paramétrer votre site.</p>
            
            <form method="post" action="">   
            <?php show::adminTokenField(); ?>          

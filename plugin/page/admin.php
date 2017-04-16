@@ -4,7 +4,6 @@ defined('ROOT') OR exit('No direct script access allowed');
 $mode = '';
 $action = (isset($_GET['action'])) ? urldecode($_GET['action']) : '';
 $msg = (isset($_GET['msg'])) ? urldecode($_GET['msg']) : '';
-$msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
 $error = false;
 $hideTitles = $runPlugin->getConfigVal('hideTitles');
 $page = new page();
@@ -29,13 +28,11 @@ switch($action){
 			$pageItem->setParent((isset($_POST['parent'])) ? $_POST['parent'] : '');
 			if($page->save($pageItem)){
 				$msg = "Les modifications ont été enregistrées.";
-				$msgType = 'success';
 			}
 			else{
 				$msg = "Une erreur est survenue.";
-				$msgType = 'error';
 			}
-			header('location:index.php?p=page&msg='.urlencode($msg).'&msgType='.$msgType);
+			header('location:index.php?p=page&msg='.urlencode($msg));
 			die();
 		}
 		break;
@@ -51,13 +48,11 @@ switch($action){
 			$pageItem = $page->create($_GET['id']);
 			if($page->del($pageItem)){
 				$msg = "Les modifications ont été enregistrées.";
-				$msgType = 'success';
 			}
 			else{
 				$msg = "Une erreur est survenue.";
-				$msgType = 'error';
 			}
-			header('location:index.php?p=page&msg='.urlencode($msg).'&msgType='.$msgType);
+			header('location:index.php?p=page&msg='.urlencode($msg));
 			die();
 		}
 		break;
@@ -84,7 +79,6 @@ switch($action){
 	default:
 		if(!$page->createHomepage()){
 			$msg = "Aucune page d'accueil définie";
-			$msgType = "error";
 		}
 		$mode = 'list';
 }

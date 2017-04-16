@@ -17,8 +17,6 @@ include_once(ROOT.'common/common.php');
 include_once(COMMON.'administrator.class.php');
 $administrator = new administrator($core->getConfigVal('adminEmail'), $core->getConfigVal('adminPwd'));
 $msg = (isset($_GET['msg'])) ? $_GET['msg'] : '';
-$msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
-$pageTitle = $runPlugin->getInfoVal('name');
 if($administrator->isAuthorized() && $core->detectAdminMode() == 'login'){
 	// on bloque l'authentification si le fichier install est présent
 	/*$temp = $core->check();

@@ -12,7 +12,7 @@
  *
  */
 
-define('VERSION', '3.3.1');
+define('VERSION', '4.0 (bêta)');
 define('COMMON',  ROOT.'common/');
 define('DATA', ROOT.'data/');
 define('UPLOAD', ROOT.'data/upload/');

@@ -27,6 +27,7 @@ class plugin{
 	private $libFile;
 	private $publicFile;
 	private $adminFile;
+	private $paramTemplate;
 	private $dataPath;
 	private $publicTemplate;
 	private $adminTemplate;
@@ -41,7 +42,7 @@ class plugin{
 	## Constructeur
 	public function __construct($name, $config = array(), $infos = array(), $hooks = array(), $initConfig = array()){
 		$core = core::getInstance();
-		// Identifiant
+		// Identifiant du plugin
 		$this->name = $name;
 		// Tableau de configuration
 		$this->config = $config;
@@ -49,21 +50,21 @@ class plugin{
 		$this->infos = $infos;
 		// Liste des hooks
 		$this->hooks = $hooks;
-		// Validité du plugin (si false l'etat ou la configuration du plugin ne sera pas sauvegardé)
+		// Validité du plugin
 		$this->isValid = true;
-		// Détermine si il s'agit du plugin par défaut en mode public
+		// On détermine si il s'agit du plugin par défaut en mode public
 		$this->isDefaultPlugin = ($name == $core->getConfigVal('defaultPlugin')) ? true : false;
-		// Détermine si il s'agit du plugin par défaut en mode admin
+		// On détermine si il s'agit du plugin par défaut en mode admin
 		$this->isDefaultAdminPlugin = ($name == $core->getConfigVal('defaultAdminPlugin')) ? true : false;
 		// Meta title
 		$this->setTitleTag($infos['name']);
 		// Titre de page
 		$this->setMainTitle($infos['name']);
-		// Fichier principal
+		// Fichier php principal
 		$this->libFile = (file_exists(PLUGINS .$this->name.'/'.$this->name.'.php')) ? PLUGINS .$this->name.'/'.$this->name.'.php' : false;
-		// Controlleur public
+		// Controlleur en mode public
 		$this->publicFile = (file_exists(PLUGINS .$this->name.'/public.php')) ? PLUGINS .$this->name.'/public.php' : false;
-		// Controlleur admin
+		// Controlleur en mode admin
 		$this->adminFile = (file_exists(PLUGINS .$this->name.'/admin.php')) ? PLUGINS .$this->name.'/admin.php' : false;
 		// CSS
 		$this->publicCssFile = (file_exists(PLUGINS .$this->name.'/template/public.css')) ? PLUGINS .$this->name.'/template/public.css' : false;
@@ -71,15 +72,17 @@ class plugin{
 		// JS
 		$this->publicJsFile = (file_exists(PLUGINS .$this->name.'/template/public.js')) ? PLUGINS .$this->name.'/template/public.js' : false;
 		$this->adminJsFile = (file_exists(PLUGINS .$this->name.'/template/admin.js')) ? PLUGINS .$this->name.'/template/admin.js' : false;
-		// Data
+		// Répertoir de sauvegarde des données internes du plugin
 		$this->dataPath = (is_dir(DATA_PLUGIN .$this->name)) ? DATA_PLUGIN .$this->name.'/' : false;
-		// Template public (peut etre le template par defaut ou un template présent dans le dossier du theme)
+		// Template public (peut etre le template par defaut ou un template présent dans le dossier du theme portant le nom du plugin)
 		if(file_exists('theme/'.$core->getConfigVal('theme').'/'.$this->name.'.php')) $this->publicTemplate = 'theme/'.$core->getConfigVal('theme').'/'.$this->name.'.php';
 		elseif(file_exists(PLUGINS .$this->name.'/template/public.php')) $this->publicTemplate = PLUGINS .$this->name.'/template/public.php';
 		else $this->publicTemplate = false;
 		// Template admin
 		$this->adminTemplate = (file_exists(PLUGINS.$this->name.'/template/admin.php')) ? PLUGINS.$this->name.'/template/admin.php' : false;
-		// Configuration usine
+		// Template parametres
+		$this->paramTemplate = (file_exists(PLUGINS.$this->name.'/template/param.php')) ? PLUGINS.$this->name.'/template/param.php' : false;
+		// Configuration d'usine
 		$this->initConfig = $initConfig;
 		// Navigation
 		$this->navigation = array();
@@ -162,6 +165,10 @@ class plugin{
 		return $this->adminTemplate;
 	}
 	
+	public function getParamTemplate(){
+		return $this->paramTemplate;
+	}
+	
 	public function getConfigTemplate(){
 		return $this->configTemplate;
 	}
@@ -184,17 +191,17 @@ class plugin{
 		if($k == 'activate' && $v < 1 && $this->isRequired()) $this->isValid = false;
 	}
 	
-	## Permet de définir la meta title
+	## Permet de forcer la meta title
 	public function setTitleTag($val){
 		$this->titleTag = trim($val);
 	}
 	
-	## Permet de définir la meta description
+	## Permet de forcer la meta description
 	public function setMetaDescriptionTag($val){
 		$this->metaDescriptionTag = trim($val);
 	}
 	
-	## Permet de définir le titre de page
+	## Permet de forcer le titre de page
 	public function setMainTitle($val){
 		$this->mainTitle = trim($val);
 	}

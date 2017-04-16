@@ -13,8 +13,8 @@
 	<?php eval($core->callHook('endAdminHead')); ?>	
   </head>
   <body class="login">
+		<?php show::msg($msg); ?>
   <div id="login">
-	<?php show::msg($msg, 'error'); ?>
 	<h1>Connexion</h1>
 	<form method="post" action="index.php?action=login">   
 	  <?php show::adminTokenField(); ?>          

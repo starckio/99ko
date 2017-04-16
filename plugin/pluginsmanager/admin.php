@@ -3,7 +3,6 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 $action = (isset($_GET['action'])) ? urldecode($_GET['action']) : '';
 $msg = (isset($_GET['msg'])) ? urldecode($_GET['msg']) : '';
-$msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
 
 switch($action){
 	case '':
@@ -41,7 +40,7 @@ switch($action){
 				}
 			}
 		}
-		header('location:index.php?p=pluginsmanager&msg='.urlencode($msg).'&msgType='.$msgType);
+		header('location:index.php?p=pluginsmanager&msg='.urlencode($msg));
 		die();
 		break;
 	case 'maintenance':

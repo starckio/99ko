@@ -28,12 +28,14 @@ class core{
     public function __construct(){
         // Timezone
         date_default_timezone_set(date_default_timezone_get());
-        // Configuration
+        // Construction du tableau de configuration
+        // Exemple : array('siteName' => 'val', 'siteUrl' => 'val2')
         $this->config = util::readJsonFile(DATA.'config.json', true);
-        // Error reporting
+        // Réglage de l'error reporting suivant le paramètre debug
         if($this->config['debug']) error_reporting(E_ALL);
         else error_reporting(E_ERROR | E_PARSE);
-        // Tableau des paramètres d'URL
+        // Construction du tableau des paramètres de l'URL
+        // Exemple : array(0 => 'val', 1 => 'val2')
         if($this->getConfigVal('urlRewriting') == 1){
             if(isset($_GET['param'])) $this->urlParams = explode($this->getConfigVal('urlSeparator'), $_GET['param']);
         }
@@ -47,15 +49,15 @@ class core{
         foreach($temp['dir'] as $k=>$v){
             $this->themes[$v] = util::readJsonFile(THEMES.$v.'/infos.json', true);
         }
-        // Quel est le plugin solicité ?
+        // On détermine le plugin que l'on doit executer suivant le mode (public ou admin)
         if(ROOT == './') $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultPlugin');
         else $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultAdminPlugin');
-        // Ressources
+        // Ressources JS & CSS de base
         $this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css';
         $this->js[] = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js';
     }
     
-    ## Retourne l'instance core
+    ## Retourne l'instance de l'objet core
     public static function getInstance(){
         if(is_null(self::$instance)){
             self::$instance = new core();
@@ -63,7 +65,8 @@ class core{
         return self::$instance;
     }
     
-    ## Retourne le paramètre d'URL ciblé
+    ## Retourne un paramètre d'URL
+    ## $k doit être un entier (index du tableau urlParams)
     public function getUrlParam($k){
         if(isset($this->urlParams[$k])) return $this->urlParams[$k];
         else return false;
@@ -80,7 +83,7 @@ class core{
         else return false;
     }
     
-    ## Retourne l'information ciblée d'un thème
+    ## Retourne les infos du thème ciblé
     public function getThemeInfo($k){
         if(isset($this->themes[$this->getConfigVal('theme')])) return $this->themes[$this->getConfigVal('theme')][$k];
         else return false;
@@ -91,15 +94,17 @@ class core{
         return $this->pluginToCall;
     }
     
+    ## Retourne le tableau de ressources JS de base
     public function getJs(){
         return $this->js;
     }
     
+    ## Retourne le tableau de ressources CSS de base
     public function getCss(){
         return $this->css;
     }
     
-        ## Détermine si 99ko est installé
+    ## Détermine si 99ko est installé
     public function isInstalled(){
         if(!file_exists(DATA.'config.json')) return false;
         else return true;
@@ -118,7 +123,8 @@ class core{
         return $siteUrl;
     }
     
-    ## Génère une URL réécrite ou retourne l'URL standard
+    ## Génère une URL réécrite ou retourne l'URL standard suivant l'état du paramètre de configuration urlRewriting
+    ## Exemple d'utilisation : $core->makeUrl('monplugin', array('mode' => 'article', 'id' => 3))) => "monplugin/article,3.html" ou "index.php?p=monplugin&mode=article&id=3"
     public function makeUrl($plugin, $params = array()){
         if($this->getConfigVal('urlRewriting') == 1){
             $url = $plugin.'/';
@@ -137,12 +143,12 @@ class core{
         return $url;
     }
     
-    ## Ajoute un hook à executter
+    ## Alimente le tableau des hooks
     public function addHook($name, $function){
         $this->hooks[$name][] = $function;
     }
     
-    ## Appel un hook
+    ## Appelle un hook
     public function callHook($name){
         $return = '';
         if(isset($this->hooks[$name])){
@@ -162,7 +168,7 @@ class core{
         elseif(isset($_GET['p'])) return 'plugin';
     }
     
-    ## Renvoi une erreur 404
+    ## Renvoi une page 404
     public function error404(){
             header("HTTP/1.1 404 Not Found");
             header("Status: 404 Not Found");
@@ -170,7 +176,7 @@ class core{
             die();
     }
     
-    ## Sauvegarde le tableau de configuration
+    ## Update le fichier de configuration
     public function saveConfig($val, $append = array()){
         $config = util::readJsonFile(DATA.'config.json', true);
         $config = array_merge($config, $append);
@@ -208,9 +214,13 @@ class core{
         return $install;
     }
     
+    ## Retourne le contenu du fichier htaccess
+    
     public function getHtaccess(){
         return htmlspecialchars(@file_get_contents(ROOT.'.htaccess'), ENT_QUOTES, 'UTF-8');
     }
+    
+    ## Update le contenu du fichier htaccess
     
     public function saveHtaccess($content){
         @file_put_contents(ROOT.'.htaccess', str_replace('¶m', '&param', $content));

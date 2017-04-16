@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$("#alert .alert-box").delay(5000).fadeOut('slow');
+	$(".msg").delay(5000).fadeOut('slow');
 	// tri menu
 	var elem = $('#navigation').find('li').sort(sortMe);
 	function sortMe(a, b){
@@ -17,6 +17,15 @@ $(document).ready(function () {
 		}
 		else{
 			$('#sidebar').hide();
+		}
+	});
+	// param
+	$('#param_link').click(function(){
+		if($('#param_panel').css('display') == 'none'){
+			$('#param_panel').slideDown();
+		}
+		else{
+			$('#param_panel').slideUp();
 		}
 	});
 });
