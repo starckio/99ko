@@ -37,7 +37,9 @@
 			</div>
 		</div>
 		<div id="body">
-		  <div id="sidebar">
+		  <div id="content_mask">
+			<div id="content" class="<?php echo $runPlugin->getName(); ?>-admin">
+			<div id="sidebar">
 			<ul id="navigation">
 			  <?php foreach($pluginsManager->getPlugins() as $k=>$v) if($v->getConfigVal('activate') && $v->getAdminFile()){ ?>
 			  <li class="<?php if($v->isRequired()){ ?>last<?php } ?>"><a href="index.php?p=<?php echo $v->getName(); ?>"><?php echo $v->getInfoVal('name'); ?></a></li>
@@ -47,8 +49,6 @@
 			  <a target="_blank" href="http://99ko.org">Just using 99ko <?php echo VERSION; ?></a>
 			</p>
 		  </div>
-		  <div id="content_mask">
-			<div id="content" class="<?php echo $runPlugin->getName(); ?>-admin">
 				<?php if($runPlugin->getParamTemplate()){ ?>
 				<a id="param_link" class="button" href="javascript:">Paramètres</a>
 				<div id="param_panel">
