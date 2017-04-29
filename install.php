@@ -25,7 +25,7 @@ if(file_exists(DATA. 'config.json')) die('Un fichier de configuration existe dé
 $core = core::getInstance();
 $administrator = new administrator();
 $pluginsManager = pluginsManager::getInstance();
-$msg = "Après l'installation, vous serez redirigé vers la page d'identification afin de paramétrer votre site.";
+$msg = "Après installation, vous serez redirigé vers la page d'identification afin de paramétrer votre site web.";
 if($core->install()){
 	$plugins = $pluginsManager->getPlugins();
 	if($plugins != false){
@@ -66,42 +66,58 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
 	}
 }
 ?>
- 
- <!doctype html>
+
+<?php defined('ROOT') OR exit('No direct script access allowed'); ?>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>99ko - Installation</title>	
-	<link rel="stylesheet" href="admin/styles.css" media="all">
-  </head>
-  
-  <body class="login">
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+	<title>99ko - Installation</title>
+
+	<link rel="stylesheet" href="admin/main.css">
+	<link rel="stylesheet" href="admin/login.css">
+
+</head>
+<body>
+
+<main class="main" role="main">
+
 	<?php show::msg($msg); ?>
-	<div id="login">
-           <h1 class="text-center">Installation</h1>
-           
-           <form method="post" action="">   
-           <?php show::adminTokenField(); ?>          
-              <p>
-                   <label for="adminEmail">Email</label><br>
-                   <input type="email" name="adminEmail" required="required">
-                </p><p>
-                   <label for="adminPwd">Mot de passe</label><br>
-                   <input type="password" name="adminPwd" id="adminPwd" required="required">
-               </p><p>
-					<a id="showPassword" href="javascript:showPassword()" class="button success">Montrer le mot de passe</a>
-					<button type="submit" class="button success">Valider</button>
-			  </p>
-			  <p class="just_using"><a target="_blank" href="http://99ko.org">Just using 99ko</a>
-	  </p>
-            </form>
-	</div>
-    <script type="text/javascript">
+
+	<h1>Installation</h1>
+
+	<form method="post" action="">
+		<?php show::adminTokenField(); ?>
+		<div class="field">
+			<label for="adminEmail">Email</label>
+			<input type="email" name="adminEmail" id="adminEmail" required />
+		</div>
+		<div class="field">
+			<label for="adminPwd">Mot de passe</label>
+			<input type="password" name="adminPwd" id="adminPwd" required />
+			<small><a id="showPassword" href="javascript:showPassword()">Montrer le mot de passe</a></small>
+		</div>
+		<button class="btn" type="submit" name="submit">Valider</button>
+	</form>
+
+	<footer class="footer cf" role="contentinfo">
+		<div class="copyright">
+			Designed by <a href="http://www.starck.io"><b>Starckio</b></a>
+		</div>
+		<div class="colophon">
+			<a href="http://99ko.org">Just using 99ko <b><?php echo VERSION; ?></b></a>
+		</div>
+	</footer>
+</main>
+
+<script type="text/javascript">
 	function showPassword(){
 		document.getElementById("adminPwd").setAttribute("type", "text");
 		document.getElementById("showPassword").style.display = 'none';
 	}
-	</script>
+</script>
 </body>
 </html>
