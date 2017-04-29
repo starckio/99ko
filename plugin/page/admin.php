@@ -4,7 +4,6 @@ defined('ROOT') OR exit('No direct script access allowed');
 $mode = '';
 $action = (isset($_GET['action'])) ? urldecode($_GET['action']) : '';
 $msg = (isset($_GET['msg'])) ? urldecode($_GET['msg']) : '';
-$msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
 $error = false;
 $hideTitles = $runPlugin->getConfigVal('hideTitles');
 $page = new page();
@@ -28,14 +27,12 @@ switch($action){
 			$pageItem->setNoIndex((isset($_POST['noIndex'])) ? 1 : 0);
 			$pageItem->setParent((isset($_POST['parent'])) ? $_POST['parent'] : '');
 			if($page->save($pageItem)){
-				$msg = $core->lang("The changes have been saved.");
-				$msgType = 'success';
+				$msg = "Les modifications ont été enregistrées.";
 			}
 			else{
-				$msg = $core->lang("An error occurred while saving the changes.");
-				$msgType = 'error';
+				$msg = "Une erreur est survenue.";
 			}
-			header('location:index.php?p=page&msg='.urlencode($msg).'&msgType='.$msgType);
+			header('location:index.php?p=page&msg='.urlencode($msg));
 			die();
 		}
 		break;
@@ -50,14 +47,12 @@ switch($action){
 		if($administrator->isAuthorized()){
 			$pageItem = $page->create($_GET['id']);
 			if($page->del($pageItem)){
-				$msg = $core->lang("The changes have been saved.");
-				$msgType = 'success';
+				$msg = "Les modifications ont été enregistrées.";
 			}
 			else{
-				$msg = $core->lang("An error occurred while saving the changes.");
-				$msgType = 'error';
+				$msg = "Une erreur est survenue.";
 			}
-			header('location:index.php?p=page&msg='.urlencode($msg).'&msgType='.$msgType);
+			header('location:index.php?p=page&msg='.urlencode($msg));
 			die();
 		}
 		break;
@@ -82,6 +77,9 @@ switch($action){
 		}
 		break;
 	default:
+		if(!$page->createHomepage()){
+			$msg = "Aucune page d'accueil définie";
+		}
 		$mode = 'list';
 }
 ?>

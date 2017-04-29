@@ -1,8 +1,12 @@
 {
-    "name" : "Page / Menu",
-    "description" : "Pages and menu management",
+    "name" : "Pages & Menu",
+    "description" : "Gestion des pages et du menu",
     "author" : "Jonathan Coulet",
     "authorEmail" : "contact@99ko.org",
     "authorWebsite" : "http://99ko.org",
+<<<<<<< HEAD
     "version" : "6.4"
+=======
+    "version" : "7.0"
+>>>>>>> dev
 }

@@ -3,5 +3,9 @@
     "author"        : "Jonathan Coulet",
     "authorEmail"   : "contact@99ko.org",
     "authorWebsite" : "http://99ko.org",
+<<<<<<< HEAD
     "version"       : "4.4"
+=======
+    "version"       : "5.0"
+>>>>>>> dev
 }

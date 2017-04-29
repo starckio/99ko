@@ -28,7 +28,7 @@ class administrator{
         $_SESSION['adminToken'] = $this->token;
     }
     
-    ## Retourne l'instance administrator
+    ## Retourne l'instance de l'objet administrator
     public static function getInstance(){
         if(is_null(self::$instance)){
             self::$instance = new administrator();
@@ -42,7 +42,7 @@ class administrator{
         return $instance->token;
     }
     
-    ## Démmare la session admin si OK
+    ## Démmare la session
     public function login($email, $pwd){
         if($this->encrypt($pwd) == $this->pwd && $email == $this->email){
             $_SESSION['admin'] = $this->pwd;
@@ -58,13 +58,13 @@ class administrator{
         session_destroy();
     }
     
-    ## Teste la session
+    ## Teste l'état de la session
     public function isLogged(){
         if(!isset($_SESSION['admin']) || $_SESSION['admin'] != $this->pwd) return false;
         else return true;
     }
     
-    ## Teste le token et autres choses...
+    ## Teste le statut du jeton
     public function isAuthorized(){
         if(!isset($_REQUEST['token'])) return false;
         if($_REQUEST['token'] != $this->token) return false;

@@ -3,7 +3,6 @@ defined('ROOT') OR exit('No direct script access allowed');
 
 $action = (isset($_GET['action'])) ? urldecode($_GET['action']) : '';
 $msg = (isset($_GET['msg'])) ? urldecode($_GET['msg']) : '';
-$msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
 
 switch($action){
 	case '':
@@ -31,20 +30,21 @@ switch($action){
 				if($v->isInstalled()){
 					$v->setConfigVal('priority', intval($_POST['priority'][$v->getName()]));
 					if(!$pluginsManager->savePluginConfig($v)){
-						$msg = $core->lang('An error occured while saving your modifications.');
+						$msg = "Une erreur est survenue";
 						$msgType = 'error';
 					}
 					else{
-						$msg = $core->lang("The changes have been saved.");
+						$msg = "Modifications enregistrées";
 						$msgType = 'success';
 					}
 				}
 			}
 		}
-		header('location:index.php?p=pluginsmanager&msg='.urlencode($msg).'&msgType='.$msgType);
+		header('location:index.php?p=pluginsmanager&msg='.urlencode($msg));
 		die();
 		break;
 	case 'maintenance':
+<<<<<<< HEAD
 		if($administrator->isAuthorized()){
 			$pluginsManager->installPlugin($_GET['plugin'], true);
 		}
@@ -52,11 +52,12 @@ switch($action){
 		die();
 		break;
 	case 'cache':
+=======
+>>>>>>> dev
 		if($administrator->isAuthorized()){
-			$pluginsManager->intiPluginsCache(array(), true);
-			$msg = $core->lang("Cache cleared.");
+			$pluginsManager->installPlugin($_GET['plugin'], true);
 		}
-		header('location:index.php?p=pluginsmanager&msg='.urlencode($msg).'&msgType='.$msgType);
+		header('location:index.php?p=pluginsmanager');
 		die();
 		break;
 }

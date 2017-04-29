@@ -1,8 +1,12 @@
 {
-    "name" : "Plugins manager",
-    "description" : "Plugins management of 99ko",
+    "name" : "Plugins",
+    "description" : "Gestion des plugins",
     "author" : "Jonathan Coulet",
     "authorEmail" : "contact@99ko.org",
     "authorWebsite" : "http://99ko.org",
+<<<<<<< HEAD
     "version" : "5.3"
+=======
+    "version" : "6.0"
+>>>>>>> dev
 }

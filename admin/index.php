@@ -12,66 +12,38 @@
  *
  */
 
-## Préchauffage...
 define('ROOT', '../');
 include_once(ROOT.'common/common.php');
 include_once(COMMON.'administrator.class.php');
-$administrator = $core->createAdministrator();
-## Variables
+$administrator = new administrator($core->getConfigVal('adminEmail'), $core->getConfigVal('adminPwd'));
 $msg = (isset($_GET['msg'])) ? $_GET['msg'] : '';
-$msgType = (isset($_GET['msgType'])) ? $_GET['msgType'] : '';
-$pageTitle = $runPlugin->getInfoVal('name');
-## Mode login
 if($administrator->isAuthorized() && $core->detectAdminMode() == 'login'){
-	// hook
-	eval($core->callHook('startAdminLogin'));
 	// on bloque l'authentification si le fichier install est présent
-	$temp = $core->check();
+	/*$temp = $core->check();
 	if($core->getConfigVal('debug') == 0 && isset($temp[2])){
 		$msg = $core->lang('Please delete the install.php file before logging');
 		include_once('login.php');
-	}
+	}*/
 	// authentification
-	elseif($administrator->login($_POST['adminEmail'], $_POST['adminPwd'])){
+	/*else*/if($administrator->login($_POST['adminEmail'], $_POST['adminPwd'])){
 		header('location:index.php');
 		die();
 	}
 	else{
-		$msg = $core->lang('Incorrect password');
+		$msg = "Mot de passe incorrect";
 		include_once('login.php');
 	}
-	// hook
-	eval($core->callHook('endAdminLogin'));
 }
-## Mode logout
 elseif($administrator->isAuthorized() && $core->detectAdminMode() == 'logout'){
 	$administrator->logout();
 	header('location:index.php');
 	die();
 }
-## Mode session KO
 if(!$administrator->isLogged()){
 	include_once('login.php');
 }
-## Mode plugin
 elseif($core->detectAdminMode() == 'plugin'){
-	// hook
-	eval($core->callHook('startAdminIncludePluginFile'));
-	// On inclut le fichier des traitements admin
 	include($runPlugin->getAdminFile());
-	// Plugin standard (un seul template)
 	if(!is_array($runPlugin->getAdminTemplate())) include($runPlugin->getAdminTemplate());
-	// Plugin avec onglets
-	if($runPlugin->useAdminTabs()){
-		include_once(ROOT.'admin/header.php');
-		foreach($runPlugin->getAdminTemplate() as $k=>$v){
-			echo '<div class="tab" id="tab-'.$k.'">';
-			include_once($v);
-			echo '</div>';
-		}
-		include_once(ROOT.'admin/footer.php');
-	}
-	// hook
-	eval($core->callHook('endAdminIncludePluginFile'));
 }
 ?>

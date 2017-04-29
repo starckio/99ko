@@ -27,13 +27,12 @@ class plugin{
 	private $libFile;
 	private $publicFile;
 	private $adminFile;
+	private $paramTemplate;
 	private $dataPath;
 	private $publicTemplate;
 	private $adminTemplate;
 	private $initConfig;
 	private $navigation;
-	private $adminTabs;
-	private $lang;
 	private $publicCssFile;
 	private $publicJsFile;
 	private $adminCssFile;
@@ -41,9 +40,9 @@ class plugin{
 	private $isDefaultAdminPlugin;
 	
 	## Constructeur
-	public function __construct($name, $config = array(), $infos = array(), $hooks = array(), $initConfig = array(), $lang = array()){
+	public function __construct($name, $config = array(), $infos = array(), $hooks = array(), $initConfig = array()){
 		$core = core::getInstance();
-		// Identifiant
+		// Identifiant du plugin
 		$this->name = $name;
 		// Tableau de configuration
 		$this->config = $config;
@@ -51,51 +50,42 @@ class plugin{
 		$this->infos = $infos;
 		// Liste des hooks
 		$this->hooks = $hooks;
-		// Validité du plugin (si false l'etat ou la configuration du plugin ne sera pas sauvegardé)
+		// Validité du plugin
 		$this->isValid = true;
-		// Détermine si il s'agit du plugin par défaut en mode public
-		$this->isDefaultPlugin = ($name == DEFAULT_PLUGIN) ? true : false;
-		// Détermine si il s'agit du plugin par défaut en mode admin
-		$this->isDefaultAdminPlugin = ($name == DEFAULT_ADMIN_PLUGIN) ? true : false;
+		// On détermine si il s'agit du plugin par défaut en mode public
+		$this->isDefaultPlugin = ($name == $core->getConfigVal('defaultPlugin')) ? true : false;
+		// On détermine si il s'agit du plugin par défaut en mode admin
+		$this->isDefaultAdminPlugin = ($name == $core->getConfigVal('defaultAdminPlugin')) ? true : false;
 		// Meta title
 		$this->setTitleTag($infos['name']);
 		// Titre de page
 		$this->setMainTitle($infos['name']);
-		// Fichier principal
+		// Fichier php principal
 		$this->libFile = (file_exists(PLUGINS .$this->name.'/'.$this->name.'.php')) ? PLUGINS .$this->name.'/'.$this->name.'.php' : false;
-		// Tableau lang
-		$this->lang = $lang;
-		// Controlleur public
+		// Controlleur en mode public
 		$this->publicFile = (file_exists(PLUGINS .$this->name.'/public.php')) ? PLUGINS .$this->name.'/public.php' : false;
-		// Controlleur admin
+		// Controlleur en mode admin
 		$this->adminFile = (file_exists(PLUGINS .$this->name.'/admin.php')) ? PLUGINS .$this->name.'/admin.php' : false;
 		// CSS
-		$this->publicCssFile = (file_exists(PLUGINS .$this->name.'/other/public.css')) ? PLUGINS .$this->name.'/other/public.css' : false;
-		$this->adminCssFile = (file_exists(PLUGINS .$this->name.'/other/admin.css')) ? PLUGINS .$this->name.'/other/admin.css' : false;
+		$this->publicCssFile = (file_exists(PLUGINS .$this->name.'/template/public.css')) ? PLUGINS .$this->name.'/template/public.css' : false;
+		$this->adminCssFile = (file_exists(PLUGINS .$this->name.'/template/admin.css')) ? PLUGINS .$this->name.'/template/admin.css' : false;
 		// JS
-		$this->publicJsFile = (file_exists(PLUGINS .$this->name.'/other/public.js')) ? PLUGINS .$this->name.'/other/public.js' : false;
-		$this->adminJsFile = (file_exists(PLUGINS .$this->name.'/other/admin.js')) ? PLUGINS .$this->name.'/other/admin.js' : false;
-		// Data
+		$this->publicJsFile = (file_exists(PLUGINS .$this->name.'/template/public.js')) ? PLUGINS .$this->name.'/template/public.js' : false;
+		$this->adminJsFile = (file_exists(PLUGINS .$this->name.'/template/admin.js')) ? PLUGINS .$this->name.'/template/admin.js' : false;
+		// Répertoir de sauvegarde des données internes du plugin
 		$this->dataPath = (is_dir(DATA_PLUGIN .$this->name)) ? DATA_PLUGIN .$this->name.'/' : false;
-		// Template public (peut etre le template par defaut ou un template présent dans le dossier du theme)
+		// Template public (peut etre le template par defaut ou un template présent dans le dossier du theme portant le nom du plugin)
 		if(file_exists('theme/'.$core->getConfigVal('theme').'/'.$this->name.'.php')) $this->publicTemplate = 'theme/'.$core->getConfigVal('theme').'/'.$this->name.'.php';
 		elseif(file_exists(PLUGINS .$this->name.'/template/public.php')) $this->publicTemplate = PLUGINS .$this->name.'/template/public.php';
 		else $this->publicTemplate = false;
 		// Template admin
 		$this->adminTemplate = (file_exists(PLUGINS.$this->name.'/template/admin.php')) ? PLUGINS.$this->name.'/template/admin.php' : false;
-		// Configuration usine
+		// Template parametres
+		$this->paramTemplate = (file_exists(PLUGINS.$this->name.'/template/param.php')) ? PLUGINS.$this->name.'/template/param.php' : false;
+		// Configuration d'usine
 		$this->initConfig = $initConfig;
 		// Navigation
 		$this->navigation = array();
-		// Templates admin (mode onglets)
-		$this->adminTabs = array();
-		if(isset($this->config['adminTabs']) && $this->config['adminTabs'] != '') $this->adminTabs = explode(',', $this->config['adminTabs']);
-		foreach($this->adminTabs as $k=>$v){
-			if(file_exists(PLUGINS .$this->name.'/template/admin-tab-'.$k.'.php')){
-				if(!is_array($this->adminTemplate)) $this->adminTemplate = array();
-				$this->adminTemplate[] = PLUGINS .$this->name.'/template/admin-tab-'.$k.'.php';
-			}
-		}
 	}
 	
 	## Getters
@@ -175,6 +165,10 @@ class plugin{
 		return $this->adminTemplate;
 	}
 	
+	public function getParamTemplate(){
+		return $this->paramTemplate;
+	}
+	
 	public function getConfigTemplate(){
 		return $this->configTemplate;
 	}
@@ -187,22 +181,8 @@ class plugin{
 		return $this->navigation;
 	}
 	
-	public function getAdminTabs(){
-		return $this->adminTabs;
-	}
-	
-	public function getLang(){
-		return $this->lang;
-	}
-	
 	public function getIsDefaultAdminPlugin(){
 		return $this->isDefaultAdminPlugin;
-	}
-	
-	## Détermine si le plugin utilise des onglets admin
-	public function useAdminTabs(){
-		if(is_array($this->adminTemplate)) return true;
-		else return false;
 	}
 
 	## Permet de modifier une valeur de configuration
@@ -211,20 +191,17 @@ class plugin{
 		if($k == 'activate' && $v < 1 && $this->isRequired()) $this->isValid = false;
 	}
 	
-	## Permet de définir la meta title
+	## Permet de forcer la meta title
 	public function setTitleTag($val){
-		$core = core::getInstance();
-		/*if($this->isDefaultPlugin) $val = $core->getConfigVal('siteName').' | '.trim($val);
-		else */$val = $val.' | '.$core->getConfigVal('siteName');
-		$this->titleTag = $val;
+		$this->titleTag = trim($val);
 	}
 	
-	## Permet de définir la meta description
+	## Permet de forcer la meta description
 	public function setMetaDescriptionTag($val){
 		$this->metaDescriptionTag = trim($val);
 	}
 	
-	## Permet de définir le titre de page
+	## Permet de forcer le titre de page
 	public function setMainTitle($val){
 		$this->mainTitle = trim($val);
 	}
@@ -251,9 +228,6 @@ class plugin{
 		$currentConfig = implode(',', array_keys($temp));
 		$initConfig = @implode(',', array_keys($this->initConfig));
 		if(count($this->config) < 1 || $currentConfig != $initConfig) return false;
-		elseif(isset($currentConfig['adminTabs'])){
-			if($currentConfig['adminTabs'] != $initConfig['adminTabs']) return false;
-		}
 		return true;
 	}
 	

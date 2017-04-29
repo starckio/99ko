@@ -1,6 +1,6 @@
 <?php defined('ROOT') OR exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
-<html lang="<?php show::siteLang(); ?>">
+<html lang="fr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>404</title>
@@ -21,7 +21,7 @@
         </style>
     </head>
     <body>
-        <p><?php echo $this->lang("The requested page does not exist.");?></p>
-        <p><a href="<?php echo $this->getConfigVal('siteUrl'); ?>"><< <?php echo $this->lang("Back to website");?></a></p>
+        <p>La page demandée est introuvable</p>
+        <p><a href="<?php echo $this->getConfigVal('siteUrl'); ?>"><< Retour au site</a></p>
     </body>
 </html>

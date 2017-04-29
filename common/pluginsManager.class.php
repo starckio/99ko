@@ -39,19 +39,15 @@ class pluginsManager{
 		return false;
 	}
 	
-	## Sauvegarde la configuration d'un plugin
+	## Sauvegarde la configuration d'un objet plugin
 	public function savePluginConfig($obj){
-		// Effacement du cache plugins lors d'une sauvegarde
-		$this->intiPluginsCache(array(), true);
 		if($obj->getIsValid() && $path = $obj->getDataPath()){
 		    return util::writeJsonFile($path.'config.json', $obj->getConfig());
 		}
 	}
 
-	## Installe un plugin
+	## Installe un plugin ciblé
 	public function installPlugin($name, $activate = false){
-		// Effacement du cache plugins lors d'une installation
-		$this->intiPluginsCache(array(), true);
 		// Création du dossier data
 		@mkdir(DATA_PLUGIN .$name.'/', 0777);
 		@chmod(DATA_PLUGIN .$name.'/', 0777);
@@ -70,28 +66,42 @@ class pluginsManager{
 		return true;
 	}
 	
+	## Retourne l'instance de l'objet pluginsManager
+	public static function getInstance(){
+		if(is_null(self::$instance)) self::$instance = new pluginsManager();
+		return self::$instance;
+	}
+	
+	## Retourne une valeur de configuration ciblée d'un plugin
+	public static function getPluginConfVal($pluginName, $kConf){
+		$instance = self::getInstance();
+		$plugin = $instance->getPlugin($pluginName);
+		return $plugin->getConfigVal($kConf);
+	}
+	
+	## Détermine si le plugin ciblé existe et s'il est actif
+	public static function isActivePlugin($pluginName){
+		$instance = self::getInstance();
+		$plugin = $instance->getPlugin($pluginName);
+		if($plugin && $plugin->isInstalled() && $plugin->getConfigval('activate')) return true;
+		return false;
+	}
+	
 	## Génère la liste des plugins
 	private function listPlugins(){
 		$data = array();
 		$dataNotSorted = array();
-		$dataFromCache = $this->loadPluginsFromCache();
-		if(ROOT == './' && is_array($dataFromCache)) $data = $dataFromCache;
-		// Si pas de cache plugins, on reconstruit le fichier cache
-		if(!$dataFromCache){
-			$items = util::scanDir(PLUGINS);
-			foreach($items['dir'] as $dir){
-				// Si le plugin est installé on récupère sa configuration
-				if(file_exists(DATA_PLUGIN .$dir. '/config.json')) $dataNotSorted[$dir] = util::readJsonFile(DATA_PLUGIN .$dir. '/config.json', true);
-				// Sinon on lui attribu une priorité faible
-				else $dataNotSorted[$dir]['priority'] = '10';
-			}
-			// On tri les plugins par priorité
-			$dataSorted = @util::sort2DimArray($dataNotSorted, 'priority', 'num');
-			foreach($dataSorted as $plugin=>$config){
-				$data[] = $this->createPlugin($plugin);
-			}
-			// On génère le cache
-			if(ROOT == './') $this->intiPluginsCache($data);
+		$items = util::scanDir(PLUGINS);
+		foreach($items['dir'] as $dir){
+			// Si le plugin est installé on récupère sa configuration
+			if(file_exists(DATA_PLUGIN .$dir. '/config.json')) $dataNotSorted[$dir] = util::readJsonFile(DATA_PLUGIN .$dir. '/config.json', true);
+			// Sinon on lui attribu une priorité faible
+			else $dataNotSorted[$dir]['priority'] = '10';
+		}
+		// On tri les plugins par priorité
+		$dataSorted = @util::sort2DimArray($dataNotSorted, 'priority', 'num');
+		foreach($dataSorted as $plugin=>$config){
+			$data[] = $this->createPlugin($plugin);
 		}
 		return $data;
 	}
@@ -108,50 +118,12 @@ class pluginsManager{
 		$hooks = util::readJsonFile(PLUGINS .$name. '/param/hooks.json');
 		// Config usine
 		$initConfig = util::readJsonFile(PLUGINS .$name. '/param/config.json');
-		// lang
-		$lang = util::readJsonFile(PLUGINS .$name. '/lang/'.$core->getConfigVal('siteLang').'.json');
 		// Derniers checks
 		if(!is_array($config)) $config = array();
 		if(!is_array($hooks)) $hooks = array();
 		// Création de l'objet
-		$plugin = new plugin($name, $config, $infos, $hooks, $initConfig, $lang);
+		$plugin = new plugin($name, $config, $infos, $hooks, $initConfig);
 		return $plugin;
-	}
-	
-	## Lecture des plugins depuis le cache
-	public function loadPluginsFromCache(){
-		if(ROOT == './' && file_exists(DATA.'plugins.cache')) return unserialize(file_get_contents(DATA.'plugins.cache'));
-		else return false;
-	}
-	
-	## Initialisation du cache plugins
-	public function intiPluginsCache($data, $clear = false){
-		if($clear){
-			@unlink(DATA.'plugins.cache');
-			return true;
-		}
-		file_put_contents(DATA.'plugins.cache', serialize($data));
-	}
-	
-	## Singleton
-	public static function getInstance(){
-		if(is_null(self::$instance)) self::$instance = new pluginsManager();
-		return self::$instance;
-	}
-	
-	## Retourne une valeur de configuration
-	public static function getPluginConfVal($pluginName, $kConf){
-		$instance = self::getInstance();
-		$plugin = $instance->getPlugin($pluginName);
-		return $plugin->getConfigVal($kConf);
-	}
-	
-	## Détermine si le plugin ciblé existe et s'il est actif
-	public static function isActivePlugin($pluginName){
-		$instance = self::getInstance();
-		$plugin = $instance->getPlugin($pluginName);
-		if($plugin && $plugin->isInstalled() && $plugin->getConfigval('activate')) return true;
-		return false;
 	}
 }
 ?>

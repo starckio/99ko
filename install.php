@@ -21,14 +21,11 @@ include_once(COMMON.'pluginsManager.class.php');
 include_once(COMMON.'plugin.class.php');
 include_once(COMMON.'show.class.php');
 include_once(COMMON.'administrator.class.php');
-$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-if($lang != 'fr') $lang = 'en';
-$core = new core($lang);
-if(file_exists(DATA. 'config.json')) die($core->lang('Config file already exist !'));
+if(file_exists(DATA. 'config.json')) die('Un fichier de configuration existe déjà !');
+$core = core::getInstance();
 $administrator = new administrator();
 $pluginsManager = pluginsManager::getInstance();
-$msg = "";
-$msgType = "";
+$msg = "Après l'installation, vous serez redirigé vers la page d'identification afin de paramétrer votre site.";
 if($core->install()){
 	$plugins = $pluginsManager->getPlugins();
 	if($plugins != false){
@@ -47,24 +44,24 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
     $adminEmail = $_POST['adminEmail'];
 	$config = array(
 		'siteName' => "Nom du site",
-		'siteDescription' => "Description du site",
 		'adminPwd' => $administrator->encrypt($_POST['adminPwd']),
 		'adminEmail' => $_POST['adminEmail'],
 		'siteUrl' => $core->makeSiteUrl(),      
 		'urlRewriting' => '0',
 		'htaccessOptimization' => '0',
 		'theme' => 'default',
-		'siteLang' => $lang,
 		'hideTitles' => '0',
 		'defaultPlugin' => 'page',
+<<<<<<< HEAD
 		'checkUrl' => CHECK_URL,
+=======
+>>>>>>> dev
 		'debug' => '0',
 		'defaultAdminPlugin' => 'page',
 		'urlSeparator' => ',',
 	);
 	if(!@file_put_contents(DATA. 'config.json', json_encode($config)) ||	!@chmod(DATA. 'config.json', 0666)){
-		$msg = $core->lang('An error has occurred');
-	    $$msgType = "error";
+		$msg = 'Une erreur est survenue';
 	}
 	else{
 		$_SESSION['installOk'] = true;
@@ -75,33 +72,36 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
 ?>
  
  <!doctype html>
-<html lang="<?php echo $lang; ?>">
+<html lang="fr">
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<<<<<<< HEAD
 	<title>99ko - <?php echo $core->lang('Installation'); ?></title>	
+=======
+	<title>99ko - Installation</title>	
+>>>>>>> dev
 	<link rel="stylesheet" href="admin/styles.css" media="all">
   </head>
   
   <body class="login">
+	<?php show::msg($msg); ?>
 	<div id="login">
-	<?php show::msg($msg, $msgType); ?>
-           <h1 class="text-center"><?php echo $core->lang('Installation'); ?></h1>
-		   <p class="alert-box"><?php echo $core->lang('After installation, you will be redirected to the login page to set your site.'); ?></p>
+           <h1 class="text-center">Installation</h1>
            
            <form method="post" action="">   
            <?php show::adminTokenField(); ?>          
               <p>
-                   <label for="adminEmail"><?php echo $core->lang('Admin email'); ?></label><br>
+                   <label for="adminEmail">Email</label><br>
                    <input type="email" name="adminEmail" required="required">
                 </p><p>
-                   <label for="adminPwd"><?php echo $core->lang('Admin password'); ?></label><br>
+                   <label for="adminPwd">Mot de passe</label><br>
                    <input type="password" name="adminPwd" id="adminPwd" required="required">
                </p><p>
-					<a id="showPassword" href="javascript:showPassword()" class="button success"><?php echo $core->lang('Show password'); ?></a>
-					<button type="submit" class="button success"><?php echo $core->lang('Validate'); ?></button>
+					<a id="showPassword" href="javascript:showPassword()" class="button success">Montrer le mot de passe</a>
+					<button type="submit" class="button success">Valider</button>
 			  </p>
-			  <p class="just_using"><a title="<?php echo $core->lang("NoDB CMS"); ?>" target="_blank" href="http://99ko.org"><?php echo $core->lang("Just using 99ko"); ?></a>
+			  <p class="just_using"><a target="_blank" href="http://99ko.org">Just using 99ko</a>
 	  </p>
             </form>
 	</div>

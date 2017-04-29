@@ -1,8 +1,12 @@
 {
     "name" : "Configuration",
-    "description" : "Configuration management of 99ko",
+    "description" : "Gestion de la configuration",
     "author" : "Jonathan Coulet",
     "authorEmail" : "contact@99ko.org",
     "authorWebsite" : "http://99ko.org",
+<<<<<<< HEAD
     "version" : "5.5"
+=======
+    "version" : "6.0"
+>>>>>>> dev
 }

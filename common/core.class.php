@@ -20,22 +20,26 @@ class core{
     private $hooks;
     private $urlParams;
     private $themes;
-    private $langs;
-    private $lang;
     private $pluginToCall;
+    private $js;
+    private $css;
     
     ## Constructeur
-    public function __construct($forceLang = ''){
+    public function __construct(){
         // Timezone
         date_default_timezone_set(date_default_timezone_get());
-        // Macgic quotes OFF
-        util::setMagicQuotesOff();
-        // Configuration
+        // Construction du tableau de configuration
+        // Exemple : array('siteName' => 'val', 'siteUrl' => 'val2')
         $this->config = util::readJsonFile(DATA.'config.json', true);
+<<<<<<< HEAD
         // Error reporting
+=======
+        // Réglage de l'error reporting suivant le paramètre debug
+>>>>>>> dev
         if($this->config['debug']) error_reporting(E_ALL);
         else error_reporting(E_ERROR | E_PARSE);
-        // Tableau des paramètres d'URL
+        // Construction du tableau des paramètres de l'URL
+        // Exemple : array(0 => 'val', 1 => 'val2')
         if($this->getConfigVal('urlRewriting') == 1){
             if(isset($_GET['param'])) $this->urlParams = explode($this->getConfigVal('urlSeparator'), $_GET['param']);
         }
@@ -49,24 +53,15 @@ class core{
         foreach($temp['dir'] as $k=>$v){
             $this->themes[$v] = util::readJsonFile(THEMES.$v.'/infos.json', true);
         }
-        // Liste des langues
-        $this->langs = array('en');
-        $temp = util::scanDir(LANG);
-        foreach($temp['file'] as $k=>$v){
-            $this->langs[] = substr($v, 0, 2);
-        }
-        // Tableau langue courante
-        if($forceLang == '') $this->lang = util::readJsonFile(LANG.$this->getConfigVal('siteLang').'.json', true);
-        else $this->lang = util::readJsonFile(LANG.$forceLang.'.json', true);
-        if(file_exists(THEMES.$this->getConfigVal('theme').'/lang/'.$this->getConfigVal('siteLang').'.json')){
-            $this->lang = array_merge($this->lang, util::readJsonFile(THEMES.$this->getConfigVal('theme').'/lang/'.$this->getConfigVal('siteLang').'.json', true));
-        }
-        if(!is_array($this->lang)) $this->lang = array();
-        // Quel est le plugin solicité ?
-        $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultPlugin');
+        // On détermine le plugin que l'on doit executer suivant le mode (public ou admin)
+        if(ROOT == './') $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultPlugin');
+        else $this->pluginToCall = isset($_GET['p']) ? $_GET['p'] : $this->getConfigVal('defaultAdminPlugin');
+        // Ressources JS & CSS de base
+        $this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css';
+        $this->js[] = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js';
     }
     
-    ## Retourne l'instance core
+    ## Retourne l'instance de l'objet core
     public static function getInstance(){
         if(is_null(self::$instance)){
             self::$instance = new core();
@@ -74,27 +69,16 @@ class core{
         return self::$instance;
     }
     
-    ## Retourne le paramètre d'URL ciblé
+    ## Retourne un paramètre d'URL
+    ## $k doit être un entier (index du tableau urlParams)
     public function getUrlParam($k){
         if(isset($this->urlParams[$k])) return $this->urlParams[$k];
         else return false;
     }
     
-    ## Retourne la liste des langues
-    public function getLangs(){
-        return $this->langs;
-    }
-    
     ## Retourne la liste des thèmes
     public function getThemes(){
         return $this->themes;
-    }
-    
-    ## Retourne une phrase dans la langue courante
-    public function lang($k){
-        if($this->getConfigVal('siteLang') == 'en') return $k;
-        elseif(is_array($this->lang) && array_key_exists($k, $this->lang)) return $this->lang[$k];
-        else return $k;
     }
     
     ## Retourne une valeur de configuration
@@ -103,7 +87,7 @@ class core{
         else return false;
     }
     
-    ## Retourne l'information ciblée d'un thème
+    ## Retourne les infos du thème ciblé
     public function getThemeInfo($k){
         if(isset($this->themes[$this->getConfigVal('theme')])) return $this->themes[$this->getConfigVal('theme')][$k];
         else return false;
@@ -114,7 +98,17 @@ class core{
         return $this->pluginToCall;
     }
     
-        ## Détermine si 99ko est installé
+    ## Retourne le tableau de ressources JS de base
+    public function getJs(){
+        return $this->js;
+    }
+    
+    ## Retourne le tableau de ressources CSS de base
+    public function getCss(){
+        return $this->css;
+    }
+    
+    ## Détermine si 99ko est installé
     public function isInstalled(){
         if(!file_exists(DATA.'config.json')) return false;
         else return true;
@@ -133,7 +127,8 @@ class core{
         return $siteUrl;
     }
     
-    ## Génère une URL réécrite ou retourne l'URL standard
+    ## Génère une URL réécrite ou retourne l'URL standard suivant l'état du paramètre de configuration urlRewriting
+    ## Exemple d'utilisation : $core->makeUrl('monplugin', array('mode' => 'article', 'id' => 3))) => "monplugin/article,3.html" ou "index.php?p=monplugin&mode=article&id=3"
     public function makeUrl($plugin, $params = array()){
         if($this->getConfigVal('urlRewriting') == 1){
             $url = $plugin.'/';
@@ -152,6 +147,7 @@ class core{
         return $url;
     }
     
+<<<<<<< HEAD
     ## Lance un check et retourne les alertes
     public function check(){
         $data = array();
@@ -194,11 +190,14 @@ class core{
     }
     
     ## Ajoute un hook à executter
+=======
+    ## Alimente le tableau des hooks
+>>>>>>> dev
     public function addHook($name, $function){
         $this->hooks[$name][] = $function;
     }
     
-    ## Appel un hook
+    ## Appelle un hook
     public function callHook($name){
         $return = '';
         if(isset($this->hooks[$name])){
@@ -207,12 +206,6 @@ class core{
             }
         }
         return $return;
-    }
-    
-    ## Charge le fichier lang d'un plugin dans le tableau lang
-    public function loadPluginLang($plugin){
-        $pluginsManager = pluginsManager::getInstance();
-        $this->lang = array_merge($this->lang, $pluginsManager->getPlugin($plugin)->getLang());
     }
     
     ## Detecte le mode de l'administration
@@ -224,7 +217,7 @@ class core{
         elseif(isset($_GET['p'])) return 'plugin';
     }
     
-    ## Renvoi une erreur 404
+    ## Renvoi une page 404
     public function error404(){
             header("HTTP/1.1 404 Not Found");
             header("Status: 404 Not Found");
@@ -232,7 +225,7 @@ class core{
             die();
     }
     
-    ## Sauvegarde le tableau de configuration
+    ## Update le fichier de configuration
     public function saveConfig($val, $append = array()){
         $config = util::readJsonFile(DATA.'config.json', true);
         $config = array_merge($config, $append);
@@ -245,11 +238,6 @@ class core{
             return true;
         }
         else return false;
-    }
-    
-    ## Retourne l'objet administrator
-    public function createAdministrator(){
-        return new administrator($this->getConfigVal('adminEmail'), $this->getConfigVal('adminPwd'));
     }
     
     ## Installation de 99ko
@@ -274,6 +262,18 @@ class core{
             if(!file_exists(DATA. 'key.php') && !@file_put_contents(DATA. 'key.php', "<?php define('KEY', '$key'); ?>", 0666)) $install = false;
         }
         return $install;
+    }
+    
+    ## Retourne le contenu du fichier htaccess
+    
+    public function getHtaccess(){
+        return htmlspecialchars(@file_get_contents(ROOT.'.htaccess'), ENT_QUOTES, 'UTF-8');
+    }
+    
+    ## Update le contenu du fichier htaccess
+    
+    public function saveHtaccess($content){
+        @file_put_contents(ROOT.'.htaccess', str_replace('¶m', '&param', $content));
     }
 }
 ?>
