@@ -52,10 +52,6 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
 		'theme' => 'default',
 		'hideTitles' => '0',
 		'defaultPlugin' => 'page',
-<<<<<<< HEAD
-		'checkUrl' => CHECK_URL,
-=======
->>>>>>> dev
 		'debug' => '0',
 		'defaultAdminPlugin' => 'page',
 		'urlSeparator' => ',',
@@ -76,11 +72,7 @@ if(count($_POST) > 0 && $administrator->isAuthorized()){
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<<<<<<< HEAD
-	<title>99ko - <?php echo $core->lang('Installation'); ?></title>	
-=======
 	<title>99ko - Installation</title>	
->>>>>>> dev
 	<link rel="stylesheet" href="admin/styles.css" media="all">
   </head>
   

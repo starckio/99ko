@@ -44,16 +44,6 @@ switch($action){
 		die();
 		break;
 	case 'maintenance':
-<<<<<<< HEAD
-		if($administrator->isAuthorized()){
-			$pluginsManager->installPlugin($_GET['plugin'], true);
-		}
-		header('location:index.php?p=pluginsmanager');
-		die();
-		break;
-	case 'cache':
-=======
->>>>>>> dev
 		if($administrator->isAuthorized()){
 			$pluginsManager->installPlugin($_GET['plugin'], true);
 		}

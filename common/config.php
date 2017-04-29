@@ -12,13 +12,7 @@
  *
  */
 
-<<<<<<< HEAD
-define('VERSION', '3.3.1');
-define('VERSION_NAME', 'Layne');
-define('CHECK_URL', 'http://99ko.org/version');
-=======
 define('VERSION', '4.0 (bêta)');
->>>>>>> dev
 define('COMMON',  ROOT.'common/');
 define('DATA', ROOT.'data/');
 define('UPLOAD', ROOT.'data/upload/');

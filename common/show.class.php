@@ -99,36 +99,12 @@ class show{
      	echo $core->getConfigVal('siteUrl');
      }
 
-<<<<<<< HEAD
-     // affiche l'url du site (theme)
-     public static function siteUrl() {
-      $core = core::getInstance();
-     	eval($core->callHook('startShowSiteUrl'));
-     	$data = $core->getConfigVal('siteUrl');
-     	eval($core->callHook('endShowSiteUrl'));
-     	echo $data;
-     }
-
-     // affiche la langue courante (theme)
-     public static function siteLang() {
-      $core = core::getInstance();
-     	eval($core->callHook('startShowSiteLang'));
-     	$data = $core->getConfigVal('siteLang');
-     	eval($core->callHook('endShowSiteLang'));
-     	echo $data;
-     }
-
-     // affiche la navigation principale (theme)
-     public static function mainNavigation($format = '<li><a href="[target]" target="[targetAttribut]">[label]</a>[childrens]</li>') {
-=======
      ## Affiche la navigation principale (theme)
      public static function mainNavigation($format = '<li><a href="[target]" target="[targetAttribut]">[label]</a>[childrens]</li>'){
->>>>>>> dev
      	$pluginsManager = pluginsManager::getInstance();
 		$core = core::getInstance();
      	$data = '';
      	foreach($pluginsManager->getPlugins() as $k=>$plugin) if($plugin->getConfigval('activate') == 1){
-			//print_r($plugin->getNavigation());
      		foreach($plugin->getNavigation() as $k2=>$item) if($item['label'] != ''){
 				if($item['parent'] < 1){
 				 $temp = $format;

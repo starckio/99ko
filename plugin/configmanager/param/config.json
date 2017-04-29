@@ -1,8 +1,4 @@
 {
     "priority" : "2",
-<<<<<<< HEAD
-    "adminTabs" : "General configuration,User account,Advanced configuration",
-=======
->>>>>>> dev
     "protected" : "1"
 }
