@@ -7,7 +7,7 @@ include_once(ROOT.'admin/header.php');
 
 <div class="items">
 
-	<nav role="navigation">
+	<nav>
 		<ul class="menu cf">
 			<li><a href="index.php?p=page&amp;action=edit">Ajouter une page</a></li>
 			<li><a href="index.php?p=page&amp;action=edit&parent=1">Ajouter un item parent</a></li>
