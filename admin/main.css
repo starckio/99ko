@@ -396,19 +396,20 @@ mark {
 .meta #param_link {
 	font-size: 1.25em;
 	border: none;
-	padding-top: .7em;
+	padding-top: .45em;
 	float: right;
 }
 #param_panel {
 	display: none;
-	border-bottom: 1px dashed #D4D4D4;
-	padding-bottom: 1.5em;
-	margin-bottom: 1.5em;
+	border-bottom: 1px dashed #FF4825;
+	padding-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 @media screen and (min-width: 50em) {
 	#param_panel {
 		padding-bottom: 2em;
+		margin-bottom: 1.5em;
 	}
 }
 
