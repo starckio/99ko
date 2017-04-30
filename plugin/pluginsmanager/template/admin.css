@@ -9,16 +9,108 @@
 	padding-bottom: 0;
 }
 #pluginsmanagerForm .item-info {
-	display: inline-block;
+	display: block;
+	float: left;
+}
+#pluginsmanagerForm .item-info a {
+	border: none;
+	display: block;
+	float: left;
+}
+#pluginsmanagerForm .item-info a h3 {
+	line-height: 1em;
 }
 #pluginsmanagerForm .item-description {
 	color: #999;
 	font-style: italic;
 }
 #pluginsmanagerForm .item-priority {
-	display: inline-block;
+	display: block;
+	float: right;
+}
+#pluginsmanagerForm .item-priority .field {
+	margin-bottom: 0;
+}
+#pluginsmanagerForm .item-priority .field label {
+	margin: 0 1em;
+	padding: 0;
+	line-height: 3em;
+	float: left;
+}
+#pluginsmanagerForm .item-priority .field > div {
+	width: 5em;
 	float: right;
 }
 #pluginsmanagerForm .item-activate {
-	display: inline-block;
+	display: block;
+	float: left;
+}
+.tgl {
+	display: none;
+}
+.tgl,
+.tgl *,
+.tgl :after,
+.tgl :before,
+.tgl+.tgl-switch,
+.tgl:after,
+.tgl:before {
+	box-sizing: border-box;
+}
+.tgl ::selection,
+.tgl :after::selection,
+.tgl :before::selection,
+.tgl+.tgl-switch::selection,
+.tgl::selection,
+.tgl:after::selection,
+.tgl:before::selection {
+	background: 0 0;
+}
+.tgl + .tgl-switch {
+	outline: 0;
+	display: block;
+	width: 3em;
+	height: 1.5em;
+	margin-right: 1em;
+	position: relative;
+	cursor: pointer;
+	vertical-align: bottom;
+	-ms-user-select: none;
+	user-select: none;
+
+	background: #efefef;
+	border-radius: 2em;
+	padding: 2px;
+	transition: all .4s ease;
+}
+.tgl + .tgl-switch:after, .tgl + .tgl-switch:before {
+	position: relative;
+	display: block;
+	content: "";
+	width: 50%;
+	height: 100%;
+}
+.tgl + .tgl-switch:after {
+	left: 0;
+	border-radius: 50%;
+	background: #fff;
+	transition: all .2s ease;
+}
+.tgl + .tgl-switch:before {
+	display: none;
+}
+.tgl:checked + .tgl-switch:after {
+	left: 50%;
+}
+.tgl:checked + .tgl-switch {
+	background: #8dae28;
+}
+.tgl[disabled] + .tgl-switch {
+	background: #efefef;
+}
+.tgl:not(:checked) ~ .tgl-text-on {
+	display: none;
+}
+.tgl:checked ~ .tgl-text-off {
+	display: none;
 }
