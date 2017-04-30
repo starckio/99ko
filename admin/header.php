@@ -47,18 +47,20 @@
 
 	<div id="alert"><?php show::msg($msg); ?></div>
 
-	<div class="meta" role="secondary">
-		<?php if($runPlugin->getParamTemplate()){ ?><div class="param_dispo cf"><?php } ?>
-		
-		<h1><?php echo $runPlugin->getInfoVal('name'); ?></h1>
+	<?php if($runPlugin->getParamTemplate()){ ?>
 
-		<?php if($runPlugin->getParamTemplate()){ ?>
+	<div class="meta cf">
+		<h1><?php echo $runPlugin->getInfoVal('name'); ?></h1>
 		<a id="param_link" href="javascript:">Paramètres</a>
-		</div>
-		<div id="param_panel">
-			<?php include($runPlugin->getParamTemplate()); ?>
-		</div>
-		<?php } ?>
 	</div>
 
 	<div class="text cf">
+		<div id="param_panel">
+			<?php include($runPlugin->getParamTemplate()); ?>
+		</div>
+
+	
+	<?php } else { ?>
+	<h1><?php echo $runPlugin->getInfoVal('name'); ?></h1>
+	<div class="text cf">
+	<?php } ?>

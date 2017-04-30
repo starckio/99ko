@@ -25,28 +25,31 @@
 	<?php show::msg($msg); ?>
 	<h1>Connexion</h1>
 
-	<form method="post" action="index.php?action=login">
-		<?php show::adminTokenField(); ?>
-		<div class="field">
-			<label for="adminEmail">Email</label>
-			<input type="email" name="adminEmail" id="adminEmail" required />
-		</div>
-		<div class="field">
-			<label for="adminPwd">Mot de passe</label>
-			<input type="password" name="adminPwd" id="adminPwd" required />
-		</div>
-		<button class="btn" type="submit" name="submit">Valider</button>
-	</form>
+	<div class="text">
+		<form method="post" action="index.php?action=login">
+			<?php show::adminTokenField(); ?>
+			<div class="field">
+				<label for="adminEmail">Email</label>
+				<input type="email" name="adminEmail" id="adminEmail" required />
+			</div>
+			<div class="field">
+				<label for="adminPwd">Mot de passe</label>
+				<input type="password" name="adminPwd" id="adminPwd" required />
+			</div>
+			<button class="btn" type="submit" name="submit">Valider</button>
+		</form>
+	</div>
 
-	<footer class="footer cf" role="contentinfo">
-		<div class="copyright">
-			Designed by <a href="http://www.starck.io"><b>Starckio</b></a>
-		</div>
-		<div class="colophon">
-			<a href="http://99ko.org">Just using 99ko <b><?php echo VERSION; ?></b></a>
-		</div>
-	</footer>
 </main>
+
+<footer class="footer cf" role="contentinfo">
+	<div class="copyright">
+		Designed by <a href="http://www.starck.io"><b>Starckio</b></a>
+	</div>
+	<div class="colophon">
+		<a href="http://99ko.org">Just using 99ko <b><?php echo VERSION; ?></b></a>
+	</div>
+</footer>
 
 <?php eval($core->callHook('endAdminBody')); ?>
 </body>
