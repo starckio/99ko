@@ -36,7 +36,8 @@
 <aside role="seealso" class="sidebar">
 	<ul class="menu cf">
 		<?php foreach($pluginsManager->getPlugins() as $k=>$v) if($v->getConfigVal('activate') && $v->getAdminFile()){ ?>
-		<li class="<?php if($v->isRequired()){ ?>last<?php } ?>">
+		<li<?php if($v->isRequired()){ ?> class="last"<?php } ?>>
+		
 			<a href="index.php?p=<?php echo $v->getName(); ?>"><?php echo $v->getInfoVal('name'); ?></a>
 		</li>
 		<?php } ?>
