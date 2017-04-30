@@ -171,10 +171,10 @@ body {
 .sidebar .menu a {
 	font-size: 1.25em;
 	display: block;
-	color: #d4d4d4;
+	color: black;
 }
 .sidebar .menu a:hover {
-	color: black;
+	color: #FF4825;
 	text-decoration: none;
 }
 .sidebar .menu .active {
@@ -186,7 +186,7 @@ body {
 }
 .sidebar .menu li a {
 	padding: .35em 0;
-	border-top: 1px solid #d4d4d4;
+	border-top: 1px solid #D4D4D4;
 }
 .sidebar .menu li:first-child a {
 	border-top: none;
@@ -200,7 +200,7 @@ body {
 	.sidebar .menu li a {
 		padding: .5em 0;
 		border-top: none;
-		border-right: 1px solid currentColor;
+		border-right: 1px solid #D4D4D4;
 	}
 	.sidebar .menu li a:hover {
 		border-right: 1px solid currentColor;
@@ -263,9 +263,6 @@ mark {
 	color: white;
 	background: #fe9191;
 }
-.main {
-	padding-bottom: 1.5em;
-}
 .main p,
 .main figure,
 .main ul,
@@ -281,12 +278,41 @@ mark {
 .text {
 	padding: 2em;
 	background: white;
+	-webkit-box-shadow: 0 1px 20px rgba(26, 141, 214, 0), 0 15px 33px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 20px rgba(26, 141, 214, 0), 0 15px 33px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 20px rgba(26, 141, 214, 0), 0 15px 33px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (min-width: 40em) {
 	.main {
 		width: 75%;
 		float: right;
+	}
+}
+
+
+/* Footer
+-------------------------------------------------- */
+.footer {
+	margin-top: 1.5em;
+	padding: 1em 0 6em;
+	font-size: .8em;
+	border-top: 1px solid #d4d4d4;
+}
+.copyright {
+	float: left;
+}
+.colophon {
+	float: right;
+}
+.colophon a b {
+	color: #FF4825;
+	padding-left: .25em;
+}
+
+@media screen and (min-width: 40em) {
+	.footer {
+		margin-top: 3em;
 	}
 }
 
@@ -380,53 +406,8 @@ mark {
 }
 
 
-/* Footer
--------------------------------------------------- */
-.footer {
-	padding: 1em 0 6em;
-	font-size: .8em;
-	border-top: 1px solid #d4d4d4;
-}
-.copyright {
-	float: left;
-}
-.colophon {
-	float: right;
-}
-.colophon a b {
-	color: #FF4825;
-	padding-left: .25em;
-}
-
-
 /* Formulaire
 -------------------------------------------------- */
-.field.error input[type="text"]::-webkit-input-placeholder,
-.field.error input[type="email"]::-webkit-input-placeholder,
-.field.error input[type="url"]::-webkit-input-placeholder,
-.field.error textarea::-webkit-input-placeholder {
-	color: #FF4825;
-}
-/* Firefox 19+ */
-.field.error input[type="text"]::-moz-placeholder,
-.field.error input[type="email"]::-moz-placeholder,
-.field.error input[type="url"]::-moz-placeholder,
-.field.error textarea::-moz-placeholder {
-	color: #FF4825;
-}
-.field.error input[type="text"]:-ms-input-placeholder,
-.field.error input[type="email"]:-ms-input-placeholder,
-.field.error input[type="url"]:-ms-input-placeholder,
-.field.error textarea:-ms-input-placeholder {
-	color: #FF4825;
-}
-/* Firefox 18- */
-.field.error input[type="text"]:-moz-placeholder,
-.field.error input[type="email"]:-moz-placeholder,
-.field.error input[type="url"]:-moz-placeholder,
-.field.error textarea:-moz-placeholder {
-	color: #FF4825;
-}
 .field {
 	margin-bottom: 1.5em;
 }
@@ -437,36 +418,6 @@ mark {
 	font-size: .9em;
 	padding-bottom: .3em;
 	display: inline-block;
-}
-.field input[type="text"]::-webkit-input-placeholder,
-.field input[type="email"]::-webkit-input-placeholder,
-.field input[type="url"]::-webkit-input-placeholder,
-.field textarea::-webkit-input-placeholder {
-	color: #d4d4d4;
-	font-style: italic;
-}
-/* Firefox 19+ */
-.field input[type="text"]::-moz-placeholder,
-.field input[type="email"]::-moz-placeholder,
-.field input[type="url"]::-moz-placeholder,
-.field textarea::-moz-placeholder {
-	color: #d4d4d4;
-	font-style: italic;
-}
-.field input[type="text"]:-ms-input-placeholder,
-.field input[type="email"]:-ms-input-placeholder,
-.field input[type="url"]:-ms-input-placeholder,
-.field textarea:-ms-input-placeholder {
-	color: #d4d4d4;
-	font-style: italic;
-}
-/* Firefox 18- */
-.field input[type="text"]:-moz-placeholder,
-.field input[type="email"]:-moz-placeholder,
-.field input[type="url"]:-moz-placeholder,
-.field textarea:-moz-placeholder {
-	color: #d4d4d4;
-	font-style: italic;
 }
 .field input[type="text"],
 .field input[type="email"],
@@ -516,11 +467,13 @@ mark {
 .field input[type="text"]:hover,
 .field input[type="email"]:hover,
 .field input[type="url"]:hover,
+.field input[type="password"]:hover,
 .field select:hover,
 .field textarea:hover,
 .field input[type="text"]:focus,
 .field input[type="email"]:focus,
 .field input[type="url"]:focus,
+.field input[type="password"]:focus,
 .field select:focus,
 .field textarea:focus,
 form .btn:hover {
@@ -529,8 +482,73 @@ form .btn:hover {
 .field.error input[type="text"],
 .field.error input[type="email"],
 .field.error input[type="url"],
+.field.error input[type="password"],
 .field.error textarea {
 	border-color: #FF4825;
+}
+.field input[type="text"]::-webkit-input-placeholder,
+.field input[type="email"]::-webkit-input-placeholder,
+.field input[type="url"]::-webkit-input-placeholder,
+.field input[type="password"]::-webkit-input-placeholder,
+.field textarea::-webkit-input-placeholder {
+	color: #d4d4d4;
+	font-style: italic;
+}
+/* Firefox 19+ */
+.field input[type="text"]::-moz-placeholder,
+.field input[type="email"]::-moz-placeholder,
+.field input[type="url"]::-moz-placeholder,
+.field input[type="password"]::-moz-placeholder,
+.field textarea::-moz-placeholder {
+	color: #d4d4d4;
+	font-style: italic;
+}
+.field input[type="text"]:-ms-input-placeholder,
+.field input[type="email"]:-ms-input-placeholder,
+.field input[type="url"]:-ms-input-placeholder,
+.field input[type="password"]:-ms-input-placeholder,
+.field textarea:-ms-input-placeholder {
+	color: #d4d4d4;
+	font-style: italic;
+}
+/* Firefox 18- */
+.field input[type="text"]:-moz-placeholder,
+.field input[type="email"]:-moz-placeholder,
+.field input[type="url"]:-moz-placeholder,
+.field input[type="password"]:-moz-placeholder,
+.field textarea:-moz-placeholder {
+	color: #d4d4d4;
+	font-style: italic;
+}
+.field.error input[type="text"]::-webkit-input-placeholder,
+.field.error input[type="email"]::-webkit-input-placeholder,
+.field.error input[type="url"]::-webkit-input-placeholder,
+.field.error input[type="password"]::-webkit-input-placeholder,
+.field.error textarea::-webkit-input-placeholder {
+	color: #FF4825;
+}
+/* Firefox 19+ */
+.field.error input[type="text"]::-moz-placeholder,
+.field.error input[type="email"]::-moz-placeholder,
+.field.error input[type="url"]::-moz-placeholder,
+.field.error input[type="password"]::-moz-placeholder,
+.field.error textarea::-moz-placeholder {
+	color: #FF4825;
+}
+.field.error input[type="text"]:-ms-input-placeholder,
+.field.error input[type="email"]:-ms-input-placeholder,
+.field.error input[type="url"]:-ms-input-placeholder,
+.field.error input[type="password"]:-ms-input-placeholder,
+.field.error textarea:-ms-input-placeholder {
+	color: #FF4825;
+}
+/* Firefox 18- */
+.field.error input[type="text"]:-moz-placeholder,
+.field.error input[type="email"]:-moz-placeholder,
+.field.error input[type="url"]:-moz-placeholder,
+.field.error input[type="password"]:-moz-placeholder,
+.field.error textarea:-moz-placeholder {
+	color: #FF4825;
 }
 .uniform__potty {
 	position: absolute;
