@@ -104,14 +104,14 @@ body {
 /* Header
 -------------------------------------------------- */
 .header {
-	padding: 1.5em 0 .5em;
+	padding: 1em 1.5em;
 	margin-bottom: 1.5em;
-	border-bottom: 1px solid #D4D4D4
+	background: black;
 }
 .logo {
 	font-size: 1.25em;
 	font-weight: 700;
-	color: black;
+	color: white;
 	display: block;
 	margin-bottom: 1.5em;
 }
@@ -134,9 +134,8 @@ body {
 /* Header navigation
 -------------------------------------------------- */
 .header .menu a {
-	font-size: 1.25em;
 	display: block;
-	color: black;
+	color: white;
 }
 .header .menu a:hover {
 	color: #FF4825;
@@ -170,6 +169,7 @@ body {
 /* Sidebar
 -------------------------------------------------- */
 .sidebar .menu a {
+	font-size: 1.25em;
 	display: block;
 	color: #d4d4d4;
 }
@@ -198,7 +198,7 @@ body {
 		float: left;
 	}
 	.sidebar .menu li a {
-		padding: 1em 0;
+		padding: .5em 0;
 		border-top: none;
 		border-right: 1px solid currentColor;
 	}
@@ -319,7 +319,7 @@ mark {
 	-moz-appearance: none;
 	-ms-appearance: none;
 	appearance: none;
-	background: #d4d4d4;
+	background: black;
 	border: 0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -341,7 +341,7 @@ mark {
 }
 [class*='btn']:hover,
 [class*='btn']:focus {
-	background: black;
+	background: #D4D4D4;
 }
 
 
