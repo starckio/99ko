@@ -17,7 +17,7 @@
 	border-top: none;
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 50em) {
 	.items .menu li {
 		display: inline-block;
 	}
@@ -34,56 +34,56 @@
 	}
 }
 
-.item {
+.items .item {
 	border: 1px solid #DDD;
 	border-bottom-width: 0px;
 }
 .items .item:last-of-type {
 	border-bottom-width: 1px;
 }
-.item img,
-.item svg {
+.items .item img,
+.items .item svg {
 	max-width: 24px;
 	display: block;
 }
-.second {
+.items .second {
 	border-left-width: 5px;
 }
-.item-icon {
+.items .item-icon {
 	padding: .7em 0 .7em .7em;
 	display: block;
 	float: left;
 }
-.item-info {
+.items .item-info {
 	padding: .6em .6em .6em .7em;
 	display: block;
 	float: left;
 }
-.item-name {
+.items .item-name {
 	
 }
-.item-url {
+.items .item-url {
 	display: none;
 }
-.item-options {
+.items .item-options {
 	display: block;
 	float: right;
 }
-.main .item-options a,
-.main .item-options .locked {
+.main .items .item-options a,
+.main .items .item-options .locked {
 	padding: .7em;
 	border: none;
 	border-left: 1px solid #DDD;
 	display: block;
 	float: left;
 }
-.main .item-options a:hover {
+.main .items .item-options a:hover {
 	background: #efefef;
 	border-color: #DDD;
 }
-.main .item-options a.red:hover {
+.main .items .item-options a.red:hover {
 	background: #FF4825;
 }
-.main .item-options a.red:hover svg#i-trash {
+.main .items .item-options a.red:hover svg#i-trash {
 	color: white;
 }
