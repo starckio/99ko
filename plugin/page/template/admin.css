@@ -1,0 +1,80 @@
+.items .menu a {
+	display: block;
+	color: #999;
+	border: none;
+}
+.items .menu a:hover {
+	color: black;
+	text-decoration: none;
+}
+.items .menu li {
+	list-style: none;
+}
+.items .menu li a {
+	padding: .35em 0;
+	border-top: 1px solid #ddd;
+	font-weight: 600;
+}
+.items .menu li:first-child a {
+	border-top: none;
+}
+
+@media screen and (min-width: 40em) {
+	.items .menu li {
+		float: left;
+	}
+	.items .menu li a {
+		padding: 0;
+		padding-right: 2em;
+		border: 0;
+	}
+}
+
+.item {
+	border: 1px solid #DDD;
+	border-bottom-width: 0px;
+}
+.items .item:last-of-type {
+	border-bottom-width: 1px;
+}
+.item img {
+	max-width: 24px;
+}
+.second {
+	border-left-width: 5px;
+}
+.item-icon {
+	padding: .7em 0 .7em .7em;
+	display: block;
+	float: left;
+}
+.item-info {
+	padding: .6em .6em .6em .7em;
+	display: block;
+	float: left;
+}
+.item-name {
+	
+}
+.item-url {
+	display: none;
+}
+.item-options {
+	display: block;
+	float: right;
+}
+.main .item-options a,
+.main .item-options .locked {
+	padding: .7em;
+	border: none;
+	border-left: 1px solid #DDD;
+	display: block;
+	float: left;
+}
+.main .item-options a:hover {
+	background: #efefef;
+	border-color: #DDD;
+}
+.main .item-options a.red:hover {
+	background: rgba(255, 0, 0, 0.5);
+}
