@@ -10,20 +10,9 @@ include_once(ROOT.'admin/header.php');
 
 	<div class="item cf">
 
-		<?php if(!$plugin->isRequired()){ ?>
-		<div class="item-activate">
-			<div class="field">
-				<label for="activate[<?php echo $plugin->getName(); ?>]">Activer</label>
-				<input onchange="document.getElementById('pluginsmanagerForm').submit();" id="activate[<?php echo $plugin->getName(); ?>]" type="checkbox" name="activate[<?php echo $plugin->getName(); ?>]" <?php if($plugin->getConfigVal('activate')){ ?>checked<?php } ?> />
-			</div>
-		</div>
-		<?php } else { ?>
-		<input style="display:none;" id="activate[<?php echo $plugin->getName(); ?>]" type="checkbox" name="activate[<?php echo $plugin->getName(); ?>]" checked />
-		<?php } ?>
-
 		<div class="item-info">
 			<a href="<?php echo $plugin->getInfoVal('authorWebsite'); ?>" target="_blank">
-				<h3><?php echo $plugin->getInfoVal('name'); ?>&nbsp;&nbsp;&nbsp;(<?php echo $plugin->getInfoVal('version'); ?>)</h3>
+				<h3><?php echo $plugin->getInfoVal('name'); ?>&nbsp;&nbsp;(<strong><?php echo $plugin->getInfoVal('version'); ?></strong>)</h3>
 			</a>
 			<?php if($plugin->getConfigVal('activate') && !$plugin->isInstalled()){ ?>&nbsp;&nbsp;<a class="button" href="index.php?p=pluginsmanager&action=maintenance&plugin=<?php echo $plugin->getName(); ?>&token=<?php echo administrator::getToken(); ?>">Maintenance requise</a><?php } ?>
 			<div class="item-description">
@@ -44,6 +33,17 @@ include_once(ROOT.'admin/header.php');
 				</div>
 			</div>
 		</div>
+
+		<?php if(!$plugin->isRequired()){ ?>
+		<div class="item-activate">
+			<div class="field">
+				<input onchange="document.getElementById('pluginsmanagerForm').submit();" id="activate[<?php echo $plugin->getName(); ?>]" type="checkbox" name="activate[<?php echo $plugin->getName(); ?>]" <?php if($plugin->getConfigVal('activate')){ ?>checked<?php } ?> />
+				<label for="activate[<?php echo $plugin->getName(); ?>]">Activer</label>
+			</div>
+		</div>
+		<?php } else { ?>
+		<input style="display:none;" id="activate[<?php echo $plugin->getName(); ?>]" type="checkbox" name="activate[<?php echo $plugin->getName(); ?>]" checked />
+		<?php } ?>
 
 	</div>
 

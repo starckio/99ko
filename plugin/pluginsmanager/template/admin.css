@@ -1,24 +1,24 @@
-.item {
+#pluginsmanagerForm .item {
 	border-bottom: 2px solid #DDD;
 	margin-bottom: 1.5em;
 	padding-bottom: 1.5em;
 }
-.item:last-of-type {
+#pluginsmanagerForm .item:last-of-type {
 	border-bottom: none;
 	margin-bottom: 0;
 	padding-bottom: 0;
 }
-.item-info {
+#pluginsmanagerForm .item-info {
 	display: inline-block;
 }
-.item-description {
+#pluginsmanagerForm .item-description {
 	color: #999;
 	font-style: italic;
 }
-.item-priority {
+#pluginsmanagerForm .item-priority {
 	display: inline-block;
 	float: right;
 }
-.item-activate {
+#pluginsmanagerForm .item-activate {
 	display: inline-block;
 }
