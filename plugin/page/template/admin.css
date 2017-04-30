@@ -41,8 +41,10 @@
 .items .item:last-of-type {
 	border-bottom-width: 1px;
 }
-.item img {
+.item img,
+.item svg {
 	max-width: 24px;
+	display: block;
 }
 .second {
 	border-left-width: 5px;
@@ -81,4 +83,7 @@
 }
 .main .item-options a.red:hover {
 	background: #FF4825;
+}
+.main .item-options a.red:hover svg#i-trash {
+	color: white;
 }
