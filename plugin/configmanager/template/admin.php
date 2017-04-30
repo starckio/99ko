@@ -7,8 +7,8 @@ include_once(ROOT.'admin/header.php');
 	<h3>Paramètres du site</h3>
 
 	<div class="field">
-		<label for="hideTitles">Masquer le titre des pages</label>
 		<input <?php if($core->getConfigVal('hideTitles')){ ?>checked<?php } ?> type="checkbox" name="hideTitles" id="hideTitles" />
+		<label for="hideTitles">Masquer le titre des pages</label>
 	</div>
 
 	<div class="field">
@@ -74,18 +74,18 @@ include_once(ROOT.'admin/header.php');
 	<h3>Configuration avançés</h3>
 
 	<div class="field">
-		<label for="debug">Mode débogage</label>
 		<input <?php if($core->getConfigVal('debug')){ ?>checked<?php } ?> type="checkbox" name="debug" id="debug" />
+		<label for="debug">Mode débogage</label>
 	</div>
 
 	<div class="field">
-		<label for="urlRewriting">Réécriture d'URL</label>
 		<input type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($core->getConfigVal('urlRewriting')){ ?>checked<?php } ?> name="urlRewriting" id="urlRewriting" />
+		<label for="urlRewriting">Réécriture d'URL</label>
 	</div>
 
 	<div class="field">
-		<label for="htaccessOptimization">Optimisations .htaccess</label>
 		<input type="checkbox" onclick="updateHtaccess('<?php echo $rewriteBase; ?>');" <?php if($core->getConfigVal('htaccessOptimization')){ ?>checked<?php } ?> name="htaccessOptimization" id="htaccessOptimization" />
+		<label for="htaccessOptimization">Optimisations .htaccess</label>
 	</div>
 
 	<div class="field">
