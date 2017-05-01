@@ -111,7 +111,7 @@ class show{
 				 $temp = str_replace('[target]', $item['target'], $temp);
 				 $temp = str_replace('[label]', $item['label'], $temp);
 				 $temp = str_replace('[targetAttribut]', $item['targetAttribut'], $temp);
-				 $data2 = '<ul>';
+				 $data2 = '<ul class="submenu">';
 				 $i = 0;
 				 foreach($plugin->getNavigation() as $k3=>$item2) if($item2['label'] != '' && $item2['parent'] == $item['id']){
 				  $temp2 = $format;
