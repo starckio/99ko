@@ -353,15 +353,15 @@ mark {
 .msg {
 	color: #fff;
 	text-align: center;
+	width: 100%;
 	padding: .7em 1em;
-	margin-bottom: 1.5em;
+	margin: 0em;
 	background: #FF4825;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .04), 0 3px 1px -2px rgba(0, 0, 0, .04), 0 1px 5px 0 rgba(0, 0, 0, .04);
-	-moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .04), 0 3px 1px -2px rgba(0, 0, 0, .04), 0 1px 5px 0 rgba(0, 0, 0, .04);
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .04), 0 3px 1px -2px rgba(0, 0, 0, .04), 0 1px 5px 0 rgba(0, 0, 0, .04);
+	position: fixed;
+	z-index: 999999;
+	left: 0;
+	right: 0;
+	top: 0;
 }
 .msg p:last-of-type {
 	margin: 0;
@@ -397,7 +397,7 @@ mark {
 }
 [class*='btn']:hover,
 [class*='btn']:focus {
-	background: #D4D4D4;
+	background: #FF4825;
 }
 
 @media screen and (min-width: 50em) {
