@@ -1,10 +1,8 @@
-$(document).ready(function(){
-    $('#mobile_menu').click(function(){
-        if($('#navigation').css('display') == 'none'){
-            $('#navigation').slideDown();
-        }
-        else{
-            $('#navigation').slideUp();
-        }
-    });
+$(document).ready( function() {
+
+	$('.toggle').click(function(){
+	    $(this).toggleClass('active');
+	    $('.navigation').toggleClass('active');
+	});
+
 });
