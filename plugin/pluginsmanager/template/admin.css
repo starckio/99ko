@@ -1,50 +1,49 @@
-#pluginsmanagerForm .item {
-	border-bottom: 2px solid #DDD;
+#pluginsmanagerForm .items {
+	margin-bottom: -1.5em;
+}
+#pluginsmanagerForm .items li {
+	border: 1px solid #d4d4d4;
 	margin-bottom: 1.5em;
-	padding-bottom: 1.5em;
+	padding: 1.5em;
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+
+	width: 100%;
 }
-#pluginsmanagerForm .item:last-of-type {
-	border-bottom: none;
-	margin-bottom: 0;
-	padding-bottom: 0;
+#pluginsmanagerForm .items li:nth-child(2n+2) {
+	margin-right: 0 !important;
 }
-#pluginsmanagerForm .item-info {
+
+#pluginsmanagerForm .item-activate,
+#pluginsmanagerForm .item-title {
 	display: block;
 	float: left;
 }
-#pluginsmanagerForm .item-info a {
+#pluginsmanagerForm .item-title {
 	border: none;
-	display: block;
-	float: left;
 }
-#pluginsmanagerForm .item-info a h3 {
+#pluginsmanagerForm .item-title h3 {
 	line-height: 1em;
 }
 #pluginsmanagerForm .item-description {
 	color: #999;
 	font-style: italic;
 }
-#pluginsmanagerForm .item-priority {
-	display: block;
-	float: right;
-}
 #pluginsmanagerForm .item-priority .field {
-	margin-bottom: 0;
+	margin: 1.5em 0 0;
 }
-#pluginsmanagerForm .item-priority .field label {
-	margin: 0 1em;
-	padding: 0;
-	line-height: 3em;
-	float: left;
+
+@media screen and (min-width: 50em) {
+	#pluginsmanagerForm .items li {
+		float: left;
+		display: block;
+		width: 47.5%;
+		margin-right: 5% !important;
+	}
 }
-#pluginsmanagerForm .item-priority .field > div {
-	width: 5em;
-	float: right;
-}
-#pluginsmanagerForm .item-activate {
-	display: block;
-	float: left;
-}
+
 .tgl {
 	display: none;
 }
@@ -107,6 +106,7 @@
 }
 .tgl[disabled] + .tgl-switch {
 	background: #efefef;
+	cursor: default;
 }
 .tgl:not(:checked) ~ .tgl-text-on {
 	display: none;
