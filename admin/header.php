@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-	<title>99ko - Administration</title>
+	<title><?php show::siteName(); ?> - Administration</title>
 
 	<?php show::linkTags(); ?>
 	<link rel="stylesheet" href="main.css">
@@ -18,9 +18,10 @@
 
 </head>
 <body>
+<div id="alert"><?php show::msg($msg); ?></div>
 
 <header class="header cf" role="banner">
-	<a class="logo" href="./">99ko Panel</a>
+	<a class="logo" href="./"><?php show::siteName(); ?> - Administration</a>
 	<nav role="navigation">
 
 		<ul class="menu cf">
@@ -44,8 +45,6 @@
 </aside>
 
 <main class="main <?php echo $runPlugin->getName(); ?>-admin" role="main">
-
-	<div id="alert"><?php show::msg($msg); ?></div>
 
 	<?php if($runPlugin->getParamTemplate()){ ?>
 
