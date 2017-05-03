@@ -1,10 +1,9 @@
-@charset "UTF-8";
-
 /*
 
-Author:   Christopher Boutillé
-URL:      http://www.starck.io
-Twitter:  @starckio
+  Auteur:  Christopher Boutillé
+Site web:  http://www.starck.io
+ Twitter:  @starckio
+   Email:  contact@starck.io
 
 */
 
@@ -26,11 +25,11 @@ footer, header, hgroup, main, nav, section, summary {
 }
 ::-moz-selection {
 	background: #FF4825;
-	color: white;
+	color: #fff;
 }
 ::selection {
 	background: #FF4825;
-	color: white;
+	color: #fff;
 }
 
 
@@ -41,11 +40,6 @@ img {
 	display: block;
 	max-width: 100%;
 	height: auto;
-}
-figcaption {
-	color: #d4d4d4;
-	font-size: .75rem;
-	line-height: 1.5rem;
 }
 
 
@@ -75,7 +69,7 @@ a:hover {
 -------------------------------------------------- */
 html {
 	height: 101%;
-	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
 }
@@ -86,8 +80,7 @@ body {
 	padding: 0 1em 1em;
 	max-width: 70em;
 	background: #EFEFEF;
-	color: black;
-
+	color: #000;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
@@ -106,12 +99,12 @@ body {
 .header {
 	padding: .5em 1em;
 	margin-bottom: 1em;
-	background: black;
+	background: #000;
 }
 .logo {
 	font-size: 1.25em;
 	font-weight: 700;
-	color: white;
+	color: #fff;
 	display: block;
 	margin-bottom: 1.5em;
 }
@@ -136,14 +129,14 @@ body {
 -------------------------------------------------- */
 .header .menu a {
 	display: block;
-	color: white;
+	color: #fff;
 }
 .header .menu a:hover {
 	color: #FF4825;
 	text-decoration: none;
 }
 .header .menu .active {
-	color: black;
+	color: #000;
 }
 .header .menu li {
 	list-style: none;
@@ -175,14 +168,14 @@ body {
 .sidebar .menu a {
 	font-size: 1.25em;
 	display: block;
-	color: black;
+	color: #000;
 }
 .sidebar .menu a:hover {
 	color: #FF4825;
 	text-decoration: none;
 }
 .sidebar .menu .active {
-	color: black;
+	color: #000;
 	border-right: 1px solid currentColor;
 }
 .sidebar .menu li {
@@ -246,6 +239,32 @@ h1 a, h2 a, h3 a, h4 a {
 	border: 0 !important;
 }
 
+.colorSync {
+    animation-duration: 60000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear
+}
+.colorSync {
+    animation-name: colorfade
+}
+@keyframes colorfade {
+    0% {
+        color: SkyBlue
+    }
+
+    33% {
+        color: MediumSlateBlue
+    }
+
+    66% {
+        color: #f3a578
+    }
+
+    100% {
+        color: SkyBlue
+    }
+}
+
 
 /* General Typography + Main
 -------------------------------------------------- */
@@ -265,7 +284,7 @@ b, strong {
 mark {
 	padding: .1em .05em;
 	margin: -.1em 0;
-	color: black;
+	color: #000;
 	background: #F4F4F4;
 }
 .main p,
@@ -278,11 +297,11 @@ mark {
 	border-bottom: 2px solid #d4d4d4;
 }
 .main a:hover {
-	border-color: black;
+	border-color: #000;
 }
 .text {
 	padding: 1em;
-	background: white;
+	background: #fff;
 	-webkit-box-shadow: 0 1px 20px rgba(26, 141, 214, 0), 0 5px 22px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 1px 20px rgba(26, 141, 214, 0), 0 5px 22px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 1px 20px rgba(26, 141, 214, 0), 0 5px 22px rgba(0, 0, 0, 0.2);
@@ -332,12 +351,11 @@ mark {
 /* Alerts
 -------------------------------------------------- */
 .msg {
-	color: white;
+	color: #fff;
 	text-align: center;
 	padding: .7em 1em;
 	margin-bottom: 1.5em;
 	background: #FF4825;
-
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -357,15 +375,15 @@ mark {
 	-moz-appearance: none;
 	-ms-appearance: none;
 	appearance: none;
-	background: black;
+	background: #000;
 	border: 0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	color: white;
+	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	font-size: .9em;
 	font-weight: 600;
 	line-height: 1.5em;
@@ -400,34 +418,26 @@ mark {
 	padding-top: .45em;
 	float: right;
 }
+.meta #param_link.active {
+	color: #FF4825;
+}
 #param_panel {
 	display: none;
-	border-bottom: 1px dashed #FF4825;
-	padding-bottom: 1em;
-	margin-bottom: 1em;
+	padding: 1em;
+	margin: -1em -1em 1em;
+	-webkit-box-shadow: inset 0 0 0 2px #FF4825;
+	-moz-box-shadow: inset 0 0 0 2px #FF4825;
+	box-shadow: inset 0 0 0 2px #FF4825;
+}
+#param_panel.active {
+	display: block;
 }
 
 @media screen and (min-width: 50em) {
 	#param_panel {
-		padding-bottom: 2em;
-		margin-bottom: 1.5em;
+		padding: 2em;
+		margin: -2em -2em 1.5em;
 	}
-}
-
-
-/* Next/Prev nav
--------------------------------------------------- */
-.nextprev {
-	padding: 1em 0;
-}
-.nextprev a {
-	border: 0;
-}
-.nextprev .prev {
-	float: left;
-}
-.nextprev .next {
-	float: right;
 }
 
 
@@ -450,23 +460,23 @@ mark {
 .field input[type="password"],
 .field select,
 .field textarea {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
+	width: 100%;
+	margin: 0;
+	padding: .5em .7em;
+	background: white;
 	border: 1px solid #d4d4d4;
-	color: black;
+	color: #000;
+	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 1em;
+	line-height: 1.5em;
+	display: block;
+	outline: none;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
-	display: inline-block;
-	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-	font-size: 1em;
-	line-height: 1.5em;
-	margin: 0;
-	outline: none;
-	padding: .5em .6em;
-	position: relative;
-	width: 100%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 .field input[type="checkbox"],
 .field input[type="radio"] {
@@ -485,7 +495,7 @@ mark {
 	right: 15px;
 	margin-top: -3px;
 	border: 6px solid transparent;
-	border-top-color: black;
+	border-top-color: #000;
 	position: absolute;
 	z-index: 10;
 }
@@ -500,9 +510,8 @@ mark {
 .field input[type="url"]:focus,
 .field input[type="password"]:focus,
 .field select:focus,
-.field textarea:focus,
-form .btn:hover {
-	border-color: black;
+.field textarea:focus {
+	border-color: #000;
 }
 .field.error input[type="text"],
 .field.error input[type="email"],
@@ -510,75 +519,6 @@ form .btn:hover {
 .field.error input[type="password"],
 .field.error textarea {
 	border-color: #FF4825;
-}
-.field input[type="text"]::-webkit-input-placeholder,
-.field input[type="email"]::-webkit-input-placeholder,
-.field input[type="url"]::-webkit-input-placeholder,
-.field input[type="password"]::-webkit-input-placeholder,
-.field textarea::-webkit-input-placeholder {
-	color: #d4d4d4;
-	font-style: italic;
-}
-/* Firefox 19+ */
-.field input[type="text"]::-moz-placeholder,
-.field input[type="email"]::-moz-placeholder,
-.field input[type="url"]::-moz-placeholder,
-.field input[type="password"]::-moz-placeholder,
-.field textarea::-moz-placeholder {
-	color: #d4d4d4;
-	font-style: italic;
-}
-.field input[type="text"]:-ms-input-placeholder,
-.field input[type="email"]:-ms-input-placeholder,
-.field input[type="url"]:-ms-input-placeholder,
-.field input[type="password"]:-ms-input-placeholder,
-.field textarea:-ms-input-placeholder {
-	color: #d4d4d4;
-	font-style: italic;
-}
-/* Firefox 18- */
-.field input[type="text"]:-moz-placeholder,
-.field input[type="email"]:-moz-placeholder,
-.field input[type="url"]:-moz-placeholder,
-.field input[type="password"]:-moz-placeholder,
-.field textarea:-moz-placeholder {
-	color: #d4d4d4;
-	font-style: italic;
-}
-.field.error input[type="text"]::-webkit-input-placeholder,
-.field.error input[type="email"]::-webkit-input-placeholder,
-.field.error input[type="url"]::-webkit-input-placeholder,
-.field.error input[type="password"]::-webkit-input-placeholder,
-.field.error textarea::-webkit-input-placeholder {
-	color: #FF4825;
-}
-/* Firefox 19+ */
-.field.error input[type="text"]::-moz-placeholder,
-.field.error input[type="email"]::-moz-placeholder,
-.field.error input[type="url"]::-moz-placeholder,
-.field.error input[type="password"]::-moz-placeholder,
-.field.error textarea::-moz-placeholder {
-	color: #FF4825;
-}
-.field.error input[type="text"]:-ms-input-placeholder,
-.field.error input[type="email"]:-ms-input-placeholder,
-.field.error input[type="url"]:-ms-input-placeholder,
-.field.error input[type="password"]:-ms-input-placeholder,
-.field.error textarea:-ms-input-placeholder {
-	color: #FF4825;
-}
-/* Firefox 18- */
-.field.error input[type="text"]:-moz-placeholder,
-.field.error input[type="email"]:-moz-placeholder,
-.field.error input[type="url"]:-moz-placeholder,
-.field.error input[type="password"]:-moz-placeholder,
-.field.error textarea:-moz-placeholder {
-	color: #FF4825;
-}
-.uniform__potty {
-	position: absolute;
-	top: -9999px;
-	left: -9999px;
 }
 
 @media screen and (min-width: 50em) {
